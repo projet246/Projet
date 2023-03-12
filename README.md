@@ -1,6 +1,6 @@
 # Projet
 ça sera notre projet 2cp ici, enjoy 
-//-------------------------------------------
+//-------------------------------------------\n
 To start wokring please do this following steps : 
 - Clone the repository.
 - Navigate to the project directory.
