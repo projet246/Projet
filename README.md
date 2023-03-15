@@ -11,4 +11,5 @@ To start wokring please do this following steps :
 -           -- Use the command "git commit -m "message or comment"" to commit your changes with a message.
 -           -- Use the command "git push origin YourName/YourTask" to push your changes to the remote repository.
 - The changes should now be updated on the remote repository.
+- now you can now delete the branch created by do this 2 commandes : "git checkout main" for move to the main branch, than "git branch -d "YourName/YourTask""
 - Sometimes, you may need to use the "pull" command to refresh your local files.
