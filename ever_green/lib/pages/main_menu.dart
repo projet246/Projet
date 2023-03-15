@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ever_green/card_bg.dart';
-import 'package:ever_green/button.dart';
+import 'package:sorttrash/card_bg.dart';
+
+import '../button.dart';
 
 class mainMenu extends StatelessWidget {
   const mainMenu({super.key});
@@ -12,7 +13,7 @@ class mainMenu extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/bg-image2.png'),
+              image: AssetImage('assets/images/bg-image2.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -70,7 +71,7 @@ class mainMenu extends StatelessWidget {
                         wid: 200.0,
                       ),
                       cardBg(
-                        title: 'STORYTIME',
+                        title: 'STORY',
                         coleur1: Color.fromARGB(255, 79, 195, 7),
                         coleur2: Color.fromARGB(255, 102, 235, 0),
                         href: '/',

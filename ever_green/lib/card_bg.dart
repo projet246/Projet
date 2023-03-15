@@ -24,9 +24,9 @@ class cardBg extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, this.href);
+        Navigator.pushReplacementNamed(context, href);
       },
-      child: Container(
+      child: SizedBox(
         height: 250.0,
         width: 180.0,
         child: Stack(children: [
@@ -78,7 +78,7 @@ class cardBg extends StatelessWidget {
                       children: [
                         Center(
                           child: Image.asset(
-                            'assets/${this.Photo}',
+                            'assets/images/${this.Photo}',
                             height: this.hei,
                             width: this.wid,
                           ),
