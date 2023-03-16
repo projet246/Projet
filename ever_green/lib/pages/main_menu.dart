@@ -20,7 +20,7 @@ class mainMenu extends StatelessWidget {
           child: Center(
             child: Container(
               height: 330.0,
-              // color: Colors.amber,
+              alignment: Alignment.center,
               child: Column(
                 children: [
                   Row(

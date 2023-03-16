@@ -22,14 +22,16 @@ void main() {
   double height = ui.window.physicalSize.height; //retourne le height de l'ecran
 
   runApp(MaterialApp(
-    initialRoute: '/Niveaux',
+    initialRoute: '/Niveaux', //le widget Niveaux sera utilisé pour l'affichage du niveaux, lors de la construction on lui fais passer le nombre de niveaux aux total et le nombre de niveaux unlocked et le href qui sera un routename pour lier
     routes: {
       '/': (context) => const mainMenu(),
       '/games': (context) => const GamesMenu(),
       '/tri': (context) => MainMenu(),
       '/StartPage': (context) => StartPage(),
-      '/Niveaux': (context) => new Niveaux(
+      '/Niveaux': (context) => const Niveaux(
             NbrNiveax: 7,
+            OpenLevels: 1,
+            href: '/',
           ),
     },
   ));
