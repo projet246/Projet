@@ -13,7 +13,14 @@ double height = ui.window.physicalSize.height;
 
 class Niveaux extends StatelessWidget {
   final int NbrNiveax;
-  const Niveaux({super.key, required this.NbrNiveax});
+  final int OpenLevels;
+  final String href;
+  const Niveaux({
+    super.key,
+    required this.NbrNiveax,
+    required this.OpenLevels,
+    required this.href
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +58,12 @@ class Niveaux extends StatelessWidget {
                     // color: Colors.amber,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          RoundButton(
+                        children:  [
+                          const RoundButton(
                               href: '/',
                               myIcon: Icons.home), //le premier button
                           RoundButton(
-                            href: '/',
+                            href: this.href,
                             myIcon: Icons.settings,
                           ), //le deuxieme button
                         ]),
@@ -76,21 +83,59 @@ class Niveaux extends StatelessWidget {
                     child: Container(
                       //le corps de niveaux
                       height: 0.4 * height,
-                      width: 135.5 * NbrNiveax,
+                      width: 100.0 * NbrNiveax + 50 * (NbrNiveax - 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color: Color.fromARGB(211, 178, 158, 211),
                       ),
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: List.generate(this.NbrNiveax, (index) {
-                            print(index);
-                            return OpenNiveau(
+                        return index != NbrNiveax - 1
+                            ? Row(
+                                children: [
+                                  Niveau(
+                                    NbrNiveax: this.NbrNiveax,
+                                    height: height,
+                                    width: width,
+                                    index: index,
+                                    openLevels: this.OpenLevels,
+                                    href: this.href,
+                                  ),
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 0.4 * height,
+                                        width: 50.0,
+                                        // color: Colors.amber,
+                                      ),
+                                      Positioned(
+                                        top: 0.1 * height,
+                                        child: Container(
+                                            width: 50.0,
+                                            height: 170,
+                                            // color: Colors.black,
+                                            child: index % 2 != 0
+                                                ? const Image(
+                                                    image: AssetImage(
+                                                        "assets/images/triAss.png"))
+                                                : const Image(
+                                                    image: AssetImage(
+                                                        "assets/images/triDes.png"))),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Niveau(
                                 NbrNiveax: this.NbrNiveax,
                                 height: height,
                                 width: width,
-                                index: index);
-                          })),
+                                index: index,
+                                openLevels: this.OpenLevels,
+                                href: '/',
+                              );
+                      })),
                     ),
                   ),
                   const SizedBox(
