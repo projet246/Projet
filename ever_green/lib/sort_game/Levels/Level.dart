@@ -2,24 +2,20 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import '../Models/Objects.dart';
 import '../Models/TrashCans.dart';
-
 class Level extends StatefulWidget {
   late Function(bool) _changeBooleanStatus;
   Level(
       {super.key,
       required List<Trash> arrayOfTrash,
       required List<TrashCan> arrayOfTrashCans,
-      required String backgroundImage,
       required Function(bool) changeBooleanStatus,
-      required bool isUnlocked}) {
+      required bool isLocked}) {
     _arrayOfTrash = arrayOfTrash;
-    _backgroundImage = backgroundImage;
     _arrayOfTrashCans = arrayOfTrashCans;
     _changeBooleanStatus = changeBooleanStatus;
-    _isLocked = isUnlocked;
+    _isLocked = isLocked;
     _copyOfArrayOfTrash = arrayOfTrash.toList();
   }
-  late String _backgroundImage;
   bool _isLocked = false;
   bool _isFinished = false;
   late List<Trash> _arrayOfTrash;
@@ -33,7 +29,6 @@ class Level extends StatefulWidget {
   bool returnIsFinished() {
     return _isFinished;
   }
-
   void setIsLocked(bool isUnlockde) {
     _isLocked = isUnlockde;
   }
@@ -60,11 +55,9 @@ class _LevelState extends State<Level> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage(widget._backgroundImage), fit: BoxFit.fill),
+            image: AssetImage('assets/images/bg-image.png'), fit: BoxFit.fill),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -210,6 +203,7 @@ class _LevelState extends State<Level> {
               widget.setIsFinished(true);
               widget._changeBooleanStatus(false);
               Navigator.pop(context);
+              Navigator.pushNamed(context, '/Niveaux');
             });
           }
           setState(() {

@@ -1,42 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:sorttrash/button.dart';
+import 'package:sorttrash/sort_game/Levels/Level.dart';
 
-class Niveau extends StatelessWidget {
+class Niveau extends StatefulWidget {
   final double height;
   final double width;
   final int NbrNiveax;
   final int index;
-  final int openLevels;
-  final String href;
-
+  final Level href;
   const Niveau(
       {super.key,
       required this.height,
       required this.width,
       required this.NbrNiveax,
       required this.index,
-      required this.openLevels,
       required this.href});
+  @override
+  State<Niveau> createState() => _NiveauState();
+}
 
+class _NiveauState extends State<Niveau> {
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       child: Column(
-        mainAxisAlignment:
-            index % 2 == 0 ? MainAxisAlignment.start : MainAxisAlignment.end,
+        mainAxisAlignment: widget.index % 2 == 0
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.end,
         children: [
           InkWell(
             onTap: () {
-              Navigator.pushReplacementNamed(
-                context,
-                href,
-              );
+              if (!widget.href.returnIsLocked()) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => widget.href),
+                ).then((_) => setState(() {}));
+              }
             },
             child: Container(
               height: 120.0,
               width: 100,
-              child: index < openLevels
+              child: !widget.href.returnIsLocked()
                   ? Stack(
                       children: [
                         Container(
@@ -52,7 +56,7 @@ class Niveau extends StatelessWidget {
                           child: RectangleButton(
                             couleur1: const Color.fromARGB(255, 255, 209, 23),
                             couleur2: const Color.fromARGB(255, 255, 209, 23),
-                            text: "Niveau ${index + 1}",
+                            text: "Niveau ${widget.index + 1}",
                           ),
                         )
                       ],
@@ -71,7 +75,7 @@ class Niveau extends StatelessWidget {
                           child: RectangleButton(
                             couleur1: const Color.fromARGB(255, 170, 130, 29),
                             couleur2: const Color.fromARGB(255, 141, 104, 12),
-                            text: "Niveau ${index + 1}",
+                            text: "Niveau ${widget.index + 1}",
                           ),
                         )
                       ],

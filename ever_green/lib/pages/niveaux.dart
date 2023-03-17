@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:sorttrash/button.dart';
+import 'package:sorttrash/sort_game/Levels/levels_managment.dart';
 import 'dart:ui' as ui;
 import '../composents/niveau.dart';
-import '../button.dart';
-
-import 'package:sorttrash/pages/main_menu.dart';
 
 //la page de la gestion de niveaux
-
 double width = ui.window.physicalSize.width;
 double height = ui.window.physicalSize.height;
 
-class Niveaux extends StatelessWidget {
+class Niveaux extends StatefulWidget {
+  late LevelManagement _levelManagement;
   final int NbrNiveax;
   final int OpenLevels;
   final String href;
-  const Niveaux({
-    super.key,
-    required this.NbrNiveax,
-    required this.OpenLevels,
-    required this.href
-  });
+  Niveaux(
+      {super.key,
+      required this.NbrNiveax,
+      required this.OpenLevels,
+      required this.href,
+      required LevelManagement levelMangement}) {
+    _levelManagement = levelMangement;
+  }
+
+  @override
+  State<Niveaux> createState() => _NiveauxState();
+}
+
+class _NiveauxState extends State<Niveaux> {
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +69,12 @@ class Niveaux extends StatelessWidget {
                     // color: Colors.amber,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children:  [
+                        children: [
                           const RoundButton(
                               href: '/',
                               myIcon: Icons.home), //le premier button
                           RoundButton(
-                            href: this.href,
+                            href: widget.href,
                             myIcon: Icons.settings,
                           ), //le deuxieme button
                         ]),
@@ -83,35 +94,36 @@ class Niveaux extends StatelessWidget {
                     child: Container(
                       //le corps de niveaux
                       height: 0.4 * height,
-                      width: 100.0 * NbrNiveax + 50 * (NbrNiveax - 1),
+                      width: 100.0 * widget.NbrNiveax +
+                          50 * (widget.NbrNiveax - 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
-                        color: Color.fromARGB(211, 178, 158, 211),
+                        color: const Color.fromARGB(211, 178, 158, 211),
                       ),
                       child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(this.NbrNiveax, (index) {
-                        return index != NbrNiveax - 1
+                          children: List.generate(widget.NbrNiveax, (index) {
+                        return index != widget.NbrNiveax - 1
                             ? Row(
                                 children: [
                                   Niveau(
-                                    NbrNiveax: this.NbrNiveax,
+                                    NbrNiveax: widget.NbrNiveax,
                                     height: height,
                                     width: width,
                                     index: index,
-                                    openLevels: this.OpenLevels,
-                                    href: this.href,
+                                    href: widget._levelManagement
+                                        .levelsContainer[index],
                                   ),
                                   Stack(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 0.4 * height,
                                         width: 50.0,
                                         // color: Colors.amber,
                                       ),
                                       Positioned(
                                         top: 0.1 * height,
-                                        child: Container(
+                                        child: SizedBox(
                                             width: 50.0,
                                             height: 170,
                                             // color: Colors.black,
@@ -128,12 +140,12 @@ class Niveaux extends StatelessWidget {
                                 ],
                               )
                             : Niveau(
-                                NbrNiveax: this.NbrNiveax,
+                                NbrNiveax: widget.NbrNiveax,
                                 height: height,
                                 width: width,
                                 index: index,
-                                openLevels: this.OpenLevels,
-                                href: '/',
+                                href: widget
+                                    ._levelManagement.levelsContainer[index],
                               );
                       })),
                     ),
