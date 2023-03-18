@@ -1,13 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sorttrash/StartPage/Silder.dart';
 import 'package:sorttrash/StartPage/settings.dart';
 import 'package:sorttrash/StartPage/start_page_button.dart';
 
-import '../button.dart';
-
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {
   StartPage({Key? key}) : super(key: key);
+
+  @override
+  State<StartPage> createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
   double _value = 4;
+  bool isSignedIn = false;
+  final User? user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    if (user != null) {
+      if (!user!.emailVerified) {
+        setState(() {
+          user!.delete();
+          FirebaseAuth.instance.signOut();
+
+        });
+      } else {
+        setState(() {
+          isSignedIn = true;
+        });
+      }
+      super.initState();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,15 +111,17 @@ class StartPage extends StatelessWidget {
                       height: 90,
                       child: Stack(
                         children: [
-                          AnonButton(),
+                          const AnonButton(),
                           Positioned(
                             left: 100,
                             bottom: 20,
-                            child: RoundButtonSettings(
-                              myIcon: Icons.settings,
-                              value: _value,
+                            child: isSignedIn ?
+                                  RoundButtonSettingsWhileLogged(
+                                      myIcon: Icons.settings, value: _value)
+                               : RoundButtonSettings(
+                                      myIcon: Icons.settings, value: _value)
+
                             ),
-                          ),
                         ],
                       ),
                     ),

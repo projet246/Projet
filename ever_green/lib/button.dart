@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class RoundButton extends StatelessWidget {
+class RoundButton extends StatefulWidget {
   final String? href; //pour indiquer le chemin à prendre en cliquant sur l'icon
   final IconData myIcon;
   const RoundButton({super.key, required this.href, required this.myIcon});
+
+  @override
+  State<RoundButton> createState() => _RoundButtonState();
+}
+
+class _RoundButtonState extends State<RoundButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, '${this.href}');
+        Navigator.pushReplacementNamed(context, '${this.widget.href}').then((_) => setState(() {}));
       },
       child: Container(
         height: 40.0,
@@ -27,7 +33,7 @@ class RoundButton extends StatelessWidget {
             ),
             child: Center(
               child: Icon(
-                myIcon,
+                widget.myIcon,
                 color: Colors.white,
               ),
             ),
