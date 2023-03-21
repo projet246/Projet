@@ -101,7 +101,7 @@ class _StartPageState extends State<StartPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                   const SizedBox(
                     height: 10,
                   ),
                   Padding(

@@ -11,7 +11,6 @@ import '../../main.dart';
 
 class VerifyUserEmail extends StatefulWidget {
   const VerifyUserEmail({Key? key}) : super(key: key);
-
   @override
   State<VerifyUserEmail> createState() => _VerifyUserEmailState();
 }

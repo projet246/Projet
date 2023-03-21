@@ -45,14 +45,6 @@ class _LevelState extends State<Level> {
   final _player = AudioPlayer();
   final _audio = AudioCache();
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _audio.clearAll();
-    _player.stop();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(

@@ -16,6 +16,7 @@ import 'sort_game/Screens/main_menu.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,

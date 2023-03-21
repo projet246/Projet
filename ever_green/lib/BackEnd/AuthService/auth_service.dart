@@ -37,12 +37,8 @@ class AuthService {
       error  = true;
       errorMessage = e.toString();
     }
-    if (FirebaseAuth.instance.currentUser!.emailVerified){
-      navigatorKey.currentState!.pushNamed('/VerifyUserEmail');
-    }else {
-      if (!error) {
+    if (!error) {
         navigatorKey.currentState!.pushNamed('/');
-      }
     }
   }
 
@@ -60,7 +56,6 @@ class AuthService {
       navigatorKey.currentState!.pushReplacementNamed('/VerifyUserEmail');
     }
   }
-
   Future signOut() async {
     try {
       return await _auth.signOut();

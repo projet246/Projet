@@ -75,7 +75,7 @@ class GamesMenu extends StatelessWidget {
                               title: 'TRI',
                               coleur1: Color.fromARGB(223, 202, 63, 172),
                               coleur2: Color.fromARGB(255, 240, 71, 206),
-                              href: '/tri',
+                              href: '/Niveaux',
                               Photo: "girl.png",
                               hei: 220.00,
                               wid: 220.0,
