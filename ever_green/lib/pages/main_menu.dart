@@ -38,10 +38,13 @@ class mainMenu extends StatelessWidget {
                               children: const [
                                 RoundButton(
                                     href: '/',
-                                    myIcon: Icons.home), //le premier button
+                                    myIcon: Icons.home,
+                                    couleur: Color.fromRGBO(255, 210, 23, 5),
+                                    ), //le premier button
                                 RoundButton(
                                   href: '/',
                                   myIcon: Icons.settings,
+                                  couleur: Color.fromRGBO(255, 210, 23, 5),
                                 ), //le deuxieme button
                               ]),
                         ),

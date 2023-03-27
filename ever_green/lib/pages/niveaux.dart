@@ -56,7 +56,7 @@ class _NiveauxState extends State<Niveaux> {
                     height: 60.0,
                     width: 60.0,
                     child: const Center(
-                      child: RoundButton(href: '/', myIcon: Icons.home),
+                      child: RoundButton(href: '/', myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5),),
                     ),
                   ),
                 ),
@@ -72,10 +72,11 @@ class _NiveauxState extends State<Niveaux> {
                         children: [
                           const RoundButton(
                               href: '/',
-                              myIcon: Icons.home), //le premier button
+                              myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
                           RoundButton(
                             href: widget.href,
                             myIcon: Icons.settings,
+                            couleur: Color.fromRGBO(255, 210, 23, 5),
                           ), //le deuxieme button
                         ]),
                   ),

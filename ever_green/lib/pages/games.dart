@@ -37,15 +37,20 @@ class GamesMenu extends StatelessWidget {
                               children: const [
                                 RoundButton(
                                     href: '/',
-                                    myIcon: Icons.home), //le premier button
+                                    myIcon: Icons.home,
+                                    couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
                                 RoundButton(
                                     href: '/',
                                     myIcon: Icons
-                                        .woo_commerce), //le deuxieme button
+                                        .woo_commerce,
+                                        couleur: Color.fromRGBO(255, 210, 23, 5),
+                                        ), //le deuxieme button
                                 RoundButton(
                                     href: '/',
                                     myIcon:
-                                        Icons.settings), //le deuxieme button
+                                        Icons.settings,
+                                        couleur: Color.fromRGBO(255, 210, 23, 5),
+                                        ), //le deuxieme button
                               ]),
                         ),
                       ),
@@ -63,7 +68,7 @@ class GamesMenu extends StatelessWidget {
                               title: 'QUIZ',
                               coleur1: Color.fromARGB(223, 202, 63, 172),
                               coleur2: Color.fromARGB(255, 240, 71, 206),
-                              href: '/',
+                              href: '/Quiz',
                               Photo: "boy.png",
                               hei: 190.00,
                               wid: 220.0,

@@ -153,7 +153,7 @@ class RoundButtonSettings extends StatelessWidget {
                         const Positioned(
                             left: 370,
                             top: 0,
-                            child: RoundButton(myIcon : Icons.exit_to_app, href: '/StartPage'))
+                            child: RoundButton(myIcon : Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
                       ],
                     ),
                   ));
@@ -337,7 +337,7 @@ class RoundButtonSettingsWhileLogged extends StatelessWidget {
                         const Positioned(
                             left: 370,
                             top: 0,
-                            child: RoundButton(myIcon : Icons.exit_to_app, href: '/StartPage'))
+                            child: RoundButton(myIcon : Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
                       ],
                     ),
                   ));
