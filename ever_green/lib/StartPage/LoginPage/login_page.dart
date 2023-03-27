@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                       left: 560,
                       top: 5,
                       child: RoundButton(
-                          myIcon: Icons.exit_to_app, href: '/StartPage'))
+                          myIcon: Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
                 ],
               ),
             ],

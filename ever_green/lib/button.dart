@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class RoundButton extends StatefulWidget {
   final String? href; //pour indiquer le chemin à prendre en cliquant sur l'icon
   final IconData myIcon;
-  const RoundButton({super.key, required this.href, required this.myIcon});
+  final Color couleur;
+  const RoundButton(
+      {super.key, required this.href, required this.myIcon, required this.couleur});
 
   @override
   State<RoundButton> createState() => _RoundButtonState();
@@ -14,7 +16,8 @@ class _RoundButtonState extends State<RoundButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, '${this.widget.href}').then((_) => setState(() {}));
+        Navigator.pushReplacementNamed(context, '${this.widget.href}')
+            .then((_) => setState(() {}));
       },
       child: Container(
         height: 40.0,
@@ -28,7 +31,7 @@ class _RoundButtonState extends State<RoundButton> {
             height: 35.0,
             width: 35.0,
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(255, 210, 23, 5),
+              color: widget.couleur,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
@@ -79,7 +82,7 @@ class RectangleButton extends StatelessWidget {
             width: 82.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.0),
-              color: this.couleur2,//principal
+              color: this.couleur2, //principal
             ),
             child: Center(
               child: Padding(
