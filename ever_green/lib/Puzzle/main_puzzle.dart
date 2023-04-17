@@ -29,7 +29,7 @@ class PuzzleLevel extends StatefulWidget {
     _imageName = imageName;
     _timeCount = timeCount;
     _matrixSize = matrixSSize;
-   
+
   }
   bool _isLocked = false;
   bool _isFinished = false;
