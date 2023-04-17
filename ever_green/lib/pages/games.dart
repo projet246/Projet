@@ -68,7 +68,7 @@ class GamesMenu extends StatelessWidget {
                               title: 'QUIZ',
                               coleur1: Color.fromARGB(223, 202, 63, 172),
                               coleur2: Color.fromARGB(255, 240, 71, 206),
-                              href: '/Quiz',
+                              href: '/Nquiz',
                               Photo: "boy.png",
                               hei: 190.00,
                               wid: 220.0,
