@@ -11,9 +11,11 @@ import 'pages/main_menu.dart';
 import 'pages/games.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'sort_game/Screens/main_menu.dart';
-import 'pages/quizmultiples.dart';
-import 'pages/quizgestes.dart';
-import 'pages/quizphotos.dart';
+import 'quiz/quizmultiples.dart';
+import 'quiz/quizgestes.dart';
+import 'quiz/quizphotos.dart';
+import 'quiz/NiveauxQuiz.dart';
+import 'quiz/managementQuiz.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -32,11 +34,14 @@ void main() async {
     OpenLevels: 1,
     href: '/',
   );
+  Management man = Management();
+  NiveauxQuiz N = NiveauxQuiz(NbrNiveax: 5, OpenLevels: 1, href: '/' , levelMangement: man,);
+
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
     initialRoute:
         // '/StartPage', //le widget Niveaux sera utilisé pour l'affichage du niveaux, lors de la construction on lui fais passer le nombre de niveaux aux total et le nombre de niveaux unlocked et le href qui sera un routename pour lier
-        '/QuizPhotos',
+        '/Nquiz',
     routes: {
       '/StartPage': (context) => StartPage(),
       '/': (context) => const mainMenu(),
@@ -47,20 +52,7 @@ void main() async {
       '/ProfilePage': (context) => const ProfilePage(),
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
-      '/QuizGestes': (context) => const QuizGestes(
-            question:
-                "Quel est le bon geste quand j'ai des documents à imprimer",
-            photo1: "",
-            photo2: "",
-          ),
-      '/QuizMultiples': (context) => const QuizMultiples(
-            question: "A ton avis à quoi sert de faire du compost ?",
-            reponse1: "A nourir le sol du jardin",
-            reponse2: "A rempoter les pots de fleurs",
-            reponse3: "A reduire les poids de ma poubelle",
-            reponse4: "A nourir le sol du jardin",
-          ),
-      '/QuizPhotos': (context) => QuizPhotos(),
+      '/Nquiz': (context) => N,
     },
   ));
 }

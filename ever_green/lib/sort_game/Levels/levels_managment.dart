@@ -4,7 +4,7 @@ import 'Level.dart';
 
 class LevelManagement {
   late Level level1 = Level(
-    isLocked: false,
+    isLocked: false, 
     arrayOfTrash: trashArray,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level2.setIsLocked,
