@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/StartPage/settings.dart';
@@ -48,56 +49,21 @@ class _StartPageState extends State<StartPage> {
               height: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: const Color.fromRGBO(217, 217, 217, 0.5),
+                color: Colors.transparent,
               ),
               child: Column(
                 children: [
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    ' Ever',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Digital',
-                      color: Colors.white,
-                      fontSize: 50,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(5.0, 1.0),
-                          blurRadius: 5.0,
-                          color: Colors.greenAccent,
-                        ),
-                        Shadow(
-                          offset: Offset(5.0, 1.0),
-                          blurRadius: 5.0,
-                          color: Colors.greenAccent,
-                        ),
-                      ],
-                    ),
-                  ),
-                  //   SilderMusic( value: _value,),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Text(
-                      ' Green',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Digital',
-                        color: Colors.white,
-                        fontSize: 70,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(5.0, 1.0),
-                            blurRadius: 5.0,
-                            color: Colors.greenAccent,
-                          ),
-                          Shadow(
-                            offset: Offset(5.0, 1.0),
-                            blurRadius: 5.0,
-                            color: Colors.greenAccent,
-                          ),
-                        ],
+                  Container(
+                    height: 150,
+                    width: 250 ,
+                    decoration: const BoxDecoration(
+
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/logo.png'),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

@@ -32,7 +32,7 @@ class _RegisterLoggingButton extends State<RegisterLoggingButton> {
               widget._description,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.lightBlueAccent,
+                  color: Color.fromRGBO(62,206,254, 1),
                   fontFamily: 'Digital'),
             )
           ],

@@ -49,23 +49,20 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Positioned(
-                    bottom: 40,
-                    left: 190,
-                    child: Container(
-                      height: 350,
-                      width: 400,
-                      decoration: BoxDecoration(
-                          color: Colors.white54,
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  ),
-                  Positioned(
                     bottom: 50,
                     left: 190,
                     child: Container(
                         height: 340,
                         width: 400,
                         decoration: BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.white54,
+                                spreadRadius: 2,
+                                blurRadius: 2,
+                                offset: Offset(0, 8), // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30)),
                         child: Center(
@@ -79,9 +76,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ElevatedButton(
                                   onPressed: () {},
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.greenAccent,
+                                      backgroundColor: const Color.fromRGBO( 	103, 	235, 	0, 1),
                                       side: const BorderSide(
-                                          width: 3, color: Colors.black38),
+                                          width: 1, color: Colors.black38),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)),
