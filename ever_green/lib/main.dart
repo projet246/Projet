@@ -70,14 +70,7 @@ void main() async {
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
       '/Nquiz': (context) => N,
-
       '/Puzzles' : (context) =>  puzzleLevels,
-      '/QuizGestes': (context) => const QuizGestes(
-            question:
-                "Quel est le bon geste quand j'ai des documents à imprimer",
-            photo1: "",
-            photo2: "",
-          ),
       '/PuzzleLevel' : (context) =>  PuzzleLevel(
         isLocked: false,
         arrayOfPuzzlePieces: puzzleLevel1Array,
