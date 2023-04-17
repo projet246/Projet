@@ -51,38 +51,41 @@ class mainMenu extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    //la ligne de widget de type cardBg
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      cardBg(
-                        title: 'GAMES',
-                        coleur1: Color.fromARGB(255, 79, 195, 7),
-                        coleur2: Color.fromARGB(255, 102, 235, 0),
-                        href: '/games',
-                        Photo: "trash.png",
-                        hei: 150.00,
-                        wid: 200.0,
-                      ),
-                      cardBg(
-                        title: 'HISTOIRES',
-                        coleur1: Color.fromARGB(255, 79, 195, 7),
-                        coleur2: Color.fromARGB(255, 102, 235, 0),
-                        href: '/',
-                        Photo: "trash2.png",
-                        hei: 170.00,
-                        wid: 200.0,
-                      ),
-                      cardBg(
-                        title: 'STORY',
-                        coleur1: Color.fromARGB(255, 79, 195, 7),
-                        coleur2: Color.fromARGB(255, 102, 235, 0),
-                        href: '/',
-                        Photo: "trush3.png",
-                        hei: 150.00,
-                        wid: 200.0,
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      //la ligne de widget de type cardBg
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        cardBg(
+                          title: 'GAMES',
+                          coleur1: Color.fromARGB(255, 79, 195, 7),
+                          coleur2: Color.fromARGB(255, 102, 235, 0),
+                          href: '/games',
+                          Photo: "trash.png",
+                          hei: 150.00,
+                          wid: 200.0,
+                        ),
+                        cardBg(
+                          title: 'HISTOIRES',
+                          coleur1: Color.fromARGB(255, 79, 195, 7),
+                          coleur2: Color.fromARGB(255, 102, 235, 0),
+                          href: '/',
+                          Photo: "trash2.png",
+                          hei: 170.00,
+                          wid: 200.0,
+                        ),
+                        cardBg(
+                          title: 'STORY',
+                          coleur1: Color.fromARGB(255, 79, 195, 7),
+                          coleur2: Color.fromARGB(255, 102, 235, 0),
+                          href: '/',
+                          Photo: "trush3.png",
+                          hei: 150.00,
+                          wid: 200.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

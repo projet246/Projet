@@ -16,8 +16,16 @@ class _SilderMusicState extends State<SilderMusic> {
       height: 23,
       width: 200,
       decoration: BoxDecoration(
+        boxShadow:  [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.8),
+            spreadRadius: 0,
+            blurRadius: 0,
+            offset: const Offset(0, 5), // changes position of shadow
+          ),
+        ],
         border: Border.all(
-          color: Colors.grey, //                   <--- border color
+          color: Colors.white, //                   <--- border color
           width: 3.0,
         ),
         color: Colors.lightBlueAccent,

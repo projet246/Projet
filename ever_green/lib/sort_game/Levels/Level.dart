@@ -44,6 +44,8 @@ class Level extends StatefulWidget {
 class _LevelState extends State<Level> {
   final _player = AudioPlayer();
   final _audio = AudioCache();
+  late double screenHeight = MediaQuery.of(context).size.height;
+  late double screenWidth = MediaQuery.of(context).size.width;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,30 +141,32 @@ class _LevelState extends State<Level> {
                     left: 20, right: 20, top: 10, bottom: 10)),
             child: const Icon(Icons.settings),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildDragInterface(),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          showTrashCans(context)
+
+          showTrashCans(context),
+          
         ],
       ),
     );
   }
 
   Widget showTrashCans(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: widget._arrayOfTrashCans
-          .map((trashCan) => showTrashCan(context, trashCan: trashCan))
-          .toList(),
+    return Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: widget._arrayOfTrashCans
+              .map((trashCan) => showTrashCan(context, trashCan: trashCan))
+              .toList(),
+        ),
+      ),
     );
   }
   @override
@@ -211,17 +215,19 @@ class _LevelState extends State<Level> {
 
   Widget buildDragInterface() {
     widget._arrayOfTrash.shuffle();
-    return Padding(
-      padding: const EdgeInsets.only(left: BorderSide.strokeAlignCenter),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.greenAccent,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Colors.black,
-            width: 5.0,
-          ),
+    return Container(
+      width: 400,
+      margin: EdgeInsets.only(left: 0.20*screenWidth, right: 0.20*screenWidth),
+      decoration: BoxDecoration(
+        color: Colors.greenAccent,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.black,
+          width: 5.0,
         ),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         child: Row(
           children: widget._arrayOfTrash
               .map((trash) => DraggableTrash(trash: trash))
@@ -233,6 +239,7 @@ class _LevelState extends State<Level> {
 }
 
 class DraggableTrash extends StatelessWidget {
+
   final Trash trash;
   const DraggableTrash({
     Key? key,
@@ -248,8 +255,10 @@ class DraggableTrash extends StatelessWidget {
       );
 
   Widget image() => Container(
+
         height: size,
         width: size,
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: Colors.transparent,

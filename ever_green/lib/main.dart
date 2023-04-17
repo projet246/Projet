@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sorttrash/Puzzle/Models/TrashCans.dart';
+import 'package:sorttrash/Puzzle/main_puzzle.dart';
 import 'package:sorttrash/pages/niveaux.dart';
 import 'package:sorttrash/profile.dart';
+import 'Puzzle/Models/Objects.dart';
+import 'Puzzle/Models/puzzle_management.dart';
+import 'Puzzle/puzzle_levels.dart';
 import 'StartPage/LoginPage/login_page.dart';
 import 'StartPage/RegisterPage/register_page.dart';
 import 'BackEnd/AuthService/verify_user.dart';
@@ -26,17 +31,28 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   await Firebase.initializeApp();
   LevelManagement levelmangement = LevelManagement();
+  PuzzleManagement puzzleManagement = PuzzleManagement();
   Niveaux niveaux = Niveaux(
     levelMangement: levelmangement,
     NbrNiveax: 5,
     OpenLevels: 1,
     href: '/',
   );
+  PuzzleLevels puzzleLevels = PuzzleLevels(
+    nbrNiveax: 5,
+    openLevels: 1,
+    levelMangement: puzzleManagement,
+    href: '/',
+  );
+  bool decoyMethod(bool te) {
+    return false;
+  }
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
+
     initialRoute:
         // '/StartPage', //le widget Niveaux sera utilisé pour l'affichage du niveaux, lors de la construction on lui fais passer le nombre de niveaux aux total et le nombre de niveaux unlocked et le href qui sera un routename pour lier
-        '/QuizPhotos',
+        '/StartPage',
     routes: {
       '/StartPage': (context) => StartPage(),
       '/': (context) => const mainMenu(),
@@ -47,12 +63,22 @@ void main() async {
       '/ProfilePage': (context) => const ProfilePage(),
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
+      '/Puzzles' : (context) =>  puzzleLevels,
       '/QuizGestes': (context) => const QuizGestes(
             question:
                 "Quel est le bon geste quand j'ai des documents à imprimer",
             photo1: "",
             photo2: "",
           ),
+      '/PuzzleLevel' : (context) =>  PuzzleLevel(
+        isLocked: false,
+        arrayOfPuzzlePieces: puzzleLevel1Array,
+        arrayOfSquares: puzzleArray,
+        matrixSSize: 4,
+        timeCount: 100,
+        changeBooleanStatus: decoyMethod, imageName: 'assets/images/puzzle_level1.jpg',
+      ),
+
       '/QuizMultiples': (context) => const QuizMultiples(
             question: "A ton avis à quoi sert de faire du compost ?",
             reponse1: "A nourir le sol du jardin",
@@ -60,13 +86,13 @@ void main() async {
             reponse3: "A reduire les poids de ma poubelle",
             reponse4: "A nourir le sol du jardin",
           ),
-      '/QuizPhotos': (context) => QuizPhotos(),
+      '/QuizPhotos': (context) => const QuizPhotos(),
     },
   ));
 }
 
 class MySortGame extends StatelessWidget {
-  MySortGame({super.key});
+  const MySortGame({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

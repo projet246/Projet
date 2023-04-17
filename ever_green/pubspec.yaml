@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^4.4.3
   firebase_core: ^2.7.0
   provider: ^6.0.5
+  confetti: ^0.7.0
+  responsive_framework: ^0.2.0
 flutter_native_splash:
   color: "#f5cb42"
 dev_dependencies:
@@ -105,3 +107,4 @@ flutter:
     - assets/images/
     - assets/music/
     - assets/fonts/
+    - assets/images/puzzle/level1/

@@ -92,7 +92,7 @@ class GamesMenu extends StatelessWidget {
                               title: 'PUZZLE',
                               coleur1: Color.fromARGB(223, 202, 63, 172),
                               coleur2: Color.fromARGB(255, 240, 71, 206),
-                              href: '/',
+                              href: '/Puzzles',
                               Photo: "group.png",
                               hei: 100.00,
                               wid: 100.0,

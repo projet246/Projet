@@ -17,12 +17,20 @@ class _RoundButtonState extends State<RoundButton> {
     return InkWell(
       onTap: () {
         Navigator.pushReplacementNamed(context, '${this.widget.href}')
-            .then((_) => setState(() {}));
+            ;
       },
       child: Container(
         height: 40.0,
         width: 40.0,
         decoration: BoxDecoration(
+          boxShadow:  [
+            BoxShadow(
+              color: widget.couleur,
+              spreadRadius: 0,
+              blurRadius: 0,
+              offset: const Offset(0, 4.2), // changes position of shadow
+            ),
+          ],
           color: Colors.white,
           borderRadius: BorderRadius.circular(100),
         ),
