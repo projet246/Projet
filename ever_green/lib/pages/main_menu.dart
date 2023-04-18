@@ -37,10 +37,10 @@ class mainMenu extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: const [
                                 RoundButton(
-                                    href: '/',
-                                    myIcon: Icons.home,
-                                    couleur: Color.fromRGBO(255, 210, 23, 5),
-                                    ), //le premier button
+                                  href: '/',
+                                  myIcon: Icons.home,
+                                  couleur: Color.fromRGBO(255, 210, 23, 5),
+                                ), //le premier button
                                 RoundButton(
                                   href: '/',
                                   myIcon: Icons.settings,
@@ -66,8 +66,11 @@ class mainMenu extends StatelessWidget {
                           hei: 150.00,
                           wid: 200.0,
                         ),
+                        SizedBox(
+                          width: 40,
+                        ),
                         cardBg(
-                          title: 'HISTOIRES',
+                          title: 'Livre',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
                           href: '/',
@@ -75,8 +78,11 @@ class mainMenu extends StatelessWidget {
                           hei: 170.00,
                           wid: 200.0,
                         ),
+                        SizedBox(
+                          width: 40,
+                        ),
                         cardBg(
-                          title: 'STORY',
+                          title: 'HISTOIRES',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
                           href: '/',

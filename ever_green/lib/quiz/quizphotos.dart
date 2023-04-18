@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/pages/main_menu.dart';
 import '../button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QuizPhotos {
   String question;
@@ -43,13 +44,21 @@ class QuizPhotosDesign extends StatefulWidget {
 
 class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
   int? reponseUtilisateur;
+  final _player = AudioPlayer();
+  final _audio = AudioCache();
   String showState = "none";
   Future<void> waitAndPop() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     Navigator.pop(context);
   }
 
   @override
+  void initState() {
+    _audio.load('music/correct.mp3');
+    _audio.load('music/wrong.mp3');
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -75,7 +84,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                         width: 20.0,
                       ),
                       RoundButton(
-                          href: '/',
+                          href: '/Nquiz',
                           myIcon: Icons.arrow_back,
                           couleur: Color.fromARGB(255, 102, 235, 0)),
                     ],
@@ -216,6 +225,15 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                       1
                                                   ? "yes"
                                                   : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -353,6 +371,15 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                       2
                                                   ? "yes"
                                                   : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -483,13 +510,22 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                       children: [
                                         InkWell(
                                           onTap: () async {
-                                            setState(()  {
+                                            setState(() {
                                               reponseUtilisateur = 3;
                                               showState = widget.quizPhotos
                                                           .reponseCorrecte ==
                                                       3
                                                   ? "yes"
                                                   : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -627,7 +663,15 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                       4
                                                   ? "yes"
                                                   : "no";
-                                                  
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },

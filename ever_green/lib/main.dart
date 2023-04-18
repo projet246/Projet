@@ -16,9 +16,6 @@ import 'pages/main_menu.dart';
 import 'pages/games.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'sort_game/Screens/main_menu.dart';
-import 'quiz/quizmultiples.dart';
-import 'quiz/quizgestes.dart';
-import 'quiz/quizphotos.dart';
 import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 
@@ -70,14 +67,7 @@ void main() async {
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
       '/Nquiz': (context) => N,
-
       '/Puzzles' : (context) =>  puzzleLevels,
-      '/QuizGestes': (context) => const QuizGestes(
-            question:
-                "Quel est le bon geste quand j'ai des documents à imprimer",
-            photo1: "",
-            photo2: "",
-          ),
       '/PuzzleLevel' : (context) =>  PuzzleLevel(
         isLocked: false,
         arrayOfPuzzlePieces: puzzleLevel1Array,
