@@ -84,8 +84,7 @@ class _LevelState extends State<Level> {
                             setState(() {
                               widget._arrayOfTrash =
                                   widget._copyOfArrayOfTrash.toList();
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
+                              Navigator.popAndPushNamed(context, '/Niveaux')   ;
                             });
 
                           },

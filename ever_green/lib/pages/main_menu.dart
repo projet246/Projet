@@ -63,7 +63,7 @@ class _mainMenuState extends State<mainMenu> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children:  [
                                 const RoundButton(
-                                    href: '/',
+                                    href: '/StartPage',
                                     myIcon: Icons.home,
                                     couleur: Color.fromRGBO(255, 210, 23, 5),
                                     ), //le premier button
@@ -102,7 +102,7 @@ class _mainMenuState extends State<mainMenu> {
                           wid: 200.0,
                         ),
                         cardBg(
-                          title: 'STORY',
+                          title: 'Conseils',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
                           href: '/',
