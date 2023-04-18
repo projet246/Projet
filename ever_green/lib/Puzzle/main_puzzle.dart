@@ -71,9 +71,14 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
   late int correctPiecesNumber = 0;
   @override
   void initState() {
+    int i = 0 ;
     widget._arrayOfPuzzlePieces.shuffle();
     _audio.load('music/correct.mp3');
     _audio.load('music/wrong.mp3');
+    while ( i < widget._arrayOfSquares.length - 1){
+      widget._arrayOfSquares[i].imageName = "assets/images/empty.png" ;
+      i++;
+    }
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (time == 0) {
@@ -132,7 +137,7 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
 
 
                     const RoundButton(
-                      href: '/',
+                      href: '/Puzzles',
                       myIcon: Icons.settings,
                       couleur: Color.fromRGBO(255, 210, 23, 5),
                     ),

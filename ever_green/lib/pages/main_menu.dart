@@ -1,11 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/card_bg.dart';
 
+import '../StartPage/settings.dart';
 import '../button.dart';
 
-class mainMenu extends StatelessWidget {
+class mainMenu extends StatefulWidget {
   const mainMenu({super.key});
 
+  @override
+  State<mainMenu> createState() => _mainMenuState();
+}
+
+class _mainMenuState extends State<mainMenu> {
+  bool isSignedIn = false;
+  final User? user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    if (user != null) {
+      if (!user!.emailVerified) {
+        setState(() {
+          user!.delete();
+          FirebaseAuth.instance.signOut();
+
+        });
+      } else {
+        setState(() {
+          isSignedIn = true;
+        });
+      }
+      super.initState();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +72,18 @@ class mainMenu extends StatelessWidget {
                                   myIcon: Icons.settings,
                                   couleur: Color.fromRGBO(255, 210, 23, 5),
                                 ), //le deuxieme button
+
+                              children:  [
+                                const RoundButton(
+                                    href: '/StartPage',
+                                    myIcon: Icons.home,
+                                    couleur: Color.fromRGBO(255, 210, 23, 5),
+                                    ), //le premier button
+                                isSignedIn ?
+                                RoundButtonSettingsWhileLogged(
+                                    myIcon: Icons.settings, value: 5)
+                                    : RoundButtonSettings(
+                                    myIcon: Icons.settings, value: 5)
                               ]),
                         ),
                       ),
