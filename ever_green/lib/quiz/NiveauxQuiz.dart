@@ -57,8 +57,8 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                     width: 60.0,
                     child: const Center(
                       child: RoundButton(
-                        href: '/',
-                        myIcon: Icons.home,
+                        href: '/games',
+                        myIcon: Icons.arrow_back,
                         couleur: Color.fromRGBO(255, 210, 23, 5),
                       ),
                     ),
@@ -118,7 +118,8 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                                     height: height,
                                     width: width,
                                     index: index,
-                                    href: widget._levelManagement.QuizContainer[index],
+                                    href: widget
+                                        ._levelManagement.QuizContainer[index],
                                   ),
                                   Stack(
                                     children: [
@@ -150,7 +151,8 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                                 height: height,
                                 width: width,
                                 index: index,
-                                href: widget._levelManagement.QuizContainer[index],
+                                href: widget
+                                    ._levelManagement.QuizContainer[index],
                               );
                       })),
                     ),

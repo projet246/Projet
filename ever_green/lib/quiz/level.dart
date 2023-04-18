@@ -7,6 +7,22 @@ import 'package:sorttrash/quiz/quizgestes.dart';
 class Level extends StatefulWidget {
   late Function(bool) _changeBooleanStatus;
   List<Widget> liste = [
+    const QuizMultiples(
+      question: "Que signifie le terme \"recyclage\" ?",
+      reponse1: "Transformer des déchets en de nouveaux produits",
+      reponse2: "Jeter des déchets dans une décharge",
+      reponse3: "Brûler des déchets pour produire de l'énergie",
+      reponse4: "Nettoyer l'environnement du déchets",
+      reponseCorrecte: 1,
+    ),
+    const QuizMultiples(
+      question: "Quelle est la première étape du recyclage ?",
+      reponse1: "Le broyage des matériaux",
+      reponse2: "Le tri des déchets",
+      reponse3: "La collecte des déchets",
+      reponse4: "Le nettoyage des déchets",
+      reponseCorrecte: 3,
+    ),
     QuizPhotosDesign(
       quizPhotos: QuizPhotos(
         question: "JE PEUX TRANSFORMER UNE BOITE A CHAUSSURES VIDES EN :",
@@ -22,48 +38,44 @@ class Level extends StatefulWidget {
         reponseCorrecte: 2,
       ),
     ),
-    QuizPhotosDesign(
-        quizPhotos: QuizPhotos(
-      question: "JE PEUXA CHAUSSURES VIDES EN :",
-      photoQuestion: "assets/images/chaussures.png",
-      reponse1: "UNE BOITE DE CEREALES",
-      photo1: "assets/images/cereals.png",
-      reponse2: "DES CARTONS DE DEMANEGEMENT",
-      photo2: "assets/images/carton.png",
-      reponse3: "DU PAPIER TOILETTES",
-      photo3: "assets/images/papier.png",
-      reponse4: "UN SAC A DOS",
-      photo4: "assets/images/sac.png",
-      reponseCorrecte: 2,
-    )),
     const QuizMultiples(
-      question: "A ton avis à quoi sert de faire du compost ?",
-      reponse1: "A nourir le sol du jardin",
-      reponse2: "A rempoter les pots de fleurs",
-      reponse3: "A reduire les poids de ma poubelle",
-      reponse4: "A nourir le sol du jardin",
+      question: "Avant de commencer le processus de recyclage , on doit trier les ordures selon : ",
+      reponse1: "La couleur",
+      reponse2: "Le type",
+      reponse3: "Le volume",
+      reponse4: "L'odeur",
+      reponseCorrecte: 2,
+    ),
+    
+    const QuizMultiples(
+      question: "Quels sont les matériaux les plus couramment recyclés ?",
+      reponse1: "Le plastique et le papier",
+      reponse2: "Le carton",
+      reponse3: "Le métal et le bois",
+      reponse4: "Le verre",
       reponseCorrecte: 1,
     ),
+    QuizPhotosDesign(
+        quizPhotos: QuizPhotos(
+      question: "Quel matériau peut être recyclé pour faire des canettes ?",
+      photoQuestion: "assets/images/canette.png",
+      reponse1: "Du verre",
+      photo1: "assets/images/verre.png",
+      reponse2: "Du carton",
+      photo2: "assets/images/cartoon.png",
+      reponse3: "Du métal",
+      photo3: "assets/images/metall.png",
+      reponse4: "D'aliminium",
+      photo4: "assets/images/aluminium.png",
+      reponseCorrecte: 4,
+    )),
     const QuizGestes(
       question: "Quel est le bon geste quand j'ai des documents à imprimer",
-      photo1: "assets/images/blue.png",
-      photo2: "assets/images/blue.png",
+      photo1: "assets/images/bongeste.jpg",
+      photo2: "assets/images/mauvaisgeste.jpg",
       reponseCorrecte: 1,
     ),
-    QuizPhotosDesign(
-        quizPhotos: QuizPhotos(
-      question: "JEEN :",
-      photoQuestion: "assets/images/chaussures.png",
-      reponse1: "UNE BOIREALES",
-      photo1: "assets/images/cereals.png",
-      reponse2: "DES CARTONS DE DEMANEGEMENT",
-      photo2: "assets/images/carton.png",
-      reponse3: "DU PAPIER TOILETTES",
-      photo3: "assets/images/papier.png",
-      reponse4: "UN SAC ",
-      photo4: "assets/images/sac.png",
-      reponseCorrecte: 2,
-    )),
+    
   ];
   int _currentIndex = -1;
   Level(

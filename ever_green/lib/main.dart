@@ -16,9 +16,6 @@ import 'pages/main_menu.dart';
 import 'pages/games.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'sort_game/Screens/main_menu.dart';
-import 'quiz/quizmultiples.dart';
-import 'quiz/quizgestes.dart';
-import 'quiz/quizphotos.dart';
 import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 

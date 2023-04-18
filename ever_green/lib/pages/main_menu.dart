@@ -61,6 +61,18 @@ class _mainMenuState extends State<mainMenu> {
                           // color: Colors.amber,
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                RoundButton(
+                                  href: '/',
+                                  myIcon: Icons.home,
+                                  couleur: Color.fromRGBO(255, 210, 23, 5),
+                                ), //le premier button
+                                RoundButton(
+                                  href: '/',
+                                  myIcon: Icons.settings,
+                                  couleur: Color.fromRGBO(255, 210, 23, 5),
+                                ), //le deuxieme button
+
                               children:  [
                                 const RoundButton(
                                     href: '/StartPage',
@@ -92,8 +104,11 @@ class _mainMenuState extends State<mainMenu> {
                           hei: 150.00,
                           wid: 200.0,
                         ),
+                        SizedBox(
+                          width: 40,
+                        ),
                         cardBg(
-                          title: 'HISTOIRES',
+                          title: 'Livre',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
                           href: '/',
@@ -101,8 +116,11 @@ class _mainMenuState extends State<mainMenu> {
                           hei: 170.00,
                           wid: 200.0,
                         ),
+                        SizedBox(
+                          width: 40,
+                        ),
                         cardBg(
-                          title: 'Conseils',
+                          title: 'HISTOIRES',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
                           href: '/',

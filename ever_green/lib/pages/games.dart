@@ -89,6 +89,9 @@ class _GamesMenuState extends State<GamesMenu> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: const [
+                            SizedBox(
+                              width: 20,
+                            ),
                             cardBg(
                               title: 'QUIZ',
                               coleur1: Color.fromARGB(223, 202, 63, 172),

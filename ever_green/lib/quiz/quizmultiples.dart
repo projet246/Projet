@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import '../button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QuizMultiples extends StatefulWidget {
   final String question;
@@ -24,15 +25,24 @@ class QuizMultiples extends StatefulWidget {
 }
 
 class _QuizMultiplesState extends State<QuizMultiples> {
+  final _player = AudioPlayer();
+  final _audio = AudioCache();
   int? reponseUtilisateur;
   String showState = "none";
   Future<void> waitAndPop() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     Navigator.pop(context);
   }
 
   @override
+  void initState() {
+    _audio.load('music/correct.mp3');
+    _audio.load('music/wrong.mp3');
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
+    AudioCache audioCache = AudioCache();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -57,7 +67,7 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                         width: 20.0,
                       ),
                       RoundButton(
-                          href: '/',
+                          href: '/Nquiz',
                           myIcon: Icons.arrow_back,
                           couleur: Color.fromARGB(255, 102, 235, 0)),
                     ],
@@ -162,6 +172,15 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   widget.reponseCorrecte == 1
                                                       ? "yes"
                                                       : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -193,9 +212,14 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                             18.0),
                                                     border: Border.all(
                                                       width: 2,
-                                                      color: showState =="yes" &&reponseUtilisateur ==1
+                                                      color: showState ==
+                                                                  "yes" &&
+                                                              reponseUtilisateur ==
+                                                                  1
                                                           ? Colors.green
-                                                          : showState == "no" && reponseUtilisateur ==1
+                                                          : showState == "no" &&
+                                                                  reponseUtilisateur ==
+                                                                      1
                                                               ? Colors.red
                                                               : const Color
                                                                       .fromARGB(
@@ -222,7 +246,9 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                 Positioned(
                                                   bottom: -1,
                                                   right: -1,
-                                                  child: showState == "yes" &&reponseUtilisateur ==1
+                                                  child: showState == "yes" &&
+                                                          reponseUtilisateur ==
+                                                              1
                                                       ? Container(
                                                           height: 0.06 *
                                                               MediaQuery.of(
@@ -239,10 +265,20 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                                 "assets/images/juste.png"),
                                                           ),
                                                         )
-                                                      : showState == "no" &&reponseUtilisateur ==1
+                                                      : showState == "no" &&
+                                                              reponseUtilisateur ==
+                                                                  1
                                                           ? Container(
-                                                              height: 0.06 *MediaQuery.of(context).size.height,
-                                                              width: 0.03 *MediaQuery.of(context).size.width,
+                                                              height: 0.06 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height,
+                                                              width: 0.03 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                               child:
                                                                   const Image(
                                                                 image: AssetImage(
@@ -263,6 +299,15 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   widget.reponseCorrecte == 2
                                                       ? "yes"
                                                       : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -294,9 +339,14 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                             18.0),
                                                     border: Border.all(
                                                       width: 2,
-                                                      color: showState =="yes" &&reponseUtilisateur ==2
+                                                      color: showState ==
+                                                                  "yes" &&
+                                                              reponseUtilisateur ==
+                                                                  2
                                                           ? Colors.green
-                                                          : showState == "no" && reponseUtilisateur ==2
+                                                          : showState == "no" &&
+                                                                  reponseUtilisateur ==
+                                                                      2
                                                               ? Colors.red
                                                               : const Color
                                                                       .fromARGB(
@@ -309,7 +359,7 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   alignment: Alignment.center,
                                                   child: Center(
                                                       child: Text(
-                                                    widget.reponse1,
+                                                    widget.reponse2,
                                                     textAlign: TextAlign.center,
                                                     style: const TextStyle(
                                                       color: Color.fromARGB(
@@ -323,7 +373,9 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                 Positioned(
                                                   bottom: -1,
                                                   right: -1,
-                                                  child: showState == "yes" &&reponseUtilisateur ==2
+                                                  child: showState == "yes" &&
+                                                          reponseUtilisateur ==
+                                                              2
                                                       ? Container(
                                                           height: 0.06 *
                                                               MediaQuery.of(
@@ -340,10 +392,20 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                                 "assets/images/juste.png"),
                                                           ),
                                                         )
-                                                      : showState == "no" &&reponseUtilisateur ==2
+                                                      : showState == "no" &&
+                                                              reponseUtilisateur ==
+                                                                  2
                                                           ? Container(
-                                                              height: 0.06 *MediaQuery.of(context).size.height,
-                                                              width: 0.03 *MediaQuery.of(context).size.width,
+                                                              height: 0.06 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height,
+                                                              width: 0.03 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                               child:
                                                                   const Image(
                                                                 image: AssetImage(
@@ -370,6 +432,15 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   widget.reponseCorrecte == 3
                                                       ? "yes"
                                                       : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -401,9 +472,14 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                             18.0),
                                                     border: Border.all(
                                                       width: 2,
-                                                      color: showState =="yes" &&reponseUtilisateur ==3
+                                                      color: showState ==
+                                                                  "yes" &&
+                                                              reponseUtilisateur ==
+                                                                  3
                                                           ? Colors.green
-                                                          : showState == "no" && reponseUtilisateur ==3
+                                                          : showState == "no" &&
+                                                                  reponseUtilisateur ==
+                                                                      3
                                                               ? Colors.red
                                                               : const Color
                                                                       .fromARGB(
@@ -416,7 +492,7 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   alignment: Alignment.center,
                                                   child: Center(
                                                       child: Text(
-                                                    widget.reponse1,
+                                                    widget.reponse3,
                                                     textAlign: TextAlign.center,
                                                     style: const TextStyle(
                                                       color: Color.fromARGB(
@@ -430,7 +506,9 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                 Positioned(
                                                   bottom: -1,
                                                   right: -1,
-                                                  child: showState == "yes" &&reponseUtilisateur ==3
+                                                  child: showState == "yes" &&
+                                                          reponseUtilisateur ==
+                                                              3
                                                       ? Container(
                                                           height: 0.06 *
                                                               MediaQuery.of(
@@ -447,10 +525,20 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                                 "assets/images/juste.png"),
                                                           ),
                                                         )
-                                                      : showState == "no" &&reponseUtilisateur ==3
+                                                      : showState == "no" &&
+                                                              reponseUtilisateur ==
+                                                                  3
                                                           ? Container(
-                                                              height: 0.06 *MediaQuery.of(context).size.height,
-                                                              width: 0.03 *MediaQuery.of(context).size.width,
+                                                              height: 0.06 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height,
+                                                              width: 0.03 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                               child:
                                                                   const Image(
                                                                 image: AssetImage(
@@ -471,6 +559,15 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   widget.reponseCorrecte == 4
                                                       ? "yes"
                                                       : "no";
+                                              if (showState == "yes") {
+                                                _player.play(AssetSource(
+                                                    'music/correct.mp3'));
+                                                _player.stop();
+                                              } else {
+                                                _player.play(AssetSource(
+                                                    'music/wrong.mp3'));
+                                                _player.stop();
+                                              }
                                             });
                                             await waitAndPop();
                                           },
@@ -502,9 +599,14 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                             18.0),
                                                     border: Border.all(
                                                       width: 2,
-                                                      color: showState =="yes" &&reponseUtilisateur ==4
+                                                      color: showState ==
+                                                                  "yes" &&
+                                                              reponseUtilisateur ==
+                                                                  4
                                                           ? Colors.green
-                                                          : showState == "no" && reponseUtilisateur ==4
+                                                          : showState == "no" &&
+                                                                  reponseUtilisateur ==
+                                                                      4
                                                               ? Colors.red
                                                               : const Color
                                                                       .fromARGB(
@@ -517,7 +619,7 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                   alignment: Alignment.center,
                                                   child: Center(
                                                       child: Text(
-                                                    widget.reponse1,
+                                                    widget.reponse4,
                                                     textAlign: TextAlign.center,
                                                     style: const TextStyle(
                                                       color: Color.fromARGB(
@@ -531,7 +633,9 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                 Positioned(
                                                   bottom: -1,
                                                   right: -1,
-                                                  child: showState == "yes" &&reponseUtilisateur ==4
+                                                  child: showState == "yes" &&
+                                                          reponseUtilisateur ==
+                                                              4
                                                       ? Container(
                                                           height: 0.06 *
                                                               MediaQuery.of(
@@ -548,10 +652,20 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                                                                 "assets/images/juste.png"),
                                                           ),
                                                         )
-                                                      : showState == "no" &&reponseUtilisateur ==4
+                                                      : showState == "no" &&
+                                                              reponseUtilisateur ==
+                                                                  4
                                                           ? Container(
-                                                              height: 0.06 *MediaQuery.of(context).size.height,
-                                                              width: 0.03 *MediaQuery.of(context).size.width,
+                                                              height: 0.06 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height,
+                                                              width: 0.03 *
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                               child:
                                                                   const Image(
                                                                 image: AssetImage(
