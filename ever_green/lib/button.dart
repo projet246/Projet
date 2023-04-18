@@ -16,7 +16,7 @@ class _RoundButtonState extends State<RoundButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, '${this.widget.href}')
+        Navigator.popAndPushNamed(context, '${this.widget.href}')
             ;
       },
       child: Container(

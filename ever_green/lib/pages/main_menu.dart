@@ -61,24 +61,13 @@ class _mainMenuState extends State<mainMenu> {
                           // color: Colors.amber,
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
-                                RoundButton(
-                                  href: '/',
-                                  myIcon: Icons.home,
-                                  couleur: Color.fromRGBO(255, 210, 23, 5),
-                                ), //le premier button
-                                RoundButton(
-                                  href: '/',
-                                  myIcon: Icons.settings,
-                                  couleur: Color.fromRGBO(255, 210, 23, 5),
-                                ), //le deuxieme button
-
                               children:  [
                                 const RoundButton(
                                     href: '/StartPage',
                                     myIcon: Icons.home,
                                     couleur: Color.fromRGBO(255, 210, 23, 5),
-                                    ), //le premier button
+                                    ), //le premier
+                                // button
                                 isSignedIn ?
                                 RoundButtonSettingsWhileLogged(
                                     myIcon: Icons.settings, value: 5)
@@ -119,6 +108,7 @@ class _mainMenuState extends State<mainMenu> {
                         SizedBox(
                           width: 40,
                         ),
+
                         cardBg(
                           title: 'HISTOIRES',
                           coleur1: Color.fromARGB(255, 79, 195, 7),

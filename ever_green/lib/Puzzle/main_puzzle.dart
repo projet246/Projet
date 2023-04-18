@@ -72,9 +72,13 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
   @override
   void initState() {
     int i = 0 ;
-    widget._arrayOfPuzzlePieces.shuffle();
     _audio.load('music/correct.mp3');
     _audio.load('music/wrong.mp3');
+    setState(() {
+      widget._arrayOfPuzzlePieces.shuffle();
+      correctPiecesNumber = 0;
+      widget._arrayOfPuzzlePieces = widget._copyOfarrayOfPuzzlePieces.toList();
+    });
     while ( i < widget._arrayOfSquares.length - 1){
       widget._arrayOfSquares[i].imageName = "assets/images/empty.png" ;
       i++;
@@ -134,8 +138,6 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                       myIcon: Icons.place_rounded,
                       couleur: Color.fromRGBO(255, 210, 23, 5),
                     ),
-
-
                     const RoundButton(
                       href: '/Puzzles',
                       myIcon: Icons.settings,
@@ -319,3 +321,4 @@ class DraggablePiece extends StatelessWidget {
         ),
       );
 }
+
