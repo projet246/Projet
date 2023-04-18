@@ -1,11 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/button.dart';
 
+import '../StartPage/settings.dart';
 import '../card_bg.dart';
 
-class GamesMenu extends StatelessWidget {
+class GamesMenu extends StatefulWidget {
   const GamesMenu({super.key});
 
+  @override
+  State<GamesMenu> createState() => _GamesMenuState();
+}
+
+class _GamesMenuState extends State<GamesMenu> {
+  bool isSignedIn = false;
+  final User? user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    if (user != null) {
+      if (!user!.emailVerified) {
+        setState(() {
+          user!.delete();
+          FirebaseAuth.instance.signOut();
+
+        });
+      } else {
+        setState(() {
+          isSignedIn = true;
+        });
+      }
+      super.initState();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,23 +60,22 @@ class GamesMenu extends StatelessWidget {
                           width: 150.0,
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
-                                RoundButton(
+                              children:  [
+                                const RoundButton(
                                     href: '/',
                                     myIcon: Icons.home,
                                     couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
-                                RoundButton(
+                                const RoundButton(
                                     href: '/',
                                     myIcon: Icons
                                         .woo_commerce,
                                         couleur: Color.fromRGBO(255, 210, 23, 5),
                                         ), //le deuxieme button
-                                RoundButton(
-                                    href: '/',
-                                    myIcon:
-                                        Icons.settings,
-                                        couleur: Color.fromRGBO(255, 210, 23, 5),
-                                        ), //le deuxieme button
+                                isSignedIn ?
+                                RoundButtonSettingsWhileLogged(
+                                    myIcon: Icons.settings, value: 5)
+                                    : RoundButtonSettings(
+                                    myIcon: Icons.settings, value: 5)
                               ]),
                         ),
                       ),
