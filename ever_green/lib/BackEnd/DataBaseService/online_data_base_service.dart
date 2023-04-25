@@ -16,29 +16,42 @@ class OnlineDataBaseService extends DataBaseService {
       int index = 0;
       if (onlineParentBox.isEmpty) {
         onlineParentBox.put(_uid, returnParent());
-        setParent(onlineParentBox.get(_uid));
         index = returnParent().numberOfChildren;
         incrementChildrenCount();
+        addChild(PlayerProgress(
+            0,
+            [
+              LevelsCompleted(1, '10000000000000'),
+              LevelsCompleted(2, '10000000000000'),
+              LevelsCompleted(3, '10000000000000'),
+              LevelsCompleted(4, '10000000000000'),
+            ],
+            DateTime.now(),
+            index,
+            childName,
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
+        setParentChildren(returnPlayers());
+        onlineParentBox.put(_uid, returnParent());
       } else {
         setParent(onlineParentBox.get(_uid));
         index = returnParent().numberOfChildren;
         incrementChildrenCount();
+        addChild(PlayerProgress(
+            0,
+            [
+              LevelsCompleted(1, '10000000000000'),
+              LevelsCompleted(2, '10000000000000'),
+              LevelsCompleted(3, '10000000000000'),
+              LevelsCompleted(4, '10000000000000'),
+            ],
+            DateTime.now(),
+            index,
+            childName,
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
         setParentChildren(returnPlayers());
-        onlineParentBox.putAt(0, returnParent());
+        onlineParentBox.put(_uid, returnParent());
       }
 
-      addChild(PlayerProgress(
-          0,
-          [
-            LevelsCompleted(1, '10000000000000'),
-            LevelsCompleted(2, '10000000000000'),
-            LevelsCompleted(3, '10000000000000'),
-            LevelsCompleted(4, '10000000000000'),
-          ],
-          DateTime.now(),
-          index,
-          childName,
-          '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
     }
   }
 

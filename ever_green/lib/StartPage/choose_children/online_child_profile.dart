@@ -1,3 +1,6 @@
+
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_snackbar/floating_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -16,29 +19,13 @@ class OnlineProfilesSelection extends StatefulWidget {
 class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
   @override
   void initState() {
-    if (onlineParentBox.isEmpty && user != null) {
-      onlineProgress.setUID(user!.uid);
-      onlineParentBox.put(user!.uid, onlineParent);
-      onlineProgress.setPlayers(onlineProgress.returnParent().children);
-      playersOnline = onlineProgress.returnPlayers();
-    } else {
-      if (onlineParentBox.isNotEmpty && user != null) {
-        if (onlineParentBox.containsKey(user!.uid)) {
-          onlineProgress.setUID(user!.uid);
-          onlineProgress.setParent(onlineParentBox.get(user!.uid));
-          onlineProgress.setPlayers(onlineProgress.returnParent().children);
-          playersOnline = onlineProgress.returnPlayers();
-        } else {
-          onlineProgress.setUID(user!.uid);
-          onlineProgress.setParent(Parent([], 0));
-          onlineProgress.setPlayers([]);
-          onlineParentBox.put(
-              onlineProgress.getUID(), onlineProgress.returnParent());
-          playersOnline = [];
-        }
-      }
-    }
     super.initState();
+    Timer.periodic(const Duration(seconds: 10), (timer) async {
+      await getProgress();
+      setState(() {
+        playersOnline = onlineProgress.returnPlayers();
+      });
+    });
   }
   final User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -427,4 +414,6 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
             ),
     );
   }
+
 }
+

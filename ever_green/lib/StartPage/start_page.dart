@@ -85,7 +85,6 @@ class _StartPageState extends State<StartPage> {
                                       myIcon: Icons.settings, value: globalVolumeMusicSettings)
                                : RoundButtonSettings(
                                       myIcon: Icons.settings, value: globalVolumeMusicSettings)
-
                             ),
                         ],
                       ),

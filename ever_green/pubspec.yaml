@@ -49,6 +49,7 @@ dependencies:
   responsive_framework: ^0.2.0
   floating_snackbar: ^1.0.3+1
   firebase_database: ^10.1.1
+  internet_connection_checker: ^1.0.0+1
 flutter_native_splash:
   color: "#f5cb42"
 dev_dependencies:

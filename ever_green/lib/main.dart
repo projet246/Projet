@@ -10,7 +10,6 @@ import 'package:sorttrash/pages/niveaux.dart';
 import 'package:sorttrash/pages/trophies_page.dart';
 import 'package:sorttrash/player_box.dart';
 import 'package:sorttrash/profile.dart';
-
 import 'BackEnd/AuthService/verify_user.dart';
 import 'BackEnd/PlayerProgress/player.dart';
 import 'Puzzle/Models/Objects.dart';
@@ -38,6 +37,7 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   await Firebase.initializeApp();
   await Hive.initFlutter();
+
   Hive.registerAdapter(PlayerProgressAdapter());
   Hive.registerAdapter(LevelsCompletedAdapter());
   Hive.registerAdapter(ParentAdapter());
@@ -54,6 +54,7 @@ void main() async {
   bool decoyMethod(bool te) {
     return false;
   }
+  await getProgress();
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
     initialRoute:
