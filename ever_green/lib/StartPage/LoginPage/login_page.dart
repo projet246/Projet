@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/BackEnd/AuthService/auth_service.dart';
 import 'package:sorttrash/StartPage/LoginPage/Cred/login_cred.dart';
@@ -22,151 +23,195 @@ class _LoginPageState extends State<LoginPage> {
     password.dispose();
     super.dispose();
   }
+  final User? user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    if (user != null) {
+      if (!user!.emailVerified) {
+        setState(() {
+          user!.delete();
+          FirebaseAuth.instance.signOut();
+
+        });
+      }
+      super.initState();
+    }
+  }
  String errorMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+        body: WillPopScope(
+          onWillPop: () async => false,
+          child: SafeArea(
       child: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/bg-image.png'),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Stack(
-                children: [
-                  Center(
-                    child: Container(
-                      height: 390,
-                      width: 500,
-                      color: Colors.transparent,
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg-image.png'),
+                  fit: BoxFit.cover),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                Stack(
+                  children: [
+                    Center(
+                      child: Container(
+                        height: 390,
+                        width: 500,
+                        color: Colors.transparent,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 50,
-                    left: 190,
-                    child: Container(
-                        height: 340,
-                        width: 400,
-                        decoration: BoxDecoration(
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.white54,
-                                spreadRadius: 2,
-                                blurRadius: 2,
-                                offset: Offset(0, 8), // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Center(
-                          child: Form(
-                            key: _mykey,
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromRGBO( 	103, 	235, 	0, 1),
-                                      side: const BorderSide(
-                                          width: 1, color: Colors.black38),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      padding: const EdgeInsets.only(
-                                          left: 100,
-                                          right: 100,
-                                          top: 1,
-                                          bottom: 3)),
-                                  child: const Text(
-                                    'Login Page',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily: 'Digital',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                 SizedBox(
-                                  height: 20,
-                                  child: Text(errorMessage, style: const TextStyle(color: Colors.redAccent, fontSize: 9, fontWeight: FontWeight.bold), ),
-                                ),
-                                EmailCred(
-                                    hint: 'Enter Email !',
-                                    controller: email,
-                                    obscureText: false),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                PassCred(
-                                    controller: password,
-                                    hint: 'Enter Password!',
-                                    obscureText: true),
-                                 Padding(
-                                  padding: const EdgeInsets.only(left: 135.0),
-                                  child: RegisterLoggingButton(
-                                    description: 'Register Here !',
-                                    href: '/RegisterPage',
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    if (_mykey.currentState!.validate()) {
-                                     _auth.logIn( email.text.trim(), password.text.trim() );
-                                     if ( _auth.error ) {
-                                       setState(() {
-                                       errorMessage = 'Please check credentials  ( Account Does Not Exist Or The Password Is Wrong  ).';
-                                     });
-                                     }
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.lightBlueAccent,
-                                      padding: const EdgeInsets.only(
-                                          left: 40,
-                                          right: 40,
-                                          top: 5,
-                                          bottom: 8)),
-                                  child: const Text(
-                                    'Login !',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily: 'Digital',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                    Positioned(
+                      bottom: 50,
+                      left: 190,
+                      child: Container(
+                          height: 340,
+                          width: 400,
+                          decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.white54,
+                                  spreadRadius: 2,
+                                  blurRadius: 2,
+                                  offset: Offset(0, 8), // changes position of shadow
                                 ),
                               ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Center(
+                            child: Form(
+                              key: _mykey,
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromRGBO( 	103, 	235, 	0, 1),
+                                        side: const BorderSide(
+                                            width: 1, color: Colors.black38),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        padding: const EdgeInsets.only(
+                                            left: 100,
+                                            right: 100,
+                                            top: 1,
+                                            bottom: 3)),
+                                    child: const Text(
+                                      'Login Page',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontFamily: 'Digital',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  EmailCred(
+                                      hint: 'Enter Email !',
+                                      controller: email,
+                                      obscureText: false),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  PassCred(
+                                      controller: password,
+                                      hint: 'Enter Password!',
+                                      obscureText: true),
+                                   Padding(
+                                    padding: const EdgeInsets.only(left: 135.0),
+                                    child: RegisterLoggingButton(
+                                      description: 'Register Here !',
+                                      href: '/RegisterPage',
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ElevatedButton(
+
+                                    onPressed: () async {
+                                      _auth.error = false;
+                                      if (_mykey.currentState!.validate()) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar( const SnackBar(
+                                            duration: Duration(seconds: 3),
+                                            backgroundColor:
+                                            Colors.greenAccent,
+                                            content: Text(
+                                              '🌐 : Trying to Login ',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: 'Digital',
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                  fontSize: 14),
+                                            )));
+                                       await _auth.logIn( email.text.trim(), password.text.trim() );
+                                       setState(() {
+                                         if (_auth.error) {
+                                           ScaffoldMessenger.of(context)
+                                               .showSnackBar( SnackBar(
+                                               duration: const Duration(seconds: 6),
+                                               backgroundColor:
+                                               Colors.redAccent,
+                                               content: Text(
+                                                 '📢 : ${_auth.errorMessage} ',
+                                                 style: const TextStyle(
+                                                     color: Colors.white,
+                                                     fontFamily: 'Digital',
+                                                     fontWeight:
+                                                     FontWeight.bold,
+                                                     fontSize: 13),
+                                               )));
+                                         }
+                                       });
+                                      }
+
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.lightBlueAccent,
+                                        padding: const EdgeInsets.only(
+                                            left: 40,
+                                            right: 40,
+                                            top: 5,
+                                            bottom: 8)),
+                                    child: const Text(
+                                      'Login !',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontFamily: 'Digital',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )),
-                  ),
-                  const Positioned(
-                      left: 560,
-                      top: 5,
-                      child: RoundButton(
-                          myIcon: Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
-                ],
-              ),
-            ],
+                          )),
+                    ),
+                    const Positioned(
+                        left: 560,
+                        top: 5,
+                        child: RoundButton(
+                            myIcon: Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
       ),
-    ));
+    ),
+        ));
   }
 
 

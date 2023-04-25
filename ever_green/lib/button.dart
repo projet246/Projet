@@ -15,8 +15,8 @@ class _RoundButtonState extends State<RoundButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.popAndPushNamed(context, '${this.widget.href}')
+      onTap: () async {
+        await Navigator.popAndPushNamed(context, '${widget.href}')
             ;
       },
       child: Container(
@@ -75,7 +75,7 @@ class RectangleButton extends StatelessWidget {
           width: 86.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            color: this.couleur1, //secondaire
+            color: couleur1, //secondaire
             border: Border.all(
               color: Colors.white,
               width: 2.0,
@@ -90,14 +90,14 @@ class RectangleButton extends StatelessWidget {
             width: 82.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.0),
-              color: this.couleur2, //principal
+              color: couleur2, //principal
             ),
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 0.0),
                 child: Text(
-                  "${this.text}",
-                  style: TextStyle(
+                  "${text}",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 13.0,
                     fontWeight: FontWeight.w900,

@@ -3,16 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/StartPage/settings.dart';
 import 'package:sorttrash/StartPage/start_page_button.dart';
+import 'package:sorttrash/player_box.dart';
 
 class StartPage extends StatefulWidget {
-  StartPage({Key? key}) : super(key: key);
+  const StartPage({Key? key}) : super(key: key);
 
   @override
   State<StartPage> createState() => _StartPageState();
 }
 
 class _StartPageState extends State<StartPage> {
-  double _value = 4;
+
   bool isSignedIn = false;
   final User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -22,7 +23,6 @@ class _StartPageState extends State<StartPage> {
         setState(() {
           user!.delete();
           FirebaseAuth.instance.signOut();
-
         });
       } else {
         setState(() {
@@ -60,7 +60,6 @@ class _StartPageState extends State<StartPage> {
                     height: 150,
                     width: 250 ,
                     decoration: const BoxDecoration(
-
                       image: DecorationImage(
                         image: AssetImage('assets/images/logo.png'),
                         fit: BoxFit.fill,
@@ -77,15 +76,15 @@ class _StartPageState extends State<StartPage> {
                       height: 90,
                       child: Stack(
                         children: [
-                          const AnonButton(),
+                          const AnonButton(href: '/ChildSelector',color: Color.fromRGBO(255, 210, 23, 5),),
                           Positioned(
                             left: 100,
                             bottom: 20,
                             child: isSignedIn ?
                                   RoundButtonSettingsWhileLogged(
-                                      myIcon: Icons.settings, value: _value)
+                                      myIcon: Icons.settings, value: globalVolumeMusicSettings)
                                : RoundButtonSettings(
-                                      myIcon: Icons.settings, value: _value)
+                                      myIcon: Icons.settings, value: globalVolumeMusicSettings)
 
                             ),
                         ],
@@ -100,4 +99,5 @@ class _StartPageState extends State<StartPage> {
       ),
     );
   }
+
 }

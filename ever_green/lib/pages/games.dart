@@ -22,7 +22,6 @@ class _GamesMenuState extends State<GamesMenu> {
         setState(() {
           user!.delete();
           FirebaseAuth.instance.signOut();
-
         });
       } else {
         setState(() {
@@ -66,7 +65,7 @@ class _GamesMenuState extends State<GamesMenu> {
                                     myIcon: Icons.home,
                                     couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
                                 const RoundButton(
-                                    href: '/',
+                                    href: '/TrophiesPage',
                                     myIcon: Icons
                                         .woo_commerce,
                                         couleur: Color.fromRGBO(255, 210, 23, 5),

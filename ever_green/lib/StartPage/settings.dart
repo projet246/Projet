@@ -166,8 +166,8 @@ class RoundButtonSettings extends StatelessWidget {
                                     height: 5,
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
+                                    onPressed: () async {
+                                     await Navigator.popAndPushNamed(
                                           context, '/LoginPage');
                                     },
                                     style: ElevatedButton.styleFrom(

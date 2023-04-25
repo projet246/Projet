@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import '../button.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -41,8 +40,8 @@ class _QuizMultiplesState extends State<QuizMultiples> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
-    AudioCache audioCache = AudioCache();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -56,7 +55,7 @@ class _QuizMultiplesState extends State<QuizMultiples> {
             SizedBox(
               height: 0.03 * MediaQuery.of(context).size.height,
             ),
-            Container(
+            SizedBox(
               height: 0.15 * MediaQuery.of(context).size.height,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,576 +113,574 @@ class _QuizMultiplesState extends State<QuizMultiples> {
                           ),
                         ],
                       ),
-                      child: Container(
-                        child: Column(
-                          //les reponses sont dans tous ce qui suit
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              //le container des questions
-                              height: 0.2 * MediaQuery.of(context).size.height,
-                              width: 0.6 * MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 242, 220, 247),
-                                borderRadius: BorderRadius.circular(18.0),
-                                border: Border.all(
-                                  color:
-                                      const Color.fromARGB(255, 251, 194, 240),
-                                  width: 2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color.fromARGB(181, 44, 43, 43)
-                                        .withOpacity(0.5),
-                                    offset: const Offset(0, 5),
-                                    blurRadius: 10,
-                                  ),
-                                ],
+                      child: Column(
+                        //les reponses sont dans tous ce qui suit
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            //le container des questions
+                            height: 0.2 * MediaQuery.of(context).size.height,
+                            width: 0.6 * MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 242, 220, 247),
+                              borderRadius: BorderRadius.circular(18.0),
+                              border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 251, 194, 240),
+                                width: 2,
                               ),
-                              alignment: Alignment.center,
-                              child: Center(
-                                  child: Text(
-                                widget.question,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 218, 78, 204),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(181, 44, 43, 43)
+                                      .withOpacity(0.5),
+                                  offset: const Offset(0, 5),
+                                  blurRadius: 10,
                                 ),
-                              )),
+                              ],
                             ),
-                            Container(
-                              //le container des reponses
-                              height: 0.35 * MediaQuery.of(context).size.height,
-                              width: 0.5 * MediaQuery.of(context).size.width,
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 1;
-                                              showState =
-                                                  widget.reponseCorrecte == 1
-                                                      ? "yes"
-                                                      : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.15 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.21 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  height: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.2 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white
-                                                        .withOpacity(0.7),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18.0),
-                                                    border: Border.all(
-                                                      width: 2,
-                                                      color: showState ==
-                                                                  "yes" &&
-                                                              reponseUtilisateur ==
-                                                                  1
-                                                          ? Colors.green
-                                                          : showState == "no" &&
-                                                                  reponseUtilisateur ==
-                                                                      1
-                                                              ? Colors.red
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  251,
-                                                                  194,
-                                                                  240),
-                                                    ),
+                            alignment: Alignment.center,
+                            child: Center(
+                                child: Text(
+                              widget.question,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 218, 78, 204),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                          ),
+                          SizedBox(
+                            //le container des reponses
+                            height: 0.35 * MediaQuery.of(context).size.height,
+                            width: 0.5 * MediaQuery.of(context).size.width,
+                            child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 1;
+                                            showState =
+                                                widget.reponseCorrecte == 1
+                                                    ? "yes"
+                                                    : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: SizedBox(
+                                          height: 0.15 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.21 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.2 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.7),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                  border: Border.all(
+                                                    width: 2,
+                                                    color: showState ==
+                                                                "yes" &&
+                                                            reponseUtilisateur ==
+                                                                1
+                                                        ? Colors.green
+                                                        : showState == "no" &&
+                                                                reponseUtilisateur ==
+                                                                    1
+                                                            ? Colors.red
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                251,
+                                                                194,
+                                                                240),
                                                   ),
-                                                  alignment: Alignment.center,
-                                                  child: Center(
-                                                      child: Text(
-                                                    widget.reponse1,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  )),
                                                 ),
-                                                Positioned(
-                                                  bottom: -1,
-                                                  right: -1,
-                                                  child: showState == "yes" &&
-                                                          reponseUtilisateur ==
-                                                              1
-                                                      ? Container(
-                                                          height: 0.06 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height,
-                                                          width: 0.03 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width,
-                                                          child: const Image(
-                                                            image: AssetImage(
-                                                                "assets/images/juste.png"),
-                                                          ),
-                                                        )
-                                                      : showState == "no" &&
-                                                              reponseUtilisateur ==
-                                                                  1
-                                                          ? Container(
-                                                              height: 0.06 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height,
-                                                              width: 0.03 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Image(
-                                                                image: AssetImage(
-                                                                    "assets/images/faux.png"),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                ),
-                                              ],
-                                            ),
+                                                alignment: Alignment.center,
+                                                child: Center(
+                                                    child: Text(
+                                                  widget.reponse1,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                )),
+                                              ),
+                                              Positioned(
+                                                bottom: -1,
+                                                right: -1,
+                                                child: showState == "yes" &&
+                                                        reponseUtilisateur ==
+                                                            1
+                                                    ? SizedBox(
+                                                        height: 0.06 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height,
+                                                        width: 0.03 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                        child: const Image(
+                                                          image: AssetImage(
+                                                              "assets/images/juste.png"),
+                                                        ),
+                                                      )
+                                                    : showState == "no" &&
+                                                            reponseUtilisateur ==
+                                                                1
+                                                        ? SizedBox(
+                                                            height: 0.06 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            width: 0.03 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            child:
+                                                                const Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/faux.png"),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 2;
-                                              showState =
-                                                  widget.reponseCorrecte == 2
-                                                      ? "yes"
-                                                      : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.15 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.21 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  height: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.2 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white
-                                                        .withOpacity(0.7),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18.0),
-                                                    border: Border.all(
-                                                      width: 2,
-                                                      color: showState ==
-                                                                  "yes" &&
-                                                              reponseUtilisateur ==
-                                                                  2
-                                                          ? Colors.green
-                                                          : showState == "no" &&
-                                                                  reponseUtilisateur ==
-                                                                      2
-                                                              ? Colors.red
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  251,
-                                                                  194,
-                                                                  240),
-                                                    ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 2;
+                                            showState =
+                                                widget.reponseCorrecte == 2
+                                                    ? "yes"
+                                                    : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: SizedBox(
+                                          height: 0.15 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.21 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.2 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.7),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                  border: Border.all(
+                                                    width: 2,
+                                                    color: showState ==
+                                                                "yes" &&
+                                                            reponseUtilisateur ==
+                                                                2
+                                                        ? Colors.green
+                                                        : showState == "no" &&
+                                                                reponseUtilisateur ==
+                                                                    2
+                                                            ? Colors.red
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                251,
+                                                                194,
+                                                                240),
                                                   ),
-                                                  alignment: Alignment.center,
-                                                  child: Center(
-                                                      child: Text(
-                                                    widget.reponse2,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  )),
                                                 ),
-                                                Positioned(
-                                                  bottom: -1,
-                                                  right: -1,
-                                                  child: showState == "yes" &&
-                                                          reponseUtilisateur ==
-                                                              2
-                                                      ? Container(
-                                                          height: 0.06 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height,
-                                                          width: 0.03 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width,
-                                                          child: const Image(
-                                                            image: AssetImage(
-                                                                "assets/images/juste.png"),
-                                                          ),
-                                                        )
-                                                      : showState == "no" &&
-                                                              reponseUtilisateur ==
-                                                                  2
-                                                          ? Container(
-                                                              height: 0.06 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height,
-                                                              width: 0.03 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Image(
-                                                                image: AssetImage(
-                                                                    "assets/images/faux.png"),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                ),
-                                              ],
-                                            ),
+                                                alignment: Alignment.center,
+                                                child: Center(
+                                                    child: Text(
+                                                  widget.reponse2,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                )),
+                                              ),
+                                              Positioned(
+                                                bottom: -1,
+                                                right: -1,
+                                                child: showState == "yes" &&
+                                                        reponseUtilisateur ==
+                                                            2
+                                                    ? SizedBox(
+                                                        height: 0.06 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height,
+                                                        width: 0.03 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                        child: const Image(
+                                                          image: AssetImage(
+                                                              "assets/images/juste.png"),
+                                                        ),
+                                                      )
+                                                    : showState == "no" &&
+                                                            reponseUtilisateur ==
+                                                                2
+                                                        ? SizedBox(
+                                                            height: 0.06 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            width: 0.03 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            child:
+                                                                const Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/faux.png"),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 3;
-                                              showState =
-                                                  widget.reponseCorrecte == 3
-                                                      ? "yes"
-                                                      : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.15 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.21 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  height: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.2 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white
-                                                        .withOpacity(0.7),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18.0),
-                                                    border: Border.all(
-                                                      width: 2,
-                                                      color: showState ==
-                                                                  "yes" &&
-                                                              reponseUtilisateur ==
-                                                                  3
-                                                          ? Colors.green
-                                                          : showState == "no" &&
-                                                                  reponseUtilisateur ==
-                                                                      3
-                                                              ? Colors.red
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  251,
-                                                                  194,
-                                                                  240),
-                                                    ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 3;
+                                            showState =
+                                                widget.reponseCorrecte == 3
+                                                    ? "yes"
+                                                    : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: SizedBox(
+                                          height: 0.15 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.21 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.2 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.7),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                  border: Border.all(
+                                                    width: 2,
+                                                    color: showState ==
+                                                                "yes" &&
+                                                            reponseUtilisateur ==
+                                                                3
+                                                        ? Colors.green
+                                                        : showState == "no" &&
+                                                                reponseUtilisateur ==
+                                                                    3
+                                                            ? Colors.red
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                251,
+                                                                194,
+                                                                240),
                                                   ),
-                                                  alignment: Alignment.center,
-                                                  child: Center(
-                                                      child: Text(
-                                                    widget.reponse3,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  )),
                                                 ),
-                                                Positioned(
-                                                  bottom: -1,
-                                                  right: -1,
-                                                  child: showState == "yes" &&
-                                                          reponseUtilisateur ==
-                                                              3
-                                                      ? Container(
-                                                          height: 0.06 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height,
-                                                          width: 0.03 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width,
-                                                          child: const Image(
-                                                            image: AssetImage(
-                                                                "assets/images/juste.png"),
-                                                          ),
-                                                        )
-                                                      : showState == "no" &&
-                                                              reponseUtilisateur ==
-                                                                  3
-                                                          ? Container(
-                                                              height: 0.06 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height,
-                                                              width: 0.03 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Image(
-                                                                image: AssetImage(
-                                                                    "assets/images/faux.png"),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                ),
-                                              ],
-                                            ),
+                                                alignment: Alignment.center,
+                                                child: Center(
+                                                    child: Text(
+                                                  widget.reponse3,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                )),
+                                              ),
+                                              Positioned(
+                                                bottom: -1,
+                                                right: -1,
+                                                child: showState == "yes" &&
+                                                        reponseUtilisateur ==
+                                                            3
+                                                    ? SizedBox(
+                                                        height: 0.06 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height,
+                                                        width: 0.03 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                        child: const Image(
+                                                          image: AssetImage(
+                                                              "assets/images/juste.png"),
+                                                        ),
+                                                      )
+                                                    : showState == "no" &&
+                                                            reponseUtilisateur ==
+                                                                3
+                                                        ? SizedBox(
+                                                            height: 0.06 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            width: 0.03 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            child:
+                                                                const Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/faux.png"),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 4;
-                                              showState =
-                                                  widget.reponseCorrecte == 4
-                                                      ? "yes"
-                                                      : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.15 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.21 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  height: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.2 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white
-                                                        .withOpacity(0.7),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18.0),
-                                                    border: Border.all(
-                                                      width: 2,
-                                                      color: showState ==
-                                                                  "yes" &&
-                                                              reponseUtilisateur ==
-                                                                  4
-                                                          ? Colors.green
-                                                          : showState == "no" &&
-                                                                  reponseUtilisateur ==
-                                                                      4
-                                                              ? Colors.red
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  251,
-                                                                  194,
-                                                                  240),
-                                                    ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 4;
+                                            showState =
+                                                widget.reponseCorrecte == 4
+                                                    ? "yes"
+                                                    : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: SizedBox(
+                                          height: 0.15 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.21 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.2 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.7),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                  border: Border.all(
+                                                    width: 2,
+                                                    color: showState ==
+                                                                "yes" &&
+                                                            reponseUtilisateur ==
+                                                                4
+                                                        ? Colors.green
+                                                        : showState == "no" &&
+                                                                reponseUtilisateur ==
+                                                                    4
+                                                            ? Colors.red
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                251,
+                                                                194,
+                                                                240),
                                                   ),
-                                                  alignment: Alignment.center,
-                                                  child: Center(
-                                                      child: Text(
-                                                    widget.reponse4,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  )),
                                                 ),
-                                                Positioned(
-                                                  bottom: -1,
-                                                  right: -1,
-                                                  child: showState == "yes" &&
-                                                          reponseUtilisateur ==
-                                                              4
-                                                      ? Container(
-                                                          height: 0.06 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height,
-                                                          width: 0.03 *
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width,
-                                                          child: const Image(
-                                                            image: AssetImage(
-                                                                "assets/images/juste.png"),
-                                                          ),
-                                                        )
-                                                      : showState == "no" &&
-                                                              reponseUtilisateur ==
-                                                                  4
-                                                          ? Container(
-                                                              height: 0.06 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height,
-                                                              width: 0.03 *
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Image(
-                                                                image: AssetImage(
-                                                                    "assets/images/faux.png"),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                ),
-                                              ],
-                                            ),
+                                                alignment: Alignment.center,
+                                                child: Center(
+                                                    child: Text(
+                                                  widget.reponse4,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                )),
+                                              ),
+                                              Positioned(
+                                                bottom: -1,
+                                                right: -1,
+                                                child: showState == "yes" &&
+                                                        reponseUtilisateur ==
+                                                            4
+                                                    ? SizedBox(
+                                                        height: 0.06 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height,
+                                                        width: 0.03 *
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                        child: const Image(
+                                                          image: AssetImage(
+                                                              "assets/images/juste.png"),
+                                                        ),
+                                                      )
+                                                    : showState == "no" &&
+                                                            reponseUtilisateur ==
+                                                                4
+                                                        ? SizedBox(
+                                                            height: 0.06 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            width: 0.03 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            child:
+                                                                const Image(
+                                                              image: AssetImage(
+                                                                  "assets/images/faux.png"),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ]),
-                            ),
-                          ],
-                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ]),
+                          ),
+                        ],
                       ),
                     ),
                   ),

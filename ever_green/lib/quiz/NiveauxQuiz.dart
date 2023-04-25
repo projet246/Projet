@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sorttrash/button.dart';
 import 'dart:ui' as ui;
-import 'level.dart';
 import 'NiveauQuiz.dart';
 import 'managementQuiz.dart';
 
@@ -10,14 +9,14 @@ double width = ui.window.physicalSize.width;
 double height = ui.window.physicalSize.height;
 
 class NiveauxQuiz extends StatefulWidget {
-  late Management _levelManagement;
-  final int NbrNiveax;
-  final int OpenLevels;
+  late final  Management _levelManagement;
+  final int nbrNiveax;
+  final int openLevels;
   final String href;
   NiveauxQuiz(
       {super.key,
-      required this.NbrNiveax,
-      required this.OpenLevels,
+      required this.nbrNiveax,
+      required this.openLevels,
       required this.href,
       required Management levelMangement}) {
     _levelManagement = levelMangement;
@@ -34,6 +33,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -50,12 +50,12 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
               //les bouttons au-dessus
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
+                const Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
                     height: 60.0,
                     width: 60.0,
-                    child: const Center(
+                    child: Center(
                       child: RoundButton(
                         href: '/games',
                         myIcon: Icons.arrow_back,
@@ -66,7 +66,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5.0, 15.0, 0.0),
-                  child: Container(
+                  child: SizedBox(
                     //pour creer un alignement des elements
                     height: 60.0,
                     width: 120.0,
@@ -82,7 +82,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                           RoundButton(
                             href: widget.href,
                             myIcon: Icons.settings,
-                            couleur: Color.fromRGBO(255, 210, 23, 5),
+                            couleur: const Color.fromRGBO(255, 210, 23, 5),
                           ), //le deuxieme button
                         ]),
                   ),
@@ -101,20 +101,20 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                     child: Container(
                       //le corps de niveaux
                       height: 0.4 * height,
-                      width: 100.0 * widget.NbrNiveax +
-                          50 * (widget.NbrNiveax - 1),
+                      width: 100.0 * widget.nbrNiveax +
+                          50 * (widget.nbrNiveax - 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color: const Color.fromARGB(211, 178, 158, 211),
                       ),
                       child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(widget.NbrNiveax, (index) {
-                        return index != widget.NbrNiveax - 1
+                          children: List.generate(widget.nbrNiveax, (index) {
+                        return index != widget.nbrNiveax - 1
                             ? Row(
                                 children: [
                                   Niveau(
-                                    NbrNiveax: widget.NbrNiveax,
+                                    nbrNiveax: widget.nbrNiveax,
                                     height: height,
                                     width: width,
                                     index: index,
@@ -147,7 +147,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                                 ],
                               )
                             : Niveau(
-                                NbrNiveax: widget.NbrNiveax,
+                                nbrNiveax: widget.nbrNiveax,
                                 height: height,
                                 width: width,
                                 index: index,

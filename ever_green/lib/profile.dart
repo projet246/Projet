@@ -12,9 +12,9 @@ class ProfilePage extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser!;
     return Column(
       children: [
-        TextButton(onPressed: () { FirebaseAuth.instance.signOut(); Navigator.pushNamed(context, '/StartPage'); },
+        TextButton(onPressed: () { FirebaseAuth.instance.signOut(); Navigator.popAndPushNamed(context, '/StartPage'); },
             child : const Text('Sign Out')),
-        TextButton(onPressed: () { Navigator.pushNamed(context, '/'); },
+        TextButton(onPressed: () {  },
     child : Text(user.email!)),
       ],
     );

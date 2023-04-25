@@ -1,37 +1,41 @@
+import 'package:sorttrash/BackEnd/DataBaseService/local_data_base_service.dart';
+import 'package:sorttrash/player_box.dart';
+
 import '../Models/Objects.dart';
 import '../Models/TrashCans.dart';
 import 'Level.dart';
 
 class LevelManagement {
+  DataBaseService dataBaseService = currentProfileIndex == 1? offlineProgress : onlineProgress;
   late Level level1 = Level(
-    isLocked: false, 
+    isLocked: dataBaseService.returnLockedState(0,1),
     arrayOfTrash: trashArray,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level2.setIsLocked,
   );
   late Level level2 = Level(
-    isLocked: true,
+    isLocked: dataBaseService.returnLockedState(1,1),
     arrayOfTrash: trashArray2,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level3.setIsLocked,
   );
 
   late Level level3 = Level(
-    isLocked: true,
+    isLocked: dataBaseService.returnLockedState(2,1),
     arrayOfTrash: trashArray,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level4.setIsLocked,
   );
 
   late Level level4 = Level(
-    isLocked: true,
+    isLocked: dataBaseService.returnLockedState(3,1),
     arrayOfTrash: trashArray,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level5.setIsLocked,
   );
 
   late Level level5 = Level(
-    isLocked: true,
+    isLocked: dataBaseService.returnLockedState(4,1),
     arrayOfTrash: trashArray,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: decoyMethod,

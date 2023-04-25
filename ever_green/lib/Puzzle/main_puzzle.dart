@@ -2,16 +2,18 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:confetti/confetti.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/Puzzle/Models/Objects.dart';
 import 'package:sorttrash/Puzzle/Models/TrashCans.dart';
 import 'package:sorttrash/button.dart';
 
+import '../BackEnd/PlayerProgress/player.dart';
+import '../player_box.dart';
 import 'Models/timer.dart';
 
 class PuzzleLevel extends StatefulWidget {
   late Function(bool) _changeBooleanStatus;
-
   PuzzleLevel(
       {super.key,
       required List<Piece> arrayOfPuzzlePieces,
@@ -29,7 +31,6 @@ class PuzzleLevel extends StatefulWidget {
     _imageName = imageName;
     _timeCount = timeCount;
     _matrixSize = matrixSSize;
-
   }
   bool _isLocked = false;
   bool _isFinished = false;
@@ -61,7 +62,11 @@ class PuzzleLevel extends StatefulWidget {
 
 class _PuzzleLevelState extends State<PuzzleLevel> {
   final _player = AudioPlayer();
-  ConfettiController _controller = ConfettiController();
+  final User? user = FirebaseAuth.instance.currentUser;
+  final ConfettiController _controller = ConfettiController();
+  late PlayerProgress playerProgress = currentProfileIndex == 1
+      ? offlineProgress.returnParent().children[globalChildKey]
+      : onlineProgress.returnParent().children[onlineGlobalChildKey];
   final _audio = AudioCache();
   late double screenHeight = MediaQuery.of(context).size.height;
   late double screenWidth = MediaQuery.of(context).size.width;
@@ -71,21 +76,22 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
   late int correctPiecesNumber = 0;
   @override
   void initState() {
-    int i = 0 ;
+    int i = 0;
     _audio.load('music/correct.mp3');
     _audio.load('music/wrong.mp3');
     setState(() {
-      widget._arrayOfPuzzlePieces.shuffle();
+      widget._copyOfarrayOfPuzzlePieces.shuffle();
       correctPiecesNumber = 0;
       widget._arrayOfPuzzlePieces = widget._copyOfarrayOfPuzzlePieces.toList();
     });
-    while ( i < widget._arrayOfSquares.length - 1){
-      widget._arrayOfSquares[i].imageName = "assets/images/empty.png" ;
+    while (i < widget._arrayOfSquares.length - 1) {
+      widget._arrayOfSquares[i].imageName = "assets/images/empty.png";
       i++;
     }
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        if (time == 0) {
+        if (time <= 0) {
+          time = 0;
         } else {
           time--;
         }
@@ -93,11 +99,13 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
     });
     super.initState();
   }
+
   @override
   void dispose() {
     timer.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +119,7 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
               minBlastForce: 1,
               emissionFrequency: 0.03,
               numberOfParticles: 10,
-              shouldLoop:true,
+              shouldLoop: true,
               gravity: 0,
             ),
           ),
@@ -144,7 +152,7 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                       couleur: Color.fromRGBO(255, 210, 23, 5),
                     ),
                     SizedBox(
-                      width: 0.013888*screenWidth,
+                      width: 0.013888 * screenWidth,
                     ),
                   ],
                 ),
@@ -207,7 +215,6 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
       ),
     );
   }
-
   Widget showSquare(
     BuildContext context, {
     required Square square,
@@ -232,14 +239,40 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
             int i = 0;
             correctPiecesNumber++;
             square.imageName = data.imageName;
-            widget._arrayOfPuzzlePieces.removeWhere((trash) => trash.id == data.id);
+            widget._arrayOfPuzzlePieces
+                .removeWhere((trash) => trash.id == data.id);
             if (correctPiecesNumber ==
                 widget._matrixSize * widget._matrixSize) {
-              widget._arrayOfPuzzlePieces = widget._copyOfarrayOfPuzzlePieces.toList();
+              widget._arrayOfPuzzlePieces =
+                  widget._copyOfarrayOfPuzzlePieces.toList();
               widget.setIsFinished(true);
               widget._changeBooleanStatus(false);
-              while ( i < widget._arrayOfSquares.length - 1){
-                widget._arrayOfSquares[i].imageName = "assets/images/empty.png" ;
+              setState(() {
+                playerProgress.score = 100;
+                String newLevelsCompleted = playerProgress
+                    .gamesData[0].levelsCompleted
+                    .replaceFirst('0', '1');
+                playerProgress.gamesData[0].levelsCompleted =
+                    newLevelsCompleted;
+              });
+              try {
+                if (currentProfileIndex == 1) {
+                  offlineProgress.setChild(globalChildKey, playerProgress);
+                  if (parentBox.isEmpty) {
+                    parentBox.add(offlineProgress);
+                  }else{
+                    parentBox.putAt(0, offlineProgress.returnParent());
+                  }
+                } else {
+                  onlineProgress.setChild(onlineGlobalChildKey, playerProgress);
+                  onlineParentBox.put(user!.uid, onlineProgress.returnParent());
+                  onlineProgress.returnParent().updateData(onlineProgress.getUID());
+                }
+              } catch (e) {
+                print(e);
+              }
+              while (i < widget._arrayOfSquares.length - 1) {
+                widget._arrayOfSquares[i].imageName = "assets/images/empty.png";
                 i++;
               }
               Navigator.popAndPushNamed(context, '/Puzzles');
@@ -262,7 +295,8 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
       child: Container(
         height: 60,
         width: 435,
-        margin: EdgeInsets.only(left: 0.20*screenWidth, right: 0.20*screenWidth),
+        margin: EdgeInsets.only(
+            left: 0.20 * screenWidth, right: 0.20 * screenWidth),
         decoration: BoxDecoration(
           color: Colors.white30,
           borderRadius: BorderRadius.circular(12),
@@ -321,4 +355,3 @@ class DraggablePiece extends StatelessWidget {
         ),
       );
 }
-

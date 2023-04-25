@@ -22,7 +22,6 @@ class _mainMenuState extends State<mainMenu> {
         setState(() {
           user!.delete();
           FirebaseAuth.instance.signOut();
-
         });
       } else {
         setState(() {

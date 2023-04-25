@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:sorttrash/pages/main_menu.dart';
 import '../button.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -48,7 +46,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
   final _audio = AudioCache();
   String showState = "none";
   Future<void> waitAndPop() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     Navigator.pop(context);
   }
 
@@ -59,6 +57,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -73,7 +72,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
             SizedBox(
               height: 0.03 * MediaQuery.of(context).size.height,
             ),
-            Container(
+            SizedBox(
               height: 0.15 * MediaQuery.of(context).size.height,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,670 +130,668 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                           ),
                         ],
                       ),
-                      child: Container(
-                        child: Column(
-                          //les reponses sont dans tous ce qui suit
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              //le container des questions
-                              height: 0.25 * MediaQuery.of(context).size.height,
-                              width: 0.35 * MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 242, 220, 247),
-                                borderRadius: BorderRadius.circular(18.0),
-                                border: Border.all(
-                                  color:
-                                      const Color.fromARGB(255, 251, 194, 240),
-                                  width: 2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color.fromARGB(181, 44, 43, 43)
-                                        .withOpacity(0.5),
-                                    offset: const Offset(0, 5),
-                                    blurRadius: 10,
-                                  ),
-                                ],
+                      child: Column(
+                        //les reponses sont dans tous ce qui suit
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            //le container des questions
+                            height: 0.25 * MediaQuery.of(context).size.height,
+                            width: 0.35 * MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 242, 220, 247),
+                              borderRadius: BorderRadius.circular(18.0),
+                              border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 251, 194, 240),
+                                width: 2,
                               ),
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                    child: Container(
-                                      width: 0.2 *
-                                          MediaQuery.of(context).size.width,
-                                      child: Center(
-                                          child: Text(
-                                        widget.quizPhotos.question,
-                                        style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 218, 78, 204),
-                                          fontSize: 13.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )),
-                                    ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(181, 44, 43, 43)
+                                      .withOpacity(0.5),
+                                  offset: const Offset(0, 5),
+                                  blurRadius: 10,
+                                ),
+                              ],
+                            ),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                  child: SizedBox(
+                                    width: 0.2 *
+                                        MediaQuery.of(context).size.width,
+                                    child: Center(
+                                        child: Text(
+                                      widget.quizPhotos.question,
+                                      style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 218, 78, 204),
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                                    child: Container(
-                                      height: 0.18 *
-                                          MediaQuery.of(context).size.height,
-                                      width: 0.08 *
-                                          MediaQuery.of(context).size.width,
-                                      child: Image(
-                                        image: AssetImage(
-                                          widget.quizPhotos.photoQuestion,
-                                        ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                                  child: SizedBox(
+                                    height: 0.18 *
+                                        MediaQuery.of(context).size.height,
+                                    width: 0.08 *
+                                        MediaQuery.of(context).size.width,
+                                    child: Image(
+                                      image: AssetImage(
+                                        widget.quizPhotos.photoQuestion,
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Container(
-                              //le container des reponses
-                              height: 0.38 * MediaQuery.of(context).size.height,
-                              width: 0.75 * MediaQuery.of(context).size.width,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    height: 0.37 *
-                                        MediaQuery.of(context).size.height,
-                                    width: 0.17 *
-                                        MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 1;
-                                              showState = widget.quizPhotos
-                                                          .reponseCorrecte ==
-                                                      1
-                                                  ? "yes"
-                                                  : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.35 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.16 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.white.withOpacity(0.8),
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              border: Border.all(
-                                                color: const Color.fromARGB(
-                                                    255, 251, 194, 240),
-                                                width: 2,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: const Color.fromARGB(
-                                                          181, 44, 43, 43)
-                                                      .withOpacity(0.5),
-                                                  offset: const Offset(2, 3),
-                                                  blurRadius: 8,
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: Center(
-                                                    child: Image(
-                                                      image: AssetImage(widget
-                                                          .quizPhotos.photo1),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    widget.quizPhotos.reponse1,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 13.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: -1,
-                                          right: -1,
-                                          child: showState == "yes" &&
-                                                  reponseUtilisateur == 1
-                                              ? Container(
-                                                  height: 0.08 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.04 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                        "assets/images/juste.png"),
-                                                  ),
-                                                )
-                                              : showState == "no" &&
-                                                      reponseUtilisateur == 1
-                                                  ? Container(
-                                                      height: 0.08 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .height,
-                                                      width: 0.04 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: const Image(
-                                                        image: AssetImage(
-                                                            "assets/images/faux.png"),
-                                                      ),
-                                                    )
-                                                  : Container(),
-                                        ),
-                                      ],
-                                    ),
-                                  ), //----------------------------------------
-                                  Container(
-                                    height: 0.37 *
-                                        MediaQuery.of(context).size.height,
-                                    width: 0.17 *
-                                        MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 2;
-                                              showState = widget.quizPhotos
-                                                          .reponseCorrecte ==
-                                                      2
-                                                  ? "yes"
-                                                  : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.35 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.16 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.white.withOpacity(0.8),
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              border: Border.all(
-                                                color: const Color.fromARGB(
-                                                    255, 251, 194, 240),
-                                                width: 2,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: const Color.fromARGB(
-                                                          181, 44, 43, 43)
-                                                      .withOpacity(0.5),
-                                                  offset: const Offset(2, 3),
-                                                  blurRadius: 8,
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: Center(
-                                                    child: Image(
-                                                      image: AssetImage(widget
-                                                          .quizPhotos.photo2),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    widget.quizPhotos.reponse2,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 13.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: -1,
-                                          right: -1,
-                                          child: showState == "yes" &&
-                                                  reponseUtilisateur == 2
-                                              ? Container(
-                                                  height: 0.08 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.04 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                        "assets/images/juste.png"),
-                                                  ),
-                                                )
-                                              : showState == "no" &&
-                                                      reponseUtilisateur == 2
-                                                  ? Container(
-                                                      height: 0.08 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .height,
-                                                      width: 0.04 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: const Image(
-                                                        image: AssetImage(
-                                                            "assets/images/faux.png"),
-                                                      ),
-                                                    )
-                                                  : Container(),
-                                        ),
-                                      ],
-                                    ),
+                          ),
+                          SizedBox(
+                            //le container des reponses
+                            height: 0.38 * MediaQuery.of(context).size.height,
+                            width: 0.75 * MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  height: 0.37 *
+                                      MediaQuery.of(context).size.height,
+                                  width: 0.17 *
+                                      MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.0),
                                   ),
-                                  Container(
-                                    height: 0.37 *
-                                        MediaQuery.of(context).size.height,
-                                    width: 0.17 *
-                                        MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 3;
-                                              showState = widget.quizPhotos
-                                                          .reponseCorrecte ==
-                                                      3
-                                                  ? "yes"
-                                                  : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.35 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.16 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.white.withOpacity(0.8),
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              border: Border.all(
+                                  child: Stack(
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 1;
+                                            showState = widget.quizPhotos
+                                                        .reponseCorrecte ==
+                                                    1
+                                                ? "yes"
+                                                : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: Container(
+                                          height: 0.35 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.16 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 251, 194, 240),
+                                              width: 2,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
                                                 color: const Color.fromARGB(
-                                                    255, 251, 194, 240),
-                                                width: 2,
+                                                        181, 44, 43, 43)
+                                                    .withOpacity(0.5),
+                                                offset: const Offset(2, 3),
+                                                blurRadius: 8,
                                               ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: const Color.fromARGB(
-                                                          181, 44, 43, 43)
-                                                      .withOpacity(0.5),
-                                                  offset: const Offset(2, 3),
-                                                  blurRadius: 8,
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: Center(
-                                                    child: Image(
-                                                      image: AssetImage(widget
-                                                          .quizPhotos.photo3),
-                                                    ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: Center(
+                                                  child: Image(
+                                                    image: AssetImage(widget
+                                                        .quizPhotos.photo1),
                                                   ),
                                                 ),
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    widget.quizPhotos.reponse3,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 13.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                              ),
+                                              Container(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  widget.quizPhotos.reponse1,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 13.0,
+                                                    fontWeight:
+                                                        FontWeight.bold,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Positioned(
-                                          bottom: -1,
-                                          right: -1,
-                                          child: showState == "yes" &&
-                                                  reponseUtilisateur == 3
-                                              ? Container(
-                                                  height: 0.08 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.04 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                        "assets/images/juste.png"),
-                                                  ),
-                                                )
-                                              : showState == "no" &&
-                                                      reponseUtilisateur == 3
-                                                  ? Container(
-                                                      height: 0.08 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .height,
-                                                      width: 0.04 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: const Image(
-                                                        image: AssetImage(
-                                                            "assets/images/faux.png"),
-                                                      ),
-                                                    )
-                                                  : Container(),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      Positioned(
+                                        bottom: -1,
+                                        right: -1,
+                                        child: showState == "yes" &&
+                                                reponseUtilisateur == 1
+                                            ? SizedBox(
+                                                height: 0.08 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.04 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: const Image(
+                                                  image: AssetImage(
+                                                      "assets/images/juste.png"),
+                                                ),
+                                              )
+                                            : showState == "no" &&
+                                                    reponseUtilisateur == 1
+                                                ? SizedBox(
+                                                    height: 0.08 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .height,
+                                                    width: 0.04 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/faux.png"),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    height: 0.37 *
-                                        MediaQuery.of(context).size.height,
-                                    width: 0.17 *
-                                        MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            setState(() {
-                                              reponseUtilisateur = 4;
-                                              showState = widget.quizPhotos
-                                                          .reponseCorrecte ==
-                                                      4
-                                                  ? "yes"
-                                                  : "no";
-                                              if (showState == "yes") {
-                                                _player.play(AssetSource(
-                                                    'music/correct.mp3'));
-                                                _player.stop();
-                                              } else {
-                                                _player.play(AssetSource(
-                                                    'music/wrong.mp3'));
-                                                _player.stop();
-                                              }
-                                            });
-                                            await waitAndPop();
-                                          },
-                                          child: Container(
-                                            height: 0.35 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                            width: 0.16 *
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.white.withOpacity(0.8),
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              border: Border.all(
+                                ), //----------------------------------------
+                                Container(
+                                  height: 0.37 *
+                                      MediaQuery.of(context).size.height,
+                                  width: 0.17 *
+                                      MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 2;
+                                            showState = widget.quizPhotos
+                                                        .reponseCorrecte ==
+                                                    2
+                                                ? "yes"
+                                                : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: Container(
+                                          height: 0.35 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.16 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 251, 194, 240),
+                                              width: 2,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
                                                 color: const Color.fromARGB(
-                                                    255, 251, 194, 240),
-                                                width: 2,
+                                                        181, 44, 43, 43)
+                                                    .withOpacity(0.5),
+                                                offset: const Offset(2, 3),
+                                                blurRadius: 8,
                                               ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: const Color.fromARGB(
-                                                          181, 44, 43, 43)
-                                                      .withOpacity(0.5),
-                                                  offset: const Offset(2, 3),
-                                                  blurRadius: 8,
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: Center(
-                                                    child: Image(
-                                                      image: AssetImage(widget
-                                                          .quizPhotos.photo4),
-                                                    ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: Center(
+                                                  child: Image(
+                                                    image: AssetImage(widget
+                                                        .quizPhotos.photo2),
                                                   ),
                                                 ),
-                                                Container(
-                                                  height: 0.15 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.13 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    widget.quizPhotos.reponse4,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 218, 78, 204),
-                                                      fontSize: 13.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                              ),
+                                              Container(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  widget.quizPhotos.reponse2,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 13.0,
+                                                    fontWeight:
+                                                        FontWeight.bold,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Positioned(
-                                          bottom: -1,
-                                          right: -1,
-                                          child: showState == "yes" &&
-                                                  reponseUtilisateur == 4
-                                              ? Container(
-                                                  height: 0.08 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height,
-                                                  width: 0.04 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                        "assets/images/juste.png"),
-                                                  ),
-                                                )
-                                              : showState == "no" &&
-                                                      reponseUtilisateur == 4
-                                                  ? Container(
-                                                      height: 0.08 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .height,
-                                                      width: 0.04 *
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: const Image(
-                                                        image: AssetImage(
-                                                            "assets/images/faux.png"),
-                                                      ),
-                                                    )
-                                                  : Container(),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      Positioned(
+                                        bottom: -1,
+                                        right: -1,
+                                        child: showState == "yes" &&
+                                                reponseUtilisateur == 2
+                                            ? SizedBox(
+                                                height: 0.08 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.04 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: const Image(
+                                                  image: AssetImage(
+                                                      "assets/images/juste.png"),
+                                                ),
+                                              )
+                                            : showState == "no" &&
+                                                    reponseUtilisateur == 2
+                                                ? SizedBox(
+                                                    height: 0.08 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .height,
+                                                    width: 0.04 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/faux.png"),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  height: 0.37 *
+                                      MediaQuery.of(context).size.height,
+                                  width: 0.17 *
+                                      MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 3;
+                                            showState = widget.quizPhotos
+                                                        .reponseCorrecte ==
+                                                    3
+                                                ? "yes"
+                                                : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: Container(
+                                          height: 0.35 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.16 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 251, 194, 240),
+                                              width: 2,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: const Color.fromARGB(
+                                                        181, 44, 43, 43)
+                                                    .withOpacity(0.5),
+                                                offset: const Offset(2, 3),
+                                                blurRadius: 8,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: Center(
+                                                  child: Image(
+                                                    image: AssetImage(widget
+                                                        .quizPhotos.photo3),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  widget.quizPhotos.reponse3,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 13.0,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: -1,
+                                        right: -1,
+                                        child: showState == "yes" &&
+                                                reponseUtilisateur == 3
+                                            ? SizedBox(
+                                                height: 0.08 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.04 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: const Image(
+                                                  image: AssetImage(
+                                                      "assets/images/juste.png"),
+                                                ),
+                                              )
+                                            : showState == "no" &&
+                                                    reponseUtilisateur == 3
+                                                ? SizedBox(
+                                                    height: 0.08 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .height,
+                                                    width: 0.04 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/faux.png"),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 0.37 *
+                                      MediaQuery.of(context).size.height,
+                                  width: 0.17 *
+                                      MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            reponseUtilisateur = 4;
+                                            showState = widget.quizPhotos
+                                                        .reponseCorrecte ==
+                                                    4
+                                                ? "yes"
+                                                : "no";
+                                            if (showState == "yes") {
+                                              _player.play(AssetSource(
+                                                  'music/correct.mp3'));
+                                              _player.stop();
+                                            } else {
+                                              _player.play(AssetSource(
+                                                  'music/wrong.mp3'));
+                                              _player.stop();
+                                            }
+                                          });
+                                          await waitAndPop();
+                                        },
+                                        child: Container(
+                                          height: 0.35 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                          width: 0.16 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 251, 194, 240),
+                                              width: 2,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: const Color.fromARGB(
+                                                        181, 44, 43, 43)
+                                                    .withOpacity(0.5),
+                                                offset: const Offset(2, 3),
+                                                blurRadius: 8,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: Center(
+                                                  child: Image(
+                                                    image: AssetImage(widget
+                                                        .quizPhotos.photo4),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 0.15 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.13 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  widget.quizPhotos.reponse4,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 218, 78, 204),
+                                                    fontSize: 13.0,
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: -1,
+                                        right: -1,
+                                        child: showState == "yes" &&
+                                                reponseUtilisateur == 4
+                                            ? SizedBox(
+                                                height: 0.08 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height,
+                                                width: 0.04 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width,
+                                                child: const Image(
+                                                  image: AssetImage(
+                                                      "assets/images/juste.png"),
+                                                ),
+                                              )
+                                            : showState == "no" &&
+                                                    reponseUtilisateur == 4
+                                                ? SizedBox(
+                                                    height: 0.08 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .height,
+                                                    width: 0.04 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/faux.png"),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

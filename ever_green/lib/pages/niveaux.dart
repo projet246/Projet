@@ -29,10 +29,10 @@ class Niveaux extends StatefulWidget {
 class _NiveauxState extends State<Niveaux> {
   @override
   void initState() {
-    setState(() {});
+    setState(() {
+    });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

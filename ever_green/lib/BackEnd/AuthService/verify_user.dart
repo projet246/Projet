@@ -1,13 +1,11 @@
-
-
-
-
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:sorttrash/BackEnd/PlayerProgress/player.dart';
 import '../../main.dart';
+
+
 
 class VerifyUserEmail extends StatefulWidget {
   const VerifyUserEmail({Key? key}) : super(key: key);
@@ -17,7 +15,7 @@ class VerifyUserEmail extends StatefulWidget {
 
 class _VerifyUserEmailState extends State<VerifyUserEmail> {
   late User user;
-  late Timer timer ;
+  late Timer timer;
   @override
   void initState() {
     user = FirebaseAuth.instance.currentUser!;
@@ -27,6 +25,7 @@ class _VerifyUserEmailState extends State<VerifyUserEmail> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,21 +44,24 @@ class _VerifyUserEmailState extends State<VerifyUserEmail> {
       ),
     );
   }
+
   @override
   void dispose() {
     timer.cancel();
     super.dispose();
   }
-  Future verifyUser  ( ) async {
+
+  Future verifyUser() async {
+    Parent methodParent = Parent([], 0);
     try {
       User user = FirebaseAuth.instance.currentUser!;
       await user.reload();
-      if ( user.emailVerified ){
+      if (user.emailVerified) {
         timer.cancel();
-        navigatorKey.currentState!.pushNamed('/');
+        methodParent.createData(user.uid);
+        await navigatorKey.currentState!.pushReplacementNamed('/ChildSelector');
       }
-    }
-    on FirebaseAuthException catch (e){
+    } on FirebaseAuthException catch (e) {
       print(e);
     }
   }

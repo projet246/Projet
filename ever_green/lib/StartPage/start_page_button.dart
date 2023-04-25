@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AnonButton extends StatefulWidget {
-  const AnonButton({Key? key}) : super(key: key);
 
+class AnonButton extends StatefulWidget {
+  const AnonButton({Key? key, required this.href, required this.color}) : super(key: key);
+  final String href;
+  final Color color ;
   @override
   State<AnonButton> createState() => _AnonButtonState();
 }
@@ -11,13 +13,13 @@ class _AnonButtonState extends State<AnonButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/');
+        onPressed: ()   {
+          Navigator.popAndPushNamed(context, widget.href);
         },
         style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(255, 210, 23, 5),
+            backgroundColor: widget.color,
             side: const BorderSide(width: 3, color: Colors.white),
-            elevation: 1,
+            elevation: 0,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             padding:

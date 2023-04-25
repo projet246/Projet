@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sorttrash/player_box.dart';
 
 class SilderMusic extends StatefulWidget {
   SilderMusic({Key? key, required double value}) {
-    _value = value;
   }
-  double _value = 6;
   @override
   State<SilderMusic> createState() => _SilderMusicState();
+
 }
 
 class _SilderMusicState extends State<SilderMusic> {
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,10 +50,9 @@ class _SilderMusicState extends State<SilderMusic> {
             ),
           ),
           child: Slider(
-            value: widget._value,
+            value: globalVolumeMusicSettings,
             onChanged: (double value) {
               setState(() {
-                widget._value = value;
               });
             },
             activeColor: const Color.fromRGBO(255, 210, 23, 5),

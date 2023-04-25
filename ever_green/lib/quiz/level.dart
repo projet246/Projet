@@ -1,10 +1,13 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../BackEnd/PlayerProgress/player.dart';
+import '../player_box.dart';
 import 'quizphotos.dart';
 import 'package:sorttrash/quiz/quizmultiples.dart';
 import 'package:sorttrash/quiz/quizgestes.dart';
 
 class Level extends StatefulWidget {
+
   late Function(bool) _changeBooleanStatus;
   List<Widget> liste = [
     const QuizMultiples(
@@ -86,29 +89,28 @@ class Level extends StatefulWidget {
     _isLocked = isLocked;
   }
   bool _isLocked = false;
-  bool _isFinished = false;
+
 
   bool returnIsLocked() {
     return _isLocked;
   }
 
-  bool returnIsFinished() {
-    return _isFinished;
-  }
 
   void setIsLocked(bool isUnlockde) {
     _isLocked = isUnlockde;
   }
 
-  void setIsFinished(bool isFinished) {
-    _isFinished = isFinished;
-  }
+
 
   @override
   State<Level> createState() => _LevelState();
 }
 
 class _LevelState extends State<Level> {
+  final User? user = FirebaseAuth.instance.currentUser;
+  late PlayerProgress playerProgress = currentProfileIndex == 1
+      ? offlineProgress.returnParent().children[globalChildKey]
+      : onlineProgress.returnParent().children[onlineGlobalChildKey];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,14 +172,34 @@ class _LevelState extends State<Level> {
                             );
                           }
                         : (() {
-                            widget.setIsFinished(true);
+
                             widget._changeBooleanStatus(false);
+                            String newLevelsCompleted = playerProgress
+                                .gamesData[2].levelsCompleted
+                                .replaceFirst('0', '1');
+                            playerProgress.gamesData[2].levelsCompleted = newLevelsCompleted;
+                            try {
+                              if (currentProfileIndex == 1) {
+                                offlineProgress.setChild(globalChildKey, playerProgress);
+                                if (parentBox.isEmpty) {
+                                  parentBox.add(offlineProgress);
+                                }else{
+                                  parentBox.putAt(0, offlineProgress.returnParent());
+                                }
+                              } else {
+                                onlineProgress.setChild(onlineGlobalChildKey, playerProgress);
+                                onlineParentBox.put(user!.uid, onlineProgress.returnParent());
+                                onlineProgress.returnParent().updateData(onlineProgress.getUID());
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
                             Navigator.pop(context);
                             Navigator.pushNamed(context, '/Nquiz');
                           }),
                     child: widget._currentIndex < widget.liste.length - 1
-                        ? Text("c'est fait")
-                        : Text("NEXT LEVEL"),
+                        ? const Text("c'est fait")
+                        : const Text("NEXT LEVEL"),
                   )
                 ],
               )),

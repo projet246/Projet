@@ -1,7 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sorttrash/BackEnd/PlayerProgress/player.dart';
+import '../../player_box.dart';
 import '../Models/Objects.dart';
 import '../Models/TrashCans.dart';
+
 class Level extends StatefulWidget {
   late Function(bool) _changeBooleanStatus;
   Level(
@@ -17,25 +21,16 @@ class Level extends StatefulWidget {
     _copyOfArrayOfTrash = arrayOfTrash.toList();
   }
   bool _isLocked = false;
-  bool _isFinished = false;
   late List<Trash> _arrayOfTrash;
   late List<Trash> _copyOfArrayOfTrash;
   late List<TrashCan> _arrayOfTrashCans;
-
   bool returnIsLocked() {
     return _isLocked;
-  }
-
-  bool returnIsFinished() {
-    return _isFinished;
   }
   void setIsLocked(bool isUnlockde) {
     _isLocked = isUnlockde;
   }
 
-  void setIsFinished(bool isFinished) {
-    _isFinished = isFinished;
-  }
 
   @override
   State<Level> createState() => _LevelState();
@@ -46,6 +41,10 @@ class _LevelState extends State<Level> {
   final _audio = AudioCache();
   late double screenHeight = MediaQuery.of(context).size.height;
   late double screenWidth = MediaQuery.of(context).size.width;
+  late PlayerProgress playerProgress = currentProfileIndex == 1
+      ? offlineProgress.returnParent().children[globalChildKey]
+      : onlineProgress.returnParent().children[onlineGlobalChildKey];
+  final User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,9 +83,8 @@ class _LevelState extends State<Level> {
                             setState(() {
                               widget._arrayOfTrash =
                                   widget._copyOfArrayOfTrash.toList();
-                              Navigator.popAndPushNamed(context, '/Niveaux')   ;
+                              Navigator.popAndPushNamed(context, '/Niveaux');
                             });
-
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xff14ffe9),
@@ -140,16 +138,13 @@ class _LevelState extends State<Level> {
                     left: 20, right: 20, top: 10, bottom: 10)),
             child: const Icon(Icons.settings),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildDragInterface(),
             ],
           ),
-
           showTrashCans(context),
-          
         ],
       ),
     );
@@ -168,12 +163,14 @@ class _LevelState extends State<Level> {
       ),
     );
   }
+
   @override
   void initState() {
     _audio.load('music/correct.mp3');
     _audio.load('music/wrong.mp3');
     super.initState();
   }
+
   Widget showTrashCan(BuildContext context, {required TrashCan trashCan}) {
     return DragTarget<Trash>(
       builder: (context, candidateData, rejectedData) => Center(
@@ -194,12 +191,30 @@ class _LevelState extends State<Level> {
           _player.stop();
           if (widget._arrayOfTrash.length == 1) {
             setState(() {
+              String newLevelsCompleted = playerProgress
+                  .gamesData[1].levelsCompleted
+                  .replaceFirst('0', '1');
+              playerProgress.gamesData[1].levelsCompleted = newLevelsCompleted;
               widget._arrayOfTrash = widget._copyOfArrayOfTrash.toList();
-              widget.setIsFinished(true);
               widget._changeBooleanStatus(false);
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/Niveaux');
             });
+            try {
+              if (currentProfileIndex == 1) {
+                offlineProgress.setChild(globalChildKey, playerProgress);
+                if (parentBox.isEmpty) {
+                  parentBox.add(offlineProgress);
+                }else{
+                  parentBox.putAt(0, offlineProgress.returnParent());
+                }
+              } else {
+                onlineProgress.setChild(onlineGlobalChildKey, playerProgress);
+                onlineParentBox.put(user!.uid, onlineProgress.returnParent());
+                onlineProgress.returnParent().updateData(onlineProgress.getUID());
+              }
+            } catch (e) {
+              print(e);
+            }
+            Navigator.popAndPushNamed(context, '/Niveaux');
           }
           setState(() {
             widget._arrayOfTrash.removeWhere((trash) => trash.id == data.id);
@@ -216,7 +231,8 @@ class _LevelState extends State<Level> {
     widget._arrayOfTrash.shuffle();
     return Container(
       width: 400,
-      margin: EdgeInsets.only(left: 0.20*screenWidth, right: 0.20*screenWidth),
+      margin:
+          EdgeInsets.only(left: 0.20 * screenWidth, right: 0.20 * screenWidth),
       decoration: BoxDecoration(
         color: Colors.greenAccent,
         borderRadius: BorderRadius.circular(20),
@@ -238,7 +254,6 @@ class _LevelState extends State<Level> {
 }
 
 class DraggableTrash extends StatelessWidget {
-
   final Trash trash;
   const DraggableTrash({
     Key? key,
@@ -254,10 +269,8 @@ class DraggableTrash extends StatelessWidget {
       );
 
   Widget image() => Container(
-
         height: size,
         width: size,
-
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: Colors.transparent,
