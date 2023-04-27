@@ -17,8 +17,9 @@ import 'Puzzle/Models/puzzle_management.dart';
 import 'Puzzle/puzzle_levels.dart';
 import 'StartPage/LoginPage/login_page.dart';
 import 'StartPage/RegisterPage/register_page.dart';
+import 'StartPage/choose_children/child_builder/icons_choose.dart';
 import 'StartPage/choose_children/leader.dart';
-import 'StartPage/choose_children/offline_child_profiles.dart';
+
 import 'StartPage/start_page.dart';
 import 'pages/games.dart';
 import 'pages/main_menu.dart';
@@ -37,7 +38,6 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   await Firebase.initializeApp();
   await Hive.initFlutter();
-
   Hive.registerAdapter(PlayerProgressAdapter());
   Hive.registerAdapter(LevelsCompletedAdapter());
   Hive.registerAdapter(ParentAdapter());
@@ -56,6 +56,7 @@ void main() async {
   }
   await getProgress();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     navigatorKey: navigatorKey,
     initialRoute:
         '/StartPage', //le widget Niveaux sera utilisé pour l'affichage du niveaux, lors de la construction on lui fais passer le nombre de niveaux aux total et le nombre de niveaux unlocked et le href qui sera un routename pour lier
@@ -74,7 +75,7 @@ void main() async {
       '/ProfilePage': (context) => const ProfilePage(),
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
-      '/OfflineProfilesSelection': (context) => const OfflineProfilesSelection(),
+      '/OfflineProfilesSelection': (context) => const ChooserAvatar(),
       '/Nquiz': (context) => N,
       '/Puzzles': (context) => PuzzleLevels(
         nbrNiveax: 5,

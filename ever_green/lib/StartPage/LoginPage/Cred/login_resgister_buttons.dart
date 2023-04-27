@@ -20,6 +20,7 @@ class _RegisterLoggingButton extends State<RegisterLoggingButton> {
           Navigator.pushNamed(context, widget._href);
         },
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children:  [
             const Text(
               ' Or ',

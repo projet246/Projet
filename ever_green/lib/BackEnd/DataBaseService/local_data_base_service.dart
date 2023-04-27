@@ -11,7 +11,7 @@ class DataBaseService {
     LevelsCompleted(4, '10000000000000'),
   ];
   List<PlayerProgress> _players = [];
-  late Parent _parent = Parent([], 0);
+  late Parent _parent = Parent([], 0, const Uuid().v4().toString());
   DataBaseService(List<PlayerProgress> players, Parent parent) {
     _parent = parent;
     _players = players;
@@ -32,7 +32,7 @@ class DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
         _parent.numberOfChildren++;
         parentBox.add(_parent);
       } else {
@@ -49,7 +49,7 @@ class DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
         _parent.children = _players.toList();
 
         _parent.numberOfChildren++;
