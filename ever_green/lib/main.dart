@@ -25,6 +25,7 @@ import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'conseils/conseils.dart';
+import 'quiz/quizmultiples.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -95,7 +96,20 @@ void main() async {
             changeBooleanStatus: decoyMethod,
             imageName: 'assets/images/puzzle_level1.jpg',
           ),
-      '/conseils': (context) =>  Conseils(),
+      '/conseils': (context) => Conseils(),
+      '/q': (context) => const QuizMultiples(
+            question: "Que signifie le terme \"recyclage\" ?",
+            reponse1: "Transformer des déchets en de nouveaux produits",
+            reponse2: "Jeter des déchets dans une décharge",
+            reponse3: "Brûler des déchets pour produire de l'énergie",
+            reponse4: "Nettoyer l'environnement du déchets",
+            reponseCorrecte: 1,
+            indication:
+                "La nourriture n'est pas recyclable mais les feuilles le sont !",
+            explication:
+                "La meilleure façon de réduire les déchets électroniques est de les recycler correctement. Les appareils électroniques contiennent souvent des matériaux toxiques qui peuvent être dangereux pour l'environnement s'ils ne sont pas éliminés correctement. Les appareils encore en bon état peuvent également être donnés ou réparés, plutôt que d'être jetés.",
+            SoundPath: "music/n1q1.m4a",
+          ),
     },
   ));
 }

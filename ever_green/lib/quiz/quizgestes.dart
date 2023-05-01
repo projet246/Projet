@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import '../button.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-
 class QuizGestes extends StatefulWidget {
   final String question;
   final String photo1;
   final String photo2;
   final int reponseCorrecte;
+  final String explication;
+  final String SoundPath;
   const QuizGestes({
     super.key,
     required this.question,
     required this.photo1,
     required this.photo2,
     required this.reponseCorrecte,
+    required this.explication,
+    required this.SoundPath,
   });
 
   @override
@@ -36,6 +39,7 @@ class _QuizGestesState extends State<QuizGestes> {
     _audio.load('music/wrong.mp3');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,14 +123,13 @@ class _QuizGestesState extends State<QuizGestes> {
                             height: 0.4 * MediaQuery.of(context).size.height,
                             width: 0.6 * MediaQuery.of(context).size.width,
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                  height: 0.38 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.22 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.38 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.22 * MediaQuery.of(context).size.width,
                                   child: Stack(
                                     children: [
                                       InkWell(
@@ -137,7 +140,7 @@ class _QuizGestesState extends State<QuizGestes> {
                                                 widget.reponseCorrecte == 1
                                                     ? "yes"
                                                     : "no";
-                                                    if (showState == "yes") {
+                                            if (showState == "yes") {
                                               _player.play(AssetSource(
                                                   'music/correct.mp3'));
                                               _player.stop();
@@ -155,9 +158,7 @@ class _QuizGestesState extends State<QuizGestes> {
                                                   .size
                                                   .height,
                                           width: 0.2 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(18.0),
@@ -231,10 +232,10 @@ class _QuizGestesState extends State<QuizGestes> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 0.38 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.22 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.38 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.22 * MediaQuery.of(context).size.width,
                                   child: Stack(
                                     children: [
                                       InkWell(
@@ -245,7 +246,7 @@ class _QuizGestesState extends State<QuizGestes> {
                                                 widget.reponseCorrecte == 2
                                                     ? "yes"
                                                     : "no";
-                                                    if (showState == "yes") {
+                                            if (showState == "yes") {
                                               _player.play(AssetSource(
                                                   'music/correct.mp3'));
                                               _player.stop();
@@ -255,7 +256,7 @@ class _QuizGestesState extends State<QuizGestes> {
                                               _player.stop();
                                             }
                                           });
-                                         await waitAndPop();
+                                          await waitAndPop();
                                         },
                                         child: Container(
                                           height: 0.35 *
@@ -263,9 +264,7 @@ class _QuizGestesState extends State<QuizGestes> {
                                                   .size
                                                   .height,
                                           width: 0.2 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(18.0),
@@ -349,8 +348,7 @@ class _QuizGestesState extends State<QuizGestes> {
                               color: const Color.fromARGB(255, 242, 220, 247),
                               borderRadius: BorderRadius.circular(18.0),
                               border: Border.all(
-                                color:
-                                    const Color.fromARGB(255, 251, 194, 240),
+                                color: const Color.fromARGB(255, 251, 194, 240),
                                 width: 2,
                               ),
                               boxShadow: [
