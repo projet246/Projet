@@ -16,10 +16,11 @@ class OnlineProfilesSelection extends StatefulWidget {
 }
 
 class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
+  late Timer _timer;
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
+   _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       await getProgress();
         // setState(() {
         //   playersOnline = onlineProgress.returnPlayers();
@@ -28,7 +29,11 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
       }
     );
   }
-
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
   final User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -301,7 +306,12 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
                                         onlineProgress
                                             .returnParent()
                                             .children[onlineGlobalChildKey]
-                                            .childGlobalUID));
+                                            .childGlobalUID,
+                                        onlineProgress
+                                            .returnParent()
+                                            .children[onlineGlobalChildKey].avatarProfileName
+
+                                    ));
                                 onlineParentBox.put(onlineProgress.getUID(),
                                     onlineProgress.returnParent());
                                 onlineProgress

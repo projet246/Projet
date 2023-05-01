@@ -21,8 +21,10 @@ class PlayerProgress {
   late String? childsName;
   @HiveField(5)
   late String? childGlobalUID;
+  @HiveField(6)
+  late String? avatarProfileName;
   PlayerProgress(this.score, this.gamesData, this.lastTimeToJoin, this.childID,
-      this.childsName, this.childGlobalUID);
+      this.childsName, this.childGlobalUID, this.avatarProfileName);
 
   factory PlayerProgress.fromJson(Map<String, dynamic> json) {
     List<dynamic> gamesDataJson = json['gamesData'];
@@ -34,6 +36,7 @@ class PlayerProgress {
       json['childID'] as int,
       json['childsName'] as String?,
       json['childGlobalUID'] as String?,
+      json['avatarProfileName'] as String?
     );
   }
   Map<String, dynamic> toJson() {
@@ -44,6 +47,7 @@ class PlayerProgress {
       'lastTimeToJoin': lastTimeToJoin.toIso8601String(),
       'childsName': childsName,
       'childGlobalUID': childGlobalUID,
+      'avatarProfileName' : avatarProfileName
     };
   }
 }
@@ -83,26 +87,28 @@ class Parent {
   }
   @HiveField(1)
   late int _numberOfChildren;
-
+  @HiveField(2)
+  late String? parentUUID;
   int get numberOfChildren => _numberOfChildren;
 
   set numberOfChildren(int value) {
     _numberOfChildren = value;
   }
 
-  Parent(this._children, this._numberOfChildren);
+  Parent(this._children, this._numberOfChildren, this.parentUUID);
    factory Parent.fromJson(Map<String, dynamic> json) {
     var children = (json['children'] as List)
         .map((e) => PlayerProgress.fromJson(e))
         .toList();
-    return Parent(children, json['childrenNumber']);
+    return Parent(children, json['childrenNumber'], json['parentUUID']);
   }
   createData( String uid) {
     final CollectionReference parentCollection =
         FirebaseFirestore.instance.collection('parent');
     final json = {
       "children": children.toList().map((e) => e.toJson()),
-      "childrenNumber": numberOfChildren
+      "childrenNumber": numberOfChildren,
+      "parentUUID": parentUUID
     };
     parentCollection.doc(uid).set(json);
   }
@@ -122,12 +128,22 @@ class Parent {
      FirebaseFirestore.instance.collection('parent');
      final json = {
        "children": children.toList().map((e) => e.toJson()),
-       "childrenNumber": numberOfChildren
+       "childrenNumber": numberOfChildren,
+       "parentUUID": parentUUID
      };
      parentCollection.doc(dataId).update(json);
    } catch (e){
      print(e);
    }
+  }
+  Future<bool> isUserAlreadyLoggedIn() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final snapshot =
+    await FirebaseFirestore.instance.collection('parent').doc(user!.uid).get();
+    final deviceId = snapshot.data()!['parentUUID'];
+    print(deviceId);
+    print(parentUUID);
+    return deviceId != parentUUID;
   }
   void putOnlineDataToLocal() {
     final User? user = FirebaseAuth.instance.currentUser;

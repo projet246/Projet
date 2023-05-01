@@ -23,13 +23,14 @@ class PlayerProgressAdapter extends TypeAdapter<PlayerProgress> {
       fields[1] as int,
       fields[4] as String?,
       fields[5] as String?,
+      fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, PlayerProgress obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.score)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class PlayerProgressAdapter extends TypeAdapter<PlayerProgress> {
       ..writeByte(4)
       ..write(obj.childsName)
       ..writeByte(5)
-      ..write(obj.childGlobalUID);
+      ..write(obj.childGlobalUID)
+      ..writeByte(6)
+      ..write(obj.avatarProfileName);
   }
 
   @override
@@ -105,17 +108,20 @@ class ParentAdapter extends TypeAdapter<Parent> {
     return Parent(
       (fields[0] as List).cast<PlayerProgress>(),
       fields[1] as int,
+      fields[2] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Parent obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj._children)
       ..writeByte(1)
-      ..write(obj._numberOfChildren);
+      ..write(obj._numberOfChildren)
+      ..writeByte(2)
+      ..write(obj.parentUUID);
   }
 
   @override

@@ -45,13 +45,13 @@ class _RegisterPage extends State<RegisterPage> {
         body: WillPopScope(
       onWillPop: () async => false,
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg-image.png'),
-                  fit: BoxFit.cover),
-            ),
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/bg-image.png'),
+                fit: BoxFit.cover),
+          ),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(
@@ -59,19 +59,14 @@ class _RegisterPage extends State<RegisterPage> {
                 ),
                 Stack(
                   children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height - 30,
+                      color: Colors.transparent,
+                    ),
                     Center(
                       child: Container(
-                        height: 390,
-                        width: 500,
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 50,
-                      left: 190,
-                      child: Container(
-                          height: 340,
-                          width: 400,
+                          height: 0.76 * MediaQuery.of(context).size.height,
+                          width: 0.4 * MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               boxShadow: const [
                                 BoxShadow(
@@ -92,32 +87,36 @@ class _RegisterPage extends State<RegisterPage> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromRGBO(
-                                            103, 235, 0, 1),
-                                        side: const BorderSide(
-                                            width: 1, color: Colors.black38),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        padding: const EdgeInsets.only(
-                                            left: 80,
-                                            right: 80,
-                                            top: 1,
-                                            bottom: 3)),
-                                    child: const Text(
-                                      'Registration  Page',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Digital',
-                                        fontWeight: FontWeight.bold,
+                                  SizedBox(
+                                    height:
+                                    0.09 * MediaQuery.of(context).size.height,
+                                    width:
+                                    0.3 * MediaQuery.of(context).size.width,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromRGBO(
+                                              103, 235, 0, 1),
+                                          side: const BorderSide(
+                                              width: 1, color: Colors.black38),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                         ),
+                                      child: const Text(
+                                        'Registration  Page',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontFamily: 'Digital',
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 0.06*MediaQuery.of(context).size.height,
+                                  ),
                                   EmailCred(
                                       hint: 'Enter Email !',
                                       controller: email,
@@ -129,15 +128,12 @@ class _RegisterPage extends State<RegisterPage> {
                                       controller: password,
                                       hint: 'Enter Password!',
                                       obscureText: true),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 135.0),
-                                    child: RegisterLoggingButton(
+                                  RegisterLoggingButton(
                                       description: 'Login Here !',
                                       href: '/LoginPage',
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
+                                  SizedBox(
+                                    height: 0.02*MediaQuery.of(context).size.height,
                                   ),
                                   ElevatedButton(
                                     onPressed: () async {
@@ -201,10 +197,9 @@ class _RegisterPage extends State<RegisterPage> {
                             ),
                           )),
                     ),
-                    const Positioned(
-                        left: 560,
-                        top: 5,
-                        child: RoundButton(
+                     Positioned(
+                        left: 0.66*MediaQuery.of(context).size.width,
+                        child: const RoundButton(
                           myIcon: Icons.exit_to_app,
                           href: '/StartPage',
                           couleur: Color.fromRGBO(255, 210, 23, 5),

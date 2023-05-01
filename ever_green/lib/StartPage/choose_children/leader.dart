@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import '../../BackEnd/PlayerProgress/player.dart';
 
 class LeaderBoard extends StatefulWidget {
@@ -12,7 +13,7 @@ class LeaderBoard extends StatefulWidget {
 class _LeaderBoard extends State<LeaderBoard> {
   final User? user = FirebaseAuth.instance.currentUser;
   List<PlayerProgress> leaderScorePlayers = [];
-  Parent leaderBoardParent = Parent([], 0);
+  Parent leaderBoardParent = Parent([], 0,const Uuid().v4().toString());
 
   @override
   Widget build(BuildContext context) {

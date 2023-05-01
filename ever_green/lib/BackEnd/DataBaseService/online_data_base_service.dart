@@ -29,7 +29,7 @@ class OnlineDataBaseService extends DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
         setParentChildren(returnPlayers());
         onlineParentBox.put(_uid, returnParent());
       } else {
@@ -47,7 +47,7 @@ class OnlineDataBaseService extends DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}', 'assets/profiles/0.svg'));
         setParentChildren(returnPlayers());
         onlineParentBox.put(_uid, returnParent());
       }
@@ -125,7 +125,7 @@ class OnlineDataBaseService extends DataBaseService {
             parent.children[cpt].lastTimeToJoin,
             i + cpt,
             parent.children[cpt].childsName,
-            parent.children[cpt].childGlobalUID));
+            parent.children[cpt].childGlobalUID, parent.children[cpt].avatarProfileName));
         cpt++;
         incrementChildrenCount();
       }

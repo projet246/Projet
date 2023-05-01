@@ -1,10 +1,10 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/BackEnd/AuthService/auth_service.dart';
 import 'package:sorttrash/StartPage/LoginPage/Cred/login_cred.dart';
 import 'package:sorttrash/StartPage/LoginPage/Cred/login_resgister_buttons.dart';
 import 'package:sorttrash/button.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     password.dispose();
     super.dispose();
   }
+
   final User? user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
@@ -31,53 +32,51 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           user!.delete();
           FirebaseAuth.instance.signOut();
-
         });
       }
       super.initState();
     }
   }
- String errorMessage = '';
+
+  String errorMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: WillPopScope(
-          onWillPop: () async => false,
-          child: SafeArea(
-      child: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg-image.png'),
-                  fit: BoxFit.cover),
-            ),
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/bg-image.png'),
+                fit: BoxFit.cover),
+          ),
+          child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
                   height: 30,
                 ),
                 Stack(
                   children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height - 30,
+                      color: Colors.transparent,
+                    ),
                     Center(
                       child: Container(
-                        height: 390,
-                        width: 500,
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 50,
-                      left: 190,
-                      child: Container(
-                          height: 340,
-                          width: 400,
+                          height: 0.76 * MediaQuery.of(context).size.height,
+                          width: 0.4 * MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               boxShadow: const [
                                 BoxShadow(
                                   color: Colors.white54,
                                   spreadRadius: 2,
                                   blurRadius: 2,
-                                  offset: Offset(0, 8), // changes position of shadow
+                                  offset:
+                                      Offset(0, 8), // changes position of shadow
                                 ),
                               ],
                               color: Colors.white,
@@ -90,92 +89,92 @@ class _LoginPageState extends State<LoginPage> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromRGBO( 	103, 	235, 	0, 1),
+                                  SizedBox(
+                                    height:
+                                        0.09 * MediaQuery.of(context).size.height,
+                                    width:
+                                        0.3 * MediaQuery.of(context).size.width,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color.fromRGBO(103, 235, 0, 1),
                                         side: const BorderSide(
                                             width: 1, color: Colors.black38),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        padding: const EdgeInsets.only(
-                                            left: 100,
-                                            right: 100,
-                                            top: 1,
-                                            bottom: 3)),
-                                    child: const Text(
-                                      'Login Page',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Digital',
-                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      child: const Text(
+                                        'Login Page',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontFamily: 'Digital',
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 0.06*MediaQuery.of(context).size.height,
+                                  ),
                                   EmailCred(
                                       hint: 'Enter Email !',
                                       controller: email,
                                       obscureText: false),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
                                   PassCred(
                                       controller: password,
                                       hint: 'Enter Password!',
                                       obscureText: true),
-                                   Padding(
-                                    padding: const EdgeInsets.only(left: 135.0),
-                                    child: RegisterLoggingButton(
-                                      description: 'Register Here !',
-                                      href: '/RegisterPage',
-                                    ),
+                                  RegisterLoggingButton(
+                                    description: 'Register Here !',
+                                    href: '/RegisterPage',
                                   ),
-                                  const SizedBox(
-                                    height: 5,
+                                  SizedBox(
+                                    height: 0.02*MediaQuery.of(context).size.height,
                                   ),
                                   ElevatedButton(
-
                                     onPressed: () async {
+                                      print(MediaQuery.of(context).size);
                                       _auth.error = false;
                                       if (_mykey.currentState!.validate()) {
                                         ScaffoldMessenger.of(context)
-                                            .showSnackBar( const SnackBar(
-                                            duration: Duration(seconds: 3),
-                                            backgroundColor:
-                                            Colors.greenAccent,
-                                            content: Text(
-                                              '🌐 : Trying to Login ',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Digital',
-                                                  fontWeight:
-                                                  FontWeight.bold,
-                                                  fontSize: 14),
-                                            )));
-                                       await _auth.logIn( email.text.trim(), password.text.trim() );
-                                       setState(() {
-                                         if (_auth.error) {
-                                           ScaffoldMessenger.of(context)
-                                               .showSnackBar( SnackBar(
-                                               duration: const Duration(seconds: 6),
-                                               backgroundColor:
-                                               Colors.redAccent,
-                                               content: Text(
-                                                 '📢 : ${_auth.errorMessage} ',
-                                                 style: const TextStyle(
-                                                     color: Colors.white,
-                                                     fontFamily: 'Digital',
-                                                     fontWeight:
-                                                     FontWeight.bold,
-                                                     fontSize: 13),
-                                               )));
-                                         }
-                                       });
+                                            .showSnackBar(const SnackBar(
+                                                duration: Duration(seconds: 3),
+                                                backgroundColor:
+                                                    Colors.greenAccent,
+                                                content: Text(
+                                                  '🌐 : Trying to Login ',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: 'Digital',
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14),
+                                                )));
+                                        await _auth.logIn(email.text.trim(),
+                                            password.text.trim());
+                                        setState(() {
+                                          if (_auth.error) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    duration: const Duration(
+                                                        seconds: 6),
+                                                    backgroundColor:
+                                                        Colors.redAccent,
+                                                    content: Text(
+                                                      '📢 : ${_auth.errorMessage} ',
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: 'Digital',
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13),
+                                                    )));
+                                          }
+                                        });
                                       }
-
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.lightBlueAccent,
@@ -199,20 +198,20 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           )),
                     ),
-                    const Positioned(
-                        left: 560,
-                        top: 5,
-                        child: RoundButton(
-                            myIcon: Icons.exit_to_app, href: '/StartPage' , couleur: Color.fromRGBO(255, 210, 23, 5),))
+                    Positioned(
+                        left: 0.66*MediaQuery.of(context).size.width,
+                        child: const RoundButton(
+                          myIcon: Icons.exit_to_app,
+                          href: '/StartPage',
+                          couleur: Color.fromRGBO(255, 210, 23, 5),
+                        ))
                   ],
                 ),
               ],
             ),
           ),
+        ),
       ),
-    ),
-        ));
+    ));
   }
-
-
 }

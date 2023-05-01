@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/BackEnd/PlayerProgress/player.dart';
+import 'package:uuid/uuid.dart';
 import '../../main.dart';
 
 
@@ -52,7 +53,7 @@ class _VerifyUserEmailState extends State<VerifyUserEmail> {
   }
 
   Future verifyUser() async {
-    Parent methodParent = Parent([], 0);
+    Parent methodParent = Parent([], 0, const Uuid().v4().toString());
     try {
       User user = FirebaseAuth.instance.currentUser!;
       await user.reload();

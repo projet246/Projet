@@ -3,6 +3,7 @@ import 'package:floating_snackbar/floating_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/button.dart';
 import 'package:sorttrash/player_box.dart';
+import 'package:uuid/uuid.dart';
 import '../../BackEnd/PlayerProgress/player.dart';
 
 class OfflineProfilesSelection extends StatefulWidget {
@@ -18,7 +19,7 @@ class _OfflineProfilesSelectionState extends State<OfflineProfilesSelection> {
   @override
   void initState() {
     if (parentBox.isNotEmpty) {
-      Parent test = Parent([], 0);
+      Parent test = Parent([], 0, const Uuid().v4().toString());
       test = parentBox.getAt(0);
       offlineProgress.setParent(test);
       offlineProgress.setPlayers(offlineProgress.returnParent().children);
@@ -26,7 +27,7 @@ class _OfflineProfilesSelectionState extends State<OfflineProfilesSelection> {
         offlineGlobalPlayers = test.children;
       });
     } else {
-      offlineProgress.setParent(Parent([], 0));
+      offlineProgress.setParent(Parent([], 0, const Uuid().v4().toString()));
       parentBox.add(offlineProgress.returnParent());
     }
     super.initState();
@@ -244,8 +245,14 @@ class _OfflineProfilesSelectionState extends State<OfflineProfilesSelection> {
                                       .returnParent()
                                       .children[globalChildKey]
                                       .childsName,
-                                offlineProgress.returnParent().children[globalChildKey].childGlobalUID
-                              ));
+                                  offlineProgress
+                                      .returnParent()
+                                      .children[globalChildKey]
+                                      .childGlobalUID,
+                                  offlineProgress
+                                      .returnParent()
+                                      .children[globalChildKey]
+                                      .avatarProfileName));
                           parentBox.putAt(0, offlineProgress.returnParent());
                           await Navigator.popAndPushNamed(context, '/');
                         } else {

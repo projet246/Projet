@@ -255,207 +255,208 @@ class RoundButtonSettingsWhileLogged extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return AlertDialog(
-                  // contentPadding: const EdgeInsets.all(20.0),
-                  backgroundColor: Colors.transparent,
-                  insetPadding: const EdgeInsets.all(10),
-                  content: Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 500,
-                          height: 500,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.transparent,
+              return Center(
+                child: AlertDialog(
+                    backgroundColor: Colors.transparent,
+                    insetPadding: const EdgeInsets.all(10),
+                    content: Center(
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 500,
+                            height: 500,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.transparent,
+                            ),
                           ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 100,
-                          child: Center(
-                            child: Container(
-                              width: 300,
-                              height: 265,
-                              decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.white30,
-                                    spreadRadius: 2,
-                                    blurRadius: 2,
-                                    offset: Offset(
-                                        1, 6), // changes position of shadow
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.white,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 12,
+                          Positioned(
+                            top: 0,
+                            left: 100,
+                            child: Center(
+                              child: Container(
+                                width: 300,
+                                height: 265,
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.white30,
+                                      spreadRadius: 2,
+                                      blurRadius: 2,
+                                      offset: Offset(
+                                          1, 6), // changes position of shadow
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.greenAccent,
-                                          side: const BorderSide(
-                                              width: 3, color: Colors.black38),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          padding: const EdgeInsets.only(
-                                              left: 80,
-                                              right: 80,
-                                              top: 1,
-                                              bottom: 3)),
-                                      child: const Text(
-                                        'Settings',
+                                  ],
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.greenAccent,
+                                            side: const BorderSide(
+                                                width: 3, color: Colors.black38),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            padding: const EdgeInsets.only(
+                                                left: 80,
+                                                right: 80,
+                                                top: 1,
+                                                bottom: 3)),
+                                        child: const Text(
+                                          'Settings',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontFamily: 'Digital',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      const Text(
+                                        'Music',
                                         style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
+                                          color: Color.fromRGBO(255, 210, 23, 5),
+                                          fontSize: 20,
                                           fontFamily: 'Digital',
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
-                                    const Text(
-                                      'Music',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 210, 23, 5),
-                                        fontSize: 20,
-                                        fontFamily: 'Digital',
-                                        fontWeight: FontWeight.bold,
+                                      const SizedBox(
+                                        height: 5,
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    SilderMusic(
-                                      value: value,
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    const Text(
-                                      'Sound',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 210, 23, 5),
-                                        fontSize: 20,
-                                        fontFamily: 'Digital',
-                                        fontWeight: FontWeight.bold,
+                                      SilderMusic(
+                                        value: value,
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    SilderMusic(
-                                      value: value,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Container(
-                                      height: 25,
-                                      width: 90+52,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1, color: Colors.black),
-                                        borderRadius: BorderRadius.circular(5),
+                                      const SizedBox(
+                                        height: 8,
                                       ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            const SizedBox(
-                                              height: 25,
-                                              width: 90,
-                                              child: FittedBox(
-                                                child: Center(
-                                                  child: Text(
-                                                    "LANGUE",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            255, 210, 23, 5),
-                                                        fontSize: 25,
-                                                        fontFamily: 'Digital',
-                                                        fontWeight:
-                                                        FontWeight.bold),
+                                      const Text(
+                                        'Sound',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(255, 210, 23, 5),
+                                          fontSize: 20,
+                                          fontFamily: 'Digital',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      SilderMusic(
+                                        value: value,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        height: 25,
+                                        width: 90+52,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            children: [
+                                              const SizedBox(
+                                                height: 25,
+                                                width: 90,
+                                                child: FittedBox(
+                                                  child: Center(
+                                                    child: Text(
+                                                      "LANGUE",
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              255, 210, 23, 5),
+                                                          fontSize: 25,
+                                                          fontFamily: 'Digital',
+                                                          fontWeight:
+                                                          FontWeight.bold),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              height: 25,
-                                              width: 50,
-                                              decoration:  BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
-                                                color: const Color.fromRGBO(62,206,254, 1),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "EN",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 17,
-                                                      fontFamily: 'Digital',
-                                                      fontWeight: FontWeight.bold),
+                                              Container(
+                                                height: 25,
+                                                width: 50,
+                                                decoration:  BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  color: const Color.fromRGBO(62,206,254, 1),
                                                 ),
-                                              ),
-                                            )
-                                          ],
+                                                child: const Center(
+                                                  child: Text(
+                                                    "EN",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 17,
+                                                        fontFamily: 'Digital',
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/ProfilePage');
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Colors.lightBlueAccent,
-                                          padding: const EdgeInsets.only(
-                                              left: 40,
-                                              right: 40,
-                                              top: 5,
-                                              bottom: 8)),
-                                      child: const Text(
-                                        'Profile',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontFamily: 'Digital',
-                                          fontWeight: FontWeight.bold,
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/ProfilePage');
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                Colors.lightBlueAccent,
+                                            padding: const EdgeInsets.only(
+                                                left: 40,
+                                                right: 40,
+                                                top: 5,
+                                                bottom: 8)),
+                                        child: const Text(
+                                          'Profile',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontFamily: 'Digital',
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        const Positioned(
-                            left: 370,
-                            top: 0,
-                            child: RoundButton(
-                              myIcon: Icons.exit_to_app,
-                              href: '/StartPage',
-                              couleur: Color.fromRGBO(255, 210, 23, 5),
-                            ))
-                      ],
-                    ),
-                  ));
+                          const Positioned(
+                              left: 370,
+                              top: 0,
+                              child: RoundButton(
+                                myIcon: Icons.exit_to_app,
+                                href: '/StartPage',
+                                couleur: Color.fromRGBO(255, 210, 23, 5),
+                              ))
+                        ],
+                      ),
+                    )),
+              );
             });
       },
       child: Container(
