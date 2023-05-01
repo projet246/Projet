@@ -25,6 +25,8 @@ import 'pages/main_menu.dart';
 import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 import 'sort_game/Levels/levels_managment.dart';
+import 'conseils/conseils.dart';
+import 'quiz/quizmultiples.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -93,6 +95,7 @@ void main() async {
             changeBooleanStatus: decoyMethod,
             imageName: 'assets/images/puzzle_level1.jpg',
           ),
+      '/conseils': (context) => Conseils(),
     },
   ));
 }

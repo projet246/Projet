@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,10 +22,12 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
     super.initState();
    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       await getProgress();
-      setState(() {
-        playersOnline = onlineProgress.returnPlayers();
-      });
-    });
+        // setState(() {
+        //   playersOnline = onlineProgress.returnPlayers();
+        // }
+        // );
+      }
+    );
   }
   @override
   void dispose() {
@@ -263,11 +264,13 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const RoundButton(
-                            myIcon: Icons.home,
-                            href: '/StartPage',
-                            couleur: Colors.greenAccent,
-                          ),
-                        const SizedBox(height: 50,),
+                          myIcon: Icons.home,
+                          href: '/StartPage',
+                          couleur: Colors.greenAccent,
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff14ffe9),
@@ -382,14 +385,20 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
                                       actions: [
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                              backgroundColor: const Color(0xff14ffe9),
+                                              backgroundColor:
+                                                  const Color(0xff14ffe9),
                                               side: const BorderSide(
-                                                  width: 3, color: Colors.white),
+                                                  width: 3,
+                                                  color: Colors.white),
                                               elevation: 1,
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(0)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(0)),
                                               padding: const EdgeInsets.only(
-                                                  left: 10, right: 10, top: 10, bottom: 10)),
+                                                  left: 10,
+                                                  right: 10,
+                                                  top: 10,
+                                                  bottom: 10)),
                                           onPressed: () {
                                             setState(() {
                                               onlineProgress.addElementProgress(
@@ -423,6 +432,4 @@ class _OnlineProfilesSelection extends State<OnlineProfilesSelection> {
             ),
     );
   }
-
 }
-
