@@ -16,7 +16,7 @@ class DataBaseService {
     _parent = parent;
     _players = players;
   }
-  addElementProgress(String childName, int childAge) {
+  addElementProgress(String childName, int childAge, String profileImage) {
     if (!(childName == '' || childAge >= 100 || childAge <= 3)) {
       int index = 0;
       if (parentBox.isEmpty) {
@@ -32,7 +32,7 @@ class DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}',profileImage,DateTime.now()));
         _parent.numberOfChildren++;
         parentBox.add(_parent);
       } else {
@@ -49,9 +49,8 @@ class DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}',profileImage,DateTime.now()));
         _parent.children = _players.toList();
-
         _parent.numberOfChildren++;
         parentBox.putAt(0, _parent);
       }

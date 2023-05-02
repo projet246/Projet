@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_snackbar/floating_snackbar.dart';
-import 'package:sorttrash/BackEnd/DataBaseService/local_data_base_service.dart';
+
 import 'package:sorttrash/player_box.dart';
 import 'package:uuid/uuid.dart';
 import '../../BackEnd/PlayerProgress/player.dart';
@@ -25,26 +25,10 @@ class _OfflineProfilesState extends State<OfflineProfiles> {
       offlineProgress.setPlayers(offlineProgress.returnParent().children);
       setState(() {
         offlineGlobalPlayers = test.children;
-        offlineGlobalPlayers.add(PlayerProgress(
-            0,
-            DataBaseService.newGameDataPlayer,
-            DateTime.now(),
-            0,
-            'aa',
-            '111',
-            'assets/profiles/1.svg'));
       });
     } else {
       offlineProgress.setParent(Parent([], 0, const Uuid().v4().toString()));
       parentBox.add(offlineProgress.returnParent());
-      offlineGlobalPlayers.add(PlayerProgress(
-          0,
-          DataBaseService.newGameDataPlayer,
-          DateTime.now(),
-          0,
-          'aa',
-          '111',
-          'assets/profiles/1.svg'));
     }
 
     super.initState();

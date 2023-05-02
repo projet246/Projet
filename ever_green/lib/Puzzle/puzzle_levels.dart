@@ -50,7 +50,7 @@ class _PuzzleLevels extends State<PuzzleLevels> {
                     height: 60.0,
                     width: 60.0,
                     child: Center(
-                      child: RoundButton(href: '/games', myIcon: Icons.arrow_back , couleur: Color.fromARGB(255, 102, 235, 0),),
+                      child: RoundButton(href: '/games', myIcon: Icons.arrow_back , couleur: Color.fromARGB(255, 102, 235, 0), shadowColor: Color.fromARGB(255, 102, 235, 0) ,),
                     ),
                   ),
                 ),
@@ -66,11 +66,12 @@ class _PuzzleLevels extends State<PuzzleLevels> {
                         children: [
                           const RoundButton(
                             href: '/',
-                            myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
+                            myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5), shadowColor: Color.fromRGBO(255, 210, 23, 5) ,), //le premier button
                           RoundButton(
                             href: widget.href,
                             myIcon: Icons.settings,
                             couleur: const Color.fromRGBO(255, 210, 23, 5),
+                            shadowColor: const Color.fromRGBO(255, 210, 23, 5),
                           ), //le deuxieme button
                         ]),
                   ),
@@ -88,7 +89,7 @@ class _PuzzleLevels extends State<PuzzleLevels> {
                     scrollDirection: Axis.horizontal,
                     child: Container(
                       //le corps de niveaux
-                      height: 0.4 * height,
+                      height: 0.75*MediaQuery.of(context).size.height,
                       width: 100.0 * widget.nbrNiveax +
                           50 * (widget.nbrNiveax - 1),
                       decoration: BoxDecoration(

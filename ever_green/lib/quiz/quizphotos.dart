@@ -85,6 +85,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                       RoundButton(
                           href: '/Nquiz',
                           myIcon: Icons.arrow_back,
+                          shadowColor:  Color.fromARGB(255, 102, 235, 0),
                           couleur: Color.fromARGB(255, 102, 235, 0)),
                     ],
                   ),
@@ -93,6 +94,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                       RoundButton(
                         href: '/',
                         myIcon: Icons.settings,
+                        shadowColor:  Color.fromRGBO(255, 210, 23, 5),
                         couleur: Color.fromRGBO(255, 210, 23, 5),
                       ),
                       SizedBox(

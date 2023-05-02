@@ -66,6 +66,7 @@ class _QuizGestesState extends State<QuizGestes> {
                         RoundButton(
                             href: '/Nquiz',
                             myIcon: Icons.arrow_back,
+                            shadowColor:  Color.fromRGBO(255, 210, 23, 5),
                             couleur: Color.fromARGB(255, 102, 235, 0)),
                       ],
                     ),
@@ -74,6 +75,7 @@ class _QuizGestesState extends State<QuizGestes> {
                         RoundButton(
                           href: '/',
                           myIcon: Icons.settings,
+                          shadowColor:  Color.fromRGBO(255, 210, 23, 5),
                           couleur: Color.fromRGBO(255, 210, 23, 5),
                         ),
                         SizedBox(

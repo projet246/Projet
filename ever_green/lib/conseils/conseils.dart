@@ -1,8 +1,7 @@
-import 'dart:ffi';
-import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sorttrash/card_bg.dart';
+
 import '../StartPage/settings.dart';
 import '../button.dart';
 
@@ -82,6 +81,7 @@ class _ConseilsState extends State<Conseils> {
       super.initState();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,18 +111,19 @@ class _ConseilsState extends State<Conseils> {
                             width: 20.0,
                           ),
                           RoundButton(
+                              shadowColor: Colors.green,
                               href: '/',
                               myIcon: Icons.arrow_back,
                               couleur: Colors.green),
                         ],
                       ),
                       Row(
-                        children:  [
-                                isSignedIn ?
-                                RoundButtonSettingsWhileLogged(
-                                    myIcon: Icons.settings, value: 5)
-                                    : RoundButtonSettings(
-                                    myIcon: Icons.settings, value: 5),
+                        children: [
+                          isSignedIn
+                              ? RoundButtonSettingsWhileLogged(
+                                  myIcon: Icons.settings, value: 5)
+                              : RoundButtonSettings(
+                                  myIcon: Icons.settings, value: 5),
                           const SizedBox(
                             width: 20.0,
                           ),
@@ -139,11 +140,12 @@ class _ConseilsState extends State<Conseils> {
                       children: [
                         (widget.currentAdvice != 0)
                             ? Column(
-                              children: [
-                                SizedBox(
-                              height: 0.1*MediaQuery.of(context).size.height,
-                            ),
-                                InkWell(
+                                children: [
+                                  SizedBox(
+                                    height: 0.1 *
+                                        MediaQuery.of(context).size.height,
+                                  ),
+                                  InkWell(
                                     onTap: () {
                                       setState(() {
                                         widget.currentAdvice -= 1;
@@ -154,8 +156,8 @@ class _ConseilsState extends State<Conseils> {
                                           "assets/images/leftbutton.png"),
                                     ),
                                   ),
-                              ],
-                            )
+                                ],
+                              )
                             : Container(
                                 // width: 0.045 * MediaQuery.of(context).size.width,
                                 ),
@@ -189,21 +191,21 @@ class _ConseilsState extends State<Conseils> {
                                       width: 0.4 *
                                           MediaQuery.of(context).size.width,
                                       child: Center(
-                                          child: Text(
-                                            "${widget.cons[widget.currentAdvice].contenu}",
-                                            style: const TextStyle(
-                                              fontSize: 20.0,
-                                              color: Color.fromARGB(
-                                                  255, 118, 120, 120),
-                                            ),
-                                            textAlign: TextAlign.center,
+                                        child: Text(
+                                          "${widget.cons[widget.currentAdvice].contenu}",
+                                          style: const TextStyle(
+                                            fontSize: 20.0,
+                                            color: Color.fromARGB(
+                                                255, 118, 120, 120),
                                           ),
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
+                            ),
                             Positioned(
                               top: 0.015 * MediaQuery.of(context).size.height,
                               left: 0.15 * MediaQuery.of(context).size.width,
@@ -256,24 +258,26 @@ class _ConseilsState extends State<Conseils> {
                             ),
                           ],
                         ),
-                        if ((widget.currentAdvice != widget.cons.length-1))
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 0.1*MediaQuery.of(context).size.height,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                    widget.currentAdvice += 1;
-                                });
-                              },
-                              child: Image(
-                                image: AssetImage("assets/images/rightbutton.png"),
+                        if ((widget.currentAdvice != widget.cons.length - 1))
+                          Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    0.1 * MediaQuery.of(context).size.height,
                               ),
-                            ),
-                          ],
-                        ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    widget.currentAdvice += 1;
+                                  });
+                                },
+                                child: Image(
+                                  image: AssetImage(
+                                      "assets/images/rightbutton.png"),
+                                ),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ), //le corps du conseils

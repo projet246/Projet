@@ -204,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                           myIcon: Icons.exit_to_app,
                           href: '/StartPage',
                           couleur: Color.fromRGBO(255, 210, 23, 5),
+                          shadowColor: Color.fromRGBO(255, 210, 23, 5),
                         ))
                   ],
                 ),

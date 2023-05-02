@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sorttrash/StartPage/choose_children/leader.dart';
-import 'package:sorttrash/StartPage/choose_children/offline_child_profiles.dart';
-import 'package:sorttrash/StartPage/choose_children/online_child_profile.dart';
+import 'package:sorttrash/StartPage/choose_children/Leader/leader.dart';
+import 'package:sorttrash/StartPage/choose_children/offlineSelection/offline_child_profiles.dart';
+import 'package:sorttrash/StartPage/choose_children/onlineSelection/online_child_profile.dart';
 import 'package:sorttrash/player_box.dart';
 
 class AnonChildSelector extends StatefulWidget {

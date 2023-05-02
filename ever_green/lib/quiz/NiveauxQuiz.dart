@@ -60,6 +60,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                         href: '/games',
                         myIcon: Icons.arrow_back,
                         couleur: Color.fromRGBO(255, 210, 23, 5),
+                        shadowColor: Color.fromRGBO(255, 210, 23, 5) ,
                       ),
                     ),
                   ),
@@ -78,11 +79,13 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                             href: '/',
                             myIcon: Icons.home,
                             couleur: Color.fromRGBO(255, 210, 23, 5),
+                            shadowColor: Color.fromRGBO(255, 210, 23, 5) ,
                           ), //le premier button
                           RoundButton(
                             href: widget.href,
                             myIcon: Icons.settings,
                             couleur: const Color.fromRGBO(255, 210, 23, 5),
+                            shadowColor: const Color.fromRGBO(255, 210, 23, 5),
                           ), //le deuxieme button
                         ]),
                   ),

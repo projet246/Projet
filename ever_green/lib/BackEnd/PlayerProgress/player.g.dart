@@ -24,13 +24,14 @@ class PlayerProgressAdapter extends TypeAdapter<PlayerProgress> {
       fields[4] as String?,
       fields[5] as String?,
       fields[6] as String?,
+      fields[7] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, PlayerProgress obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.score)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class PlayerProgressAdapter extends TypeAdapter<PlayerProgress> {
       ..writeByte(5)
       ..write(obj.childGlobalUID)
       ..writeByte(6)
-      ..write(obj.avatarProfileName);
+      ..write(obj.avatarProfileName)
+      ..writeByte(7)
+      ..write(obj.lastChallengeDate);
   }
 
   @override
