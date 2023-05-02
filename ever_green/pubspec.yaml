@@ -51,6 +51,7 @@ dependencies:
   floating_snackbar: ^1.0.3+1
   firebase_database: ^10.1.1
   internet_connection_checker: ^1.0.0+1
+  just_audio: ^0.9.32
   carousel_slider: ^4.2.1
 flutter_native_splash:
   color: "#f5cb42"
@@ -121,5 +122,7 @@ flutter:
     - assets/images/puzzle/level3/
     - assets/images/puzzle/level5/
     - assets/images/trophies/
+    - assets/images/quiz/niveau1/
+    - assets/images/quiz/niveau2/
     - assets/profiles/
 

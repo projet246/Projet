@@ -14,6 +14,8 @@ class QuizPhotos {
   String reponse4;
   String photo4;
   int reponseCorrecte;
+  String explication;
+  String SoundPath;
   QuizPhotos({
     required this.question,
     required this.photoQuestion,
@@ -26,6 +28,8 @@ class QuizPhotos {
     required this.reponse4,
     required this.photo4,
     required this.reponseCorrecte,
+    required this.explication,
+    required this.SoundPath,
   });
 }
 
@@ -144,8 +148,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                               color: const Color.fromARGB(255, 242, 220, 247),
                               borderRadius: BorderRadius.circular(18.0),
                               border: Border.all(
-                                color:
-                                    const Color.fromARGB(255, 251, 194, 240),
+                                color: const Color.fromARGB(255, 251, 194, 240),
                                 width: 2,
                               ),
                               boxShadow: [
@@ -159,15 +162,14 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                             ),
                             alignment: Alignment.center,
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(15, 0, 0, 0),
                                   child: SizedBox(
-                                    width: 0.2 *
-                                        MediaQuery.of(context).size.width,
+                                    width:
+                                        0.2 * MediaQuery.of(context).size.width,
                                     child: Center(
                                         child: Text(
                                       widget.quizPhotos.question,
@@ -203,14 +205,13 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                             height: 0.38 * MediaQuery.of(context).size.height,
                             width: 0.75 * MediaQuery.of(context).size.width,
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
-                                  height: 0.37 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.17 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.37 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.17 * MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
@@ -243,9 +244,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                   .size
                                                   .height,
                                           width: 0.16 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color:
                                                 Colors.white.withOpacity(0.8),
@@ -303,8 +302,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                     color: Color.fromARGB(
                                                         255, 218, 78, 204),
                                                     fontSize: 13.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
@@ -353,10 +351,10 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                   ),
                                 ), //----------------------------------------
                                 Container(
-                                  height: 0.37 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.17 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.37 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.17 * MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
@@ -389,9 +387,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                   .size
                                                   .height,
                                           width: 0.16 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color:
                                                 Colors.white.withOpacity(0.8),
@@ -449,8 +445,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                     color: Color.fromARGB(
                                                         255, 218, 78, 204),
                                                     fontSize: 13.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
@@ -499,10 +494,10 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                   ),
                                 ),
                                 Container(
-                                  height: 0.37 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.17 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.37 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.17 * MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
@@ -535,9 +530,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                   .size
                                                   .height,
                                           width: 0.16 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color:
                                                 Colors.white.withOpacity(0.8),
@@ -595,8 +588,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                     color: Color.fromARGB(
                                                         255, 218, 78, 204),
                                                     fontSize: 13.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
@@ -645,10 +637,10 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                   ),
                                 ),
                                 Container(
-                                  height: 0.37 *
-                                      MediaQuery.of(context).size.height,
-                                  width: 0.17 *
-                                      MediaQuery.of(context).size.width,
+                                  height:
+                                      0.37 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.17 * MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
@@ -681,9 +673,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                   .size
                                                   .height,
                                           width: 0.16 *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color:
                                                 Colors.white.withOpacity(0.8),
@@ -741,8 +731,7 @@ class _QuizPhotosDesignState extends State<QuizPhotosDesign> {
                                                     color: Color.fromARGB(
                                                         255, 218, 78, 204),
                                                     fontSize: 13.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
