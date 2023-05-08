@@ -88,14 +88,14 @@ class _NiveauxState extends State<Niveaux> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
+                   SizedBox(
+                    width: 0.026*MediaQuery.of(context).size.width,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
                       //le corps de niveaux
-                      height: 0.4 * height,
+                      height: 0.75*MediaQuery.of(context).size.height,
                       width: 100.0 * widget.NbrNiveax +
                           50 * (widget.NbrNiveax - 1),
                       decoration: BoxDecoration(

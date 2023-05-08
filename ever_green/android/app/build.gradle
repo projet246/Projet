@@ -69,4 +69,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
+android {
+    namespace 'com.example.ever_green'
+}
+
 apply plugin: 'com.google.gms.google-services'

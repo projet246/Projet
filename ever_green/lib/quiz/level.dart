@@ -39,7 +39,6 @@ class Level extends StatefulWidget {
 class _LevelState extends State<Level> {
   final User? user = FirebaseAuth.instance.currentUser;
   final _player = AudioPlayer();
-  final _audio = AudioCache();
   late PlayerProgress playerProgress = currentProfileIndex == 1
       ? offlineProgress.returnParent().children[globalChildKey]
       : onlineProgress.returnParent().children[onlineGlobalChildKey];
@@ -86,7 +85,7 @@ class _LevelState extends State<Level> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromARGB(255, 102, 235, 0),
+                          color: const Color.fromARGB(255, 102, 235, 0),
                           spreadRadius: 0,
                           blurRadius: 0,
                           offset: const Offset(
@@ -121,6 +120,7 @@ class _LevelState extends State<Level> {
                 RoundButton(
                   href: '/',
                   myIcon: Icons.settings,
+                  shadowColor: Color.fromRGBO(255, 210, 23, 5),
                   couleur: Color.fromRGBO(255, 210, 23, 5),
                 ),
                 SizedBox(

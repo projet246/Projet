@@ -39,7 +39,7 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   animated_splash_screen: ^1.3.0
   firebase_auth: ^4.2.9
-  cloud_firestore: ^4.5.2
+  cloud_firestore: ^4.5.3
   firebase_core: ^2.7.0
   provider: ^6.0.5
   uuid: ^3.0.6
@@ -51,8 +51,8 @@ dependencies:
   floating_snackbar: ^1.0.3+1
   firebase_database: ^10.1.1
   internet_connection_checker: ^1.0.0+1
-  just_audio: ^0.9.32
   carousel_slider: ^4.2.1
+  flutter_local_notifications: ^14.0.0+1
 flutter_native_splash:
   color: "#f5cb42"
 dev_dependencies:
@@ -112,7 +112,7 @@ flutter:
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
-#  # see https://flutter.dev/custom-fonts/#from-packages
+  #  # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/images/
     - assets/music/
@@ -125,4 +125,8 @@ flutter:
     - assets/images/quiz/niveau1/
     - assets/images/quiz/niveau2/
     - assets/profiles/
-
+    - assets/images/plastic/
+    - assets/images/paper/
+    - assets/images/organic/
+    - assets/images/e_waste/
+    - assets/images/non_recyclable/

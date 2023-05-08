@@ -1,11 +1,13 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/BackEnd/ChallengesLocalDataBase/local_challenges.dart';
 import 'package:sorttrash/button.dart';
 import 'package:sorttrash/defis/show_challenge_screen.dart';
-
+import '../BackEnd/PlayerProgress/player.dart';
+import '../player_box.dart';
 import 'challenge_mangement.dart';
 import 'key_container.dart';
 
@@ -18,6 +20,10 @@ class ChallengesScreen extends StatefulWidget {
 
 class _ChallengesScreenState extends State<ChallengesScreen> {
   final ChallengeManagement challengeManagement = ChallengeManagement();
+  final User? user = FirebaseAuth.instance.currentUser;
+  late PlayerProgress playerProgress = currentProfileIndex == 1
+      ? offlineProgress.returnParent().children[globalChildKey]
+      : onlineProgress.returnParent().children[onlineGlobalChildKey];
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -54,7 +60,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                          ),
                        ),
                        const SizedBox(width: 10,),
-                       const Text('01', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'Digital', color: sm1 ),)
+                       Text('${_countNumberOfOnesInAString(playerProgress.gamesData[3].levelsCompleted)}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'Digital', color: sm1 ),)
                      ],
                    ),
                 ),
@@ -69,7 +75,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
             ),
             const SizedBox(height: 20,),
             Center(
-              child: Container(
+              child: SizedBox(
                 width:  8*0.12*MediaQuery.of(context).size.width,
                 child: AspectRatio(
                   aspectRatio:2.7,
@@ -81,9 +87,16 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                       i++)
                         InkWell(
                              onTap: (){
-                               Navigator.of(context).push(
-                                 MaterialPageRoute(builder: (context) =>  ShowChallenge(challengeInformation: globalchallengesInformationsList[i]) )
-                               );
+                               if (playerProgress.lastChallengeDate != null && DateTime.now().isAfter(playerProgress.lastChallengeDate!.add(const Duration(seconds: 100)))){
+                                 playerProgress.lastChallengeDate = DateTime.now();
+                               }
+                               _updateUserData(i + 1);
+
+                               if(!challengeManagement.challengesList[i].state ){
+                                 Navigator.of(context).push(
+                                     MaterialPageRoute(builder: (context) =>  ShowChallenge(challengeInformation: globalchallengesInformationsList[i]) )
+                                 );
+                               }
                              }
                             ,child: challengeManagement.challengesList[i])
                     ],
@@ -96,4 +109,41 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
       ),
     );
   }
+  void _updateUserData(int challengeNumber){
+    setState(() {
+      if ( challengeNumber < playerProgress.gamesData[3].levelsCompleted.length) {
+        List<String> characters = playerProgress.gamesData[3]
+            .levelsCompleted.split('');
+        characters[challengeNumber] = '1';
+        playerProgress.gamesData[3].levelsCompleted =
+            characters.join('');
+      }
+    });
+    try {
+      if (currentProfileIndex == 1) {
+        offlineProgress.setChild(globalChildKey, playerProgress);
+        if (parentBox.isEmpty) {
+          parentBox.add(offlineProgress);
+        }else{
+          parentBox.putAt(0, offlineProgress.returnParent());
+        }
+      } else {
+        onlineProgress.setChild(onlineGlobalChildKey, playerProgress);
+        onlineParentBox.put(user!.uid, onlineProgress.returnParent());
+        onlineProgress.returnParent().updateData(onlineProgress.getUID());
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  int _countNumberOfOnesInAString(String input) {
+    int count = 0;
+    for (int i = 0; i < input.length; i++) {
+      if (input[i] == '1') {
+        count++;
+      }
+    }
+    return count;
+  }
+
 }

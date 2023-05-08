@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:sorttrash/Puzzle/Models/Objects.dart';
 import 'package:sorttrash/Puzzle/Models/TrashCans.dart';
 import 'package:sorttrash/Puzzle/Models/puzzle_management.dart';
-import 'package:sorttrash/button.dart';
+import 'package:sorttrash/composents/game_settings.dart';
 
 import '../BackEnd/PlayerProgress/player.dart';
 import '../player_box.dart';
@@ -62,6 +62,31 @@ class PuzzleLevel extends StatefulWidget {
 }
 
 class _PuzzleLevelState extends State<PuzzleLevel> {
+  bool stopTimerBool = false;
+  void stopTimer(){
+    setState(() {
+      stopTimerBool = true;
+    });
+  }
+  void resumeTimer(){
+    setState(() {
+      stopTimerBool = false;
+    });
+  }
+  void replay() {
+    setState(() {
+      int i = 0;
+      time = widget._timeCount;
+      widget._copyOfarrayOfPuzzlePieces.shuffle();
+      correctPiecesNumber = 0;
+      widget._arrayOfPuzzlePieces = widget._copyOfarrayOfPuzzlePieces.toList();
+      while (i < widget._arrayOfSquares.length - 1) {
+        widget._arrayOfSquares[i].imageName = "assets/images/empty.png";
+        i++;
+      }
+    });
+  }
+
   final _player = AudioPlayer();
   final User? user = FirebaseAuth.instance.currentUser;
   final ConfettiController _controller = ConfettiController();
@@ -93,8 +118,13 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
       setState(() {
         if (time <= 0) {
           time = 0;
+          if ( correctPiecesNumber != widget._matrixSize*widget._matrixSize){
+            Navigator.pop(context);
+          }
         } else {
-          time--;
+          if (!stopTimerBool){
+            time--;
+          }
         }
       });
     });
@@ -142,18 +172,7 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                     GameTimer(
                       time: time,
                     ),
-                    const RoundButton(
-                      href: '/',
-                      myIcon: Icons.place_rounded,
-                      couleur: Color.fromRGBO(255, 210, 23, 5),
-                      shadowColor: Color.fromRGBO(255, 210, 23, 5),
-                    ),
-                    const RoundButton(
-                      href: '/Puzzles',
-                      myIcon: Icons.settings,
-                      couleur: Color.fromRGBO(255, 210, 23, 5),
-                      shadowColor:  Color.fromRGBO(255, 210, 23, 5),
-                    ),
+                    GamesSettings(functionToBeUsed: replay, functionToResumeTimer: resumeTimer, functionToStopTimer: stopTimer,),
                     SizedBox(
                       width: 0.013888 * screenWidth,
                     ),
@@ -218,6 +237,7 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
       ),
     );
   }
+
   Widget showSquare(
     BuildContext context, {
     required Square square,
@@ -252,9 +272,10 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
               widget._changeBooleanStatus(false);
               playerProgress.score += 100;
               setState(() {
-                if ( puzzleNumber < playerProgress.gamesData[0].levelsCompleted.length) {
-                  List<String> characters = playerProgress.gamesData[0]
-                      .levelsCompleted.split('');
+                if (puzzleNumber <
+                    playerProgress.gamesData[0].levelsCompleted.length) {
+                  List<String> characters =
+                      playerProgress.gamesData[0].levelsCompleted.split('');
                   characters[puzzleNumber] = '1';
                   playerProgress.gamesData[0].levelsCompleted =
                       characters.join('');
@@ -265,13 +286,15 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                   offlineProgress.setChild(globalChildKey, playerProgress);
                   if (parentBox.isEmpty) {
                     parentBox.add(offlineProgress);
-                  }else{
+                  } else {
                     parentBox.putAt(0, offlineProgress.returnParent());
                   }
                 } else {
                   onlineProgress.setChild(onlineGlobalChildKey, playerProgress);
                   onlineParentBox.put(user!.uid, onlineProgress.returnParent());
-                  onlineProgress.returnParent().updateData(onlineProgress.getUID());
+                  onlineProgress
+                      .returnParent()
+                      .updateData(onlineProgress.getUID());
                 }
               } catch (e) {
                 print(e);

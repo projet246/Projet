@@ -1,28 +1,37 @@
 
 import 'package:flutter/material.dart';
+import 'package:sorttrash/StartPage/choose_children/choose_child_profile_main.dart';
 
 import '../player_box.dart';
 
 
-class AnonButton extends StatefulWidget {
+class AnonButton extends StatelessWidget {
   const AnonButton({Key? key, required this.href, required this.color, required this.text}) : super(key: key);
   final String href;
   final Color color ;
   final String text;
   @override
-  State<AnonButton> createState() => _AnonButtonState();
-}
-
-class _AnonButtonState extends State<AnonButton> {
-  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: ()   async {
+        onPressed: ()  {
           getProgress();
-          Navigator.pushNamed(context, widget.href);
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              transitionDuration: const Duration(milliseconds: 2500),
+              pageBuilder: (context, animation, secondaryAnimation) => const AnonChildSelector(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+            ),
+          );
+
         },
         style: ElevatedButton.styleFrom(
-            backgroundColor: widget.color,
+            backgroundColor: color,
             side: const BorderSide(width: 3, color: Colors.white),
             elevation: 0,
             shape:
@@ -30,7 +39,7 @@ class _AnonButtonState extends State<AnonButton> {
             padding:
                 const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
         child:  Text(
-          widget.text,
+          text,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,

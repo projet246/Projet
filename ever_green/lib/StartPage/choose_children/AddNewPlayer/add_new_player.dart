@@ -173,19 +173,18 @@ class _AddPlayer extends State<AddPlayer> {
                   ),
                 ),
 
-                const Positioned(left : 520,child: RoundButton(myIcon: Icons.exit_to_app, href: '/', couleur: Color.fromRGBO(255,221,80, 1), shadowColor: Colors.transparent,)),
+                Positioned(left : 0.66*MediaQuery.of(context).size.width,child: const RoundButton(myIcon: Icons.exit_to_app, href: '/', couleur: Color.fromRGBO(255,221,80, 1), shadowColor: Colors.transparent,)),
                 Positioned(
-                    left: 340,
-                    top: 230,
+                    left: 0.43*MediaQuery.of(context).size.width,
+                    top: 0.63888*MediaQuery.of(context).size.height,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: sm1,
                             side: const BorderSide(width: 3, color: Colors.white),
-                            elevation: 0,
                             shape:
                             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
+                            EdgeInsets.only(left: 0.0388*MediaQuery.of(context).size.width, right: 0.0388*MediaQuery.of(context).size.width, top: 0.0222*MediaQuery.of(context).size.height, bottom: 0.02777*MediaQuery.of(context).size.height)),
                         onPressed: (){
 
                          setState(() {

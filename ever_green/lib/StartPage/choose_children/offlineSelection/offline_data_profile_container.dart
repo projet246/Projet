@@ -26,7 +26,7 @@ class _OfflineProfileDataContainerState extends State<OfflineProfileDataContaine
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(left: 200, right: 200, top: 20),
+              padding:  EdgeInsets.only(left: 0.26*MediaQuery.of(context).size.width, right:0.26* MediaQuery.of(context).size.width, top: 0.06*MediaQuery.of(context).size.height),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -52,8 +52,8 @@ class _OfflineProfileDataContainerState extends State<OfflineProfileDataContaine
             ),
           ),
           Positioned(
-            left: 180,
-            top: 20,
+            left: 0.22*MediaQuery.of(context).size.width,
+            top: 0.06*MediaQuery.of(context).size.height,
             child: InkWell(
               onTap: () {
                 setState(() {
@@ -73,7 +73,7 @@ class _OfflineProfileDataContainerState extends State<OfflineProfileDataContaine
                 });
               },
               child: CircleAvatar(
-                radius: 45.0,
+                radius: 45,
                 backgroundColor: color,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30.0),

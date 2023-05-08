@@ -117,10 +117,9 @@ class _LearnPageState extends State<LearnPage> {
               onPressed: () {
               },
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
+                foregroundColor: Colors.white, shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                primary: Colors.white,
                 backgroundColor: Colors.tealAccent,
                 minimumSize: const Size.fromHeight(80),
               ),

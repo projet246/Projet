@@ -74,7 +74,30 @@ class DataBaseService {
       return false;
     }
   }
-
+  bool returnChallengeLockedState(int index, int levelNumber){
+    try {
+      _parent = parentBox.getAt(0);
+      playerProgress = offlineProgress.returnParent().children[globalChildKey];
+    } catch (e) {
+      print(e);
+    }
+    if (index < 0 ||
+        index >= playerProgress.gamesData[levelNumber].levelsCompleted.length || playerProgress.lastChallengeDate == null) {
+        return true;
+    }
+    if (playerProgress.gamesData[levelNumber].levelsCompleted[index] == '0') {
+      return true;
+    } else {
+      if (isExactlyOneDayApart(playerProgress.lastChallengeDate!, DateTime.now())){
+        return false;
+      }
+    }
+    return true;
+  }
+  bool isExactlyOneDayApart(DateTime date1, DateTime date2) {
+    final difference = date2.difference(date1);
+    return difference.inSeconds.abs() == 100;
+  }
   deleteElementProgress(PlayerProgress playerProgress) {
     _parent.numberOfChildren--;
     int i = _players.indexOf(playerProgress);

@@ -52,7 +52,7 @@ class _GamesMenuState extends State<GamesMenu> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
+                        padding:  EdgeInsets.only(right: 0.041*MediaQuery.of(context).size.width),
                         child: Container(
                           //pour creer un alignement des elements
                           height: 60.0,
@@ -68,8 +68,7 @@ class _GamesMenuState extends State<GamesMenu> {
                           ), //le premier button
                                 const RoundButton(
                                     href: '/TrophiesPage',
-                                    myIcon: Icons
-                                        .woo_commerce,
+                                    myIcon: Icons.star,
                                         couleur: Color.fromRGBO(255, 210, 23, 5),
                                         shadowColor:  Color.fromRGBO(255, 210, 23, 5) ,
                                         ), //le deuxieme button
@@ -134,7 +133,7 @@ class _GamesMenuState extends State<GamesMenu> {
                               title: 'DEFIS',
                               coleur1: Color.fromARGB(223, 202, 63, 172),
                               coleur2: Color.fromARGB(255, 240, 71, 206),
-                              href: '/',
+                              href: '/ChallengesScreen',
                               Photo: "defis.png",
                               hei: 200.00,
                               wid: 200.0,

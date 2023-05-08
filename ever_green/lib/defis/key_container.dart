@@ -7,10 +7,12 @@ class KeyContainer extends StatefulWidget {
   const KeyContainer({Key? key, required this.state, required this.text}) : super(key: key);
   final bool state;
   final String text;
+  bool returnState(){
+    return state;
+  }
   @override
   State<KeyContainer> createState() => _KeyContainerState();
 }
-
 class _KeyContainerState extends State<KeyContainer> {
 
   @override

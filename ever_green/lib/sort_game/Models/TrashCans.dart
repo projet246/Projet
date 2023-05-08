@@ -22,7 +22,7 @@ class TrashCan{
 final trashCansArray = [
   TrashCan(
     id: 1,
-    trashToGoThrough: [TrashTypes.glass],
+    trashToGoThrough: [TrashTypes.cantBeRecycled],
     imageName: "assets/images/green.png",
     type: TrashCanTypes.green,
   ),
@@ -39,12 +39,6 @@ final trashCansArray = [
     type: TrashCanTypes.red,
   ),
   TrashCan(
-    id: 4,
-    trashToGoThrough: [TrashTypes.metal],
-    imageName: "assets/images/yellow.png",
-    type: TrashCanTypes.yellow,
-  ),
-  TrashCan(
     id: 5,
     trashToGoThrough: [TrashTypes.plastic],
     imageName: "assets/images/orange.png",
@@ -58,3 +52,4 @@ final trashCansArray = [
   ),
 
 ];
+

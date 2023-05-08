@@ -26,7 +26,7 @@ class ShowChallenge extends StatelessWidget {
             Center(
               child: Container(
                 height: 0.6*MediaQuery.of(context).size.height,
-                width: 0.34*MediaQuery.of(context).size.width,
+                width: 0.5*MediaQuery.of(context).size.width,
                 color: Colors.transparent,
               ),
             ),
@@ -34,7 +34,7 @@ class ShowChallenge extends StatelessWidget {
             Center(
               child: Container(
                 height: 0.52*MediaQuery.of(context).size.height,
-                width: 0.3*MediaQuery.of(context).size.width,
+                width: 0.4*MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
@@ -61,16 +61,18 @@ class ShowChallenge extends StatelessWidget {
                       ),
                       child: const Center(child: Text('Challenge', style: TextStyle(color: Colors.white, fontFamily: 'Digital', fontSize: 18),),),
                     ),
-                    const SizedBox(height: 20,),
-                    Center(child : Text( challengeInformation,textAlign: TextAlign.center, style: const TextStyle( fontSize: 18, fontFamily: 'Digital',color: sm1, ),))
+                    SizedBox(height: 0.05555*MediaQuery.of(context).size.height,),
+                    Center(child : Text( challengeInformation,textAlign: TextAlign.center, style: const TextStyle( fontSize: 14, fontFamily: 'Digital',color: sm1, ),))
                   ],
                 ),
               ),
             ),
-            const Positioned(left : 487, top: 78,child: RoundButton(myIcon: Icons.exit_to_app, href: '/', couleur: Color.fromRGBO(255,221,80, 1), shadowColor: Colors.transparent,)),
+            Positioned(left : 0.65*MediaQuery.of(context).size.width,
+                top: 0.21666*MediaQuery.of(context).size.height,
+                child: const RoundButton(myIcon: Icons.exit_to_app, href: '/', couleur: Color.fromRGBO(255,221,80, 1), shadowColor: Colors.transparent,)),
             Positioned(
-                left: 340,
-                top: 250,
+                left: 0.43*MediaQuery.of(context).size.width,
+                top: 0.694444*MediaQuery.of(context).size.height,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: sm1,
@@ -79,7 +81,7 @@ class ShowChallenge extends StatelessWidget {
                         shape:
                         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         padding:
-                        const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
+                        EdgeInsets.only(left: 0.0387*MediaQuery.of(context).size.width, right: 0.0387*MediaQuery.of(context).size.width, top: 8, bottom: 10)),
                     onPressed: (){
                   playerProgress.lastChallengeDate = DateTime.now();
                   try {

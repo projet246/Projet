@@ -15,21 +15,21 @@ class LevelManagement {
   );
   late Level level2 = Level(
     isLocked: dataBaseService.returnLockedState(1,1),
-    arrayOfTrash: trashArray2,
+    arrayOfTrash: trashArrayLeve2,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level3.setIsLocked,
   );
 
   late Level level3 = Level(
     isLocked: dataBaseService.returnLockedState(2,1),
-    arrayOfTrash: trashArray,
+    arrayOfTrash: trashArrayLeve3,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level4.setIsLocked,
   );
 
   late Level level4 = Level(
     isLocked: dataBaseService.returnLockedState(3,1),
-    arrayOfTrash: trashArray,
+    arrayOfTrash: trashArrayLevel4,
     arrayOfTrashCans: trashCansArray,
     changeBooleanStatus: level5.setIsLocked,
   );

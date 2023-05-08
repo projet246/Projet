@@ -1,18 +1,28 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/player_box.dart';
 
 class SilderMusic extends StatefulWidget {
-  SilderMusic({Key? key, required double value}) {
-  }
+  const SilderMusic({super.key, required double value, Key? key1}) ;
   @override
   State<SilderMusic> createState() => _SilderMusicState();
-
 }
 
 class _SilderMusicState extends State<SilderMusic> {
+  final AudioPlayer _audioPlayer = AudioPlayer();
   @override
   void initState() {
     super.initState();
+    _loadAudio();
+  }
+  @override
+  void dispose() {
+    _audioPlayer.release();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+  void _loadAudio() async {
+    await _audioPlayer.play(AssetSource('https://example.com/audio.mp3'));
   }
   @override
   Widget build(BuildContext context) {
@@ -40,7 +50,7 @@ class _SilderMusicState extends State<SilderMusic> {
         child: SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 15,
-            rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 10),
+            rangeThumbShape: const RoundRangeSliderThumbShape(enabledThumbRadius: 10),
             inactiveTrackColor: Colors.lightBlueAccent,
             thumbShape: const RoundSliderThumbShape(
               enabledThumbRadius: 0.0,

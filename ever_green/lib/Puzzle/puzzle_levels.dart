@@ -82,8 +82,8 @@ class _PuzzleLevels extends State<PuzzleLevels> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
+                   SizedBox(
+                    width: 0.026*MediaQuery.of(context).size.width,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -113,18 +113,18 @@ class _PuzzleLevels extends State<PuzzleLevels> {
                                 Stack(
                                   children: [
                                     SizedBox(
-                                      height: 0.4 * height,
+                                      height: 0.75 * height,
                                       width: 50.0,
                                       // color: Colors.amber,
                                     ),
-                                    Positioned(
-                                      top: 0.1 * height,
-                                      child: SizedBox(
-                                          width: 50.0,
-                                          height: 170,
-                                          // color: Colors.black,
-                                          child: index % 2 != 0
-                                              ? const Image(
+                                      Positioned(
+                                        top: 0.1 * height,
+                                        child: SizedBox(
+                                            width: 50.0,
+                                            height: 170,
+                                            // color: Colors.black,
+                                            child: index % 2 != 0
+                                                ? const Image(
                                               image: AssetImage(
                                                   "assets/images/triAss.png"))
                                               : const Image(

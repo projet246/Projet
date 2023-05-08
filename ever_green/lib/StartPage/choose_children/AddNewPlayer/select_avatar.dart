@@ -60,7 +60,7 @@ class _ChooseAvatarState extends State<ChooseAvatar> {
                   child: Row(
                     children: [
                       ...avatarList.map((e) => InkWell(
-                        onDoubleTap: (){
+                        onTap: (){
                           setState(() {
                             widget.updateAvatar(e);
                           });

@@ -1,10 +1,13 @@
 
+
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sorttrash/Puzzle/Models/TrashCans.dart';
 import 'package:sorttrash/Puzzle/main_puzzle.dart';
+import 'package:sorttrash/StartPage/choose_children/AddNewPlayer/add_new_player.dart';
 import 'package:sorttrash/StartPage/choose_children/choose_child_profile_main.dart';
 import 'package:sorttrash/pages/niveaux.dart';
 import 'package:sorttrash/pages/trophies_page.dart';
@@ -17,20 +20,21 @@ import 'Puzzle/Models/puzzle_management.dart';
 import 'Puzzle/puzzle_levels.dart';
 import 'StartPage/LoginPage/login_page.dart';
 import 'StartPage/RegisterPage/register_page.dart';
-import 'StartPage/choose_children/leader.dart';
-import 'StartPage/choose_children/offline_child_profiles.dart';
+import 'StartPage/choose_children/Leader/leader.dart';
+import 'StartPage/choose_children/offlineSelection/offline_child_profiles.dart';
 import 'StartPage/start_page.dart';
+import 'defis/challenge_screen.dart';
 import 'pages/games.dart';
 import 'pages/main_menu.dart';
 import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'conseils/conseils.dart';
-import 'quiz/quizmultiples.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  tz.initializeTimeZones();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -65,6 +69,7 @@ void main() async {
       '/StartPage': (context) => const StartPage(),
       '/': (context) => const mainMenu(),
       '/games': (context) => const GamesMenu(),
+      '/AddPlayer' : (context)=> const AddPlayer(),
       '/Niveaux': (context) => Niveaux(
             levelMangement: LevelManagement(),
             NbrNiveax: 5,
@@ -78,6 +83,7 @@ void main() async {
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
       '/OfflineProfilesSelection': (context) => const OfflineProfilesSelection(),
       '/Nquiz': (context) => N,
+      '/ChallengesScreen' :(context) => const ChallengesScreen(),
       '/Puzzles': (context) => PuzzleLevels(
         nbrNiveax: 5,
         openLevels: 1,

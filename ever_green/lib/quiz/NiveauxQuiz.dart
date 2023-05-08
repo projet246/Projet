@@ -96,14 +96,14 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
+                  SizedBox(
+                    width:  0.026*MediaQuery.of(context).size.width,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
                       //le corps de niveaux
-                      height: 0.4 * height,
+                      height: 0.75*MediaQuery.of(context).size.height,
                       width: 100.0 * widget.nbrNiveax +
                           50 * (widget.nbrNiveax - 1),
                       decoration: BoxDecoration(
@@ -127,7 +127,7 @@ class _NiveauxQuizState extends State<NiveauxQuiz> {
                                   Stack(
                                     children: [
                                       SizedBox(
-                                        height: 0.4 * height,
+                                        height: 0.75 * height,
                                         width: 50.0,
                                         // color: Colors.amber,
                                       ),

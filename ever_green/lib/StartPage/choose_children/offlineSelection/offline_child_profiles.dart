@@ -38,8 +38,8 @@ class _OfflineProfilesSelectionState extends State<OfflineProfilesSelection> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
+    return Scaffold(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -54,109 +54,109 @@ class _OfflineProfilesSelectionState extends State<OfflineProfilesSelection> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const RoundButton(
+                          myIcon: Icons.home,
+                          href: '/StartPage',
+                          couleur: Colors.greenAccent,
+                          shadowColor: Colors.greenAccent,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: sm1,
+                                side: const BorderSide(width: 3, color: Colors.white),
+                                elevation: 0,
+                                shape:
+                                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                padding:
+                                const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
+                            onPressed: () async {
+                              if (globalChildKey != -1) {
+                                _startOfflineSession();
+                                await Navigator.popAndPushNamed(context, '/');
+                              } else {
+                                FloatingSnackBar(
+                                  message: '📢 : Please Choose A Child Profile! ',
+                                  context: context,
+                                  textColor: Colors.black,
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Digital',
+                                      fontSize: 16),
+                                  duration: const Duration(milliseconds: 2000),
+                                  backgroundColor: Colors.redAccent,
+                                );
+                              }
+                            },
+                            child: const Text(
+                              'Play',
+                              style: TextStyle(
+                                fontFamily: 'Digital',
+                              ),
+                            )),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: sm1,
+                                side: const BorderSide(width: 3, color: Colors.white),
+                                elevation: 0,
+                                shape:
+                                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                padding:
+                                const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
+                            onPressed: () {
+                              if (parentBox.isNotEmpty) {
+                                if (user != null) {
+                                  setState(() {
+                                    _appendOfflineDataOnline();
+                                  });
+                                } else {
+                                  FloatingSnackBar(
+                                    message: '📢 : Please Log in Or Register ',
+                                    context: context,
+                                    textColor: Colors.black,
+                                    textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Digital',
+                                        fontSize: 16),
+                                    duration: const Duration(milliseconds: 3000),
+                                    backgroundColor: Colors.redAccent,
+                                  );
+                                }
+                              }
+                            },
+                            child: const Text('ONL/OFL')),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: sm1,
+                                side: const BorderSide(width: 3, color: Colors.white),
+                                elevation: 0,
+                                shape:
+                                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                padding:
+                                const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
+                            child: const Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/AddPlayer');
+                            }),
+                      ],
+                    ),
+                  ),
                   ...offlineGlobalPlayers.map((e) => OfflineProfileDataContainer(playerProgress: e,)),
                 ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const RoundButton(
-                      myIcon: Icons.home,
-                      href: '/StartPage',
-                      couleur: Colors.greenAccent,
-                      shadowColor: Colors.greenAccent,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: sm1,
-                            side: const BorderSide(width: 3, color: Colors.white),
-                            elevation: 0,
-                            shape:
-                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
-                        onPressed: () async {
-                          if (globalChildKey != -1) {
-                            _startOfflineSession();
-                            await Navigator.popAndPushNamed(context, '/');
-                          } else {
-                            FloatingSnackBar(
-                              message: '📢 : Please Choose A Child Profile! ',
-                              context: context,
-                              textColor: Colors.black,
-                              textStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Digital',
-                                  fontSize: 16),
-                              duration: const Duration(milliseconds: 4000),
-                              backgroundColor: Colors.redAccent,
-                            );
-                          }
-                        },
-                        child: const Text(
-                          'Play',
-                          style: TextStyle(
-                            fontFamily: 'Digital',
-                          ),
-                        )),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: sm1,
-                            side: const BorderSide(width: 3, color: Colors.white),
-                            elevation: 0,
-                            shape:
-                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
-                        onPressed: () {
-                          if (parentBox.isNotEmpty) {
-                            if (user != null) {
-                              setState(() {
-                                _appendOfflineDataOnline();
-                              });
-                            } else {
-                              FloatingSnackBar(
-                                message: '📢 : Please Log in Or Register ',
-                                context: context,
-                                textColor: Colors.black,
-                                textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Digital',
-                                    fontSize: 16),
-                                duration: const Duration(milliseconds: 3000),
-                                backgroundColor: Colors.redAccent,
-                              );
-                            }
-                          }
-                        },
-                        child: const Text('ONL/OFL')),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: sm1,
-                            side: const BorderSide(width: 3, color: Colors.white),
-                            elevation: 0,
-                            shape:
-                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 10)),
-                        child: const Icon(Icons.add),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/AddPlayer');
-                        }),
-                  ],
-                ),
               ),
             ],
           ),

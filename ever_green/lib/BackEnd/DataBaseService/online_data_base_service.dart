@@ -106,6 +106,28 @@ class OnlineDataBaseService extends DataBaseService {
     }
   }
 
+  @override
+  bool returnChallengeLockedState(int index, int levelNumber) {
+    try {
+      setParent(onlineParentBox.get(_uid));
+      playerProgress =
+      onlineProgress.returnParent().children[onlineGlobalChildKey];
+    } catch (e) {
+      print(e);
+    }
+    if (index < 0 ||
+        index >= playerProgress.gamesData[levelNumber].levelsCompleted.length || playerProgress.lastChallengeDate == null) {
+      return true;
+    }
+    if (playerProgress.gamesData[levelNumber].levelsCompleted[index] == '0') {
+      return true;
+    } else {
+      if (isExactlyOneDayApart(playerProgress.lastChallengeDate!, DateTime.now())){
+        return false;
+      }
+    }
+    return true;
+  }
   setUID(String uid) {
     _uid = uid;
   }

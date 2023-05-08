@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/BackEnd/PlayerProgress/player.dart';
+import '../../composents/game_settings.dart';
 import '../../player_box.dart';
 import '../Models/Objects.dart';
 import '../Models/TrashCans.dart';
@@ -45,107 +46,51 @@ class _LevelState extends State<Level> {
       ? offlineProgress.returnParent().children[globalChildKey]
       : onlineProgress.returnParent().children[onlineGlobalChildKey];
   final User? user = FirebaseAuth.instance.currentUser;
+  void replay(){
+    setState(() {
+      widget._copyOfArrayOfTrash.shuffle();
+      widget._arrayOfTrash = widget._copyOfArrayOfTrash;
+    });
+  }
+  void decoy(){
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/bg-image.png'), fit: BoxFit.fill),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    shadowColor: Colors.black87,
-                    backgroundColor: Colors.white54,
-                    title: const Center(
-                      child: Text(
-                        'Settings',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22),
-                      ),
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              widget._arrayOfTrash =
-                                  widget._copyOfArrayOfTrash.toList();
-                              Navigator.popAndPushNamed(context, '/Niveaux');
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff14ffe9),
-                              side: const BorderSide(
-                                  width: 3, color: Colors.black),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: const EdgeInsets.only(
-                                  left: 40, right: 40, top: 10, bottom: 10)),
-                          child: const Icon(Icons.arrow_back),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              widget._arrayOfTrash =
-                                  widget._copyOfArrayOfTrash.toList();
-                            });
-                            Navigator.pop(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff14ffe9),
-                              side: const BorderSide(
-                                  width: 3, color: Colors.black),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: const EdgeInsets.only(
-                                  left: 40, right: 40, top: 10, bottom: 10)),
-                          child: const Icon(Icons.refresh),
-                        ),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Cancel'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff14ffe9),
-                side: const BorderSide(width: 3, color: Colors.black),
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 10, bottom: 10)),
-            child: const Icon(Icons.settings),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildDragInterface(),
-            ],
-          ),
-          showTrashCans(context),
-        ],
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/bg-image.png'), fit: BoxFit.fill),
+        ),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GamesSettings(functionToBeUsed: replay, functionToResumeTimer: decoy, functionToStopTimer: decoy,),
+                const SizedBox(width: 30,),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildDragInterface(),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 0.06*MediaQuery.of(context).size.height,
+            ),
+            showTrashCans(context),
+          ],
+        ),
       ),
     );
   }
@@ -154,11 +99,18 @@ class _LevelState extends State<Level> {
     return Center(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: widget._arrayOfTrashCans
-              .map((trashCan) => showTrashCan(context, trashCan: trashCan))
-              .toList(),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: 2, color: Colors.black),
+            color: Colors.white38
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: widget._arrayOfTrashCans
+                .map((trashCan) => showTrashCan(context, trashCan: trashCan))
+                .toList(),
+          ),
         ),
       ),
     );
@@ -166,6 +118,8 @@ class _LevelState extends State<Level> {
 
   @override
   void initState() {
+    widget._copyOfArrayOfTrash.shuffle();
+    widget._arrayOfTrash = widget._copyOfArrayOfTrash;
     _audio.load('music/correct.mp3');
     _audio.load('music/wrong.mp3');
     super.initState();
@@ -175,7 +129,7 @@ class _LevelState extends State<Level> {
     return DragTarget<Trash>(
       builder: (context, candidateData, rejectedData) => Center(
         child: Container(
-          height: 200,
+          height: 0.55*MediaQuery.of(context).size.height,
           width: 100,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -230,9 +184,7 @@ class _LevelState extends State<Level> {
   Widget buildDragInterface() {
     widget._arrayOfTrash.shuffle();
     return Container(
-      width: 400,
-      margin:
-          EdgeInsets.only(left: 0.20 * screenWidth, right: 0.20 * screenWidth),
+      width: 0.7*MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.greenAccent,
         borderRadius: BorderRadius.circular(20),

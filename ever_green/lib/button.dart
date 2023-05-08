@@ -17,9 +17,10 @@ class _RoundButtonState extends State<RoundButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        print(MediaQuery.of(context).size);
-        await Navigator.popAndPushNamed(context, '${widget.href}')
-            ;
+
+       if (widget.href != '-'){
+         await Navigator.popAndPushNamed(context, '${widget.href}');
+       }
       },
       child: Container(
         height: 40.0,
