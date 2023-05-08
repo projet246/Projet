@@ -116,6 +116,7 @@ flutter:
   assets:
     - assets/images/
     - assets/music/
+    - assets/music/audioconseils/
     - assets/fonts/
     - assets/images/puzzle/level1/
     - assets/images/puzzle/level2/
@@ -125,4 +126,5 @@ flutter:
     - assets/images/quiz/niveau1/
     - assets/images/quiz/niveau2/
     - assets/profiles/
+    - assets/images/storys/
 

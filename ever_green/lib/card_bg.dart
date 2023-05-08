@@ -7,18 +7,16 @@ class cardBg extends StatelessWidget {
   final String? title; //pour rajouter de contenu dans le frame
   final Color coleur1;
   final Color coleur2;
+  final Color couleur3;
   final String href;
-  final double hei; //for double
-  final double wid; //for width of image
   const cardBg({
     super.key,
     required this.title,
     required this.coleur1,
     required this.coleur2,
+    required this.couleur3,
     required this.href,
     required this.Photo,
-    required this.hei,
-    required this.wid,
   });
   @override
   Widget build(BuildContext context) {
@@ -72,15 +70,17 @@ class cardBg extends StatelessWidget {
                     width: 170.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(27.0),
-                      color: Colors.white,
+                      color: couleur3,
                     ),
                     child: Stack(
                       children: [
                         Center(
-                          child: Image.asset(
-                            'assets/images/${this.Photo}',
-                            height: this.hei,
-                            width: this.wid,
+                          child: Container(
+                            height: 180.0,
+                            width: 150.0,
+                            child: Image.asset(
+                              'assets/images/${this.Photo}',
+                            ),
                           ),
                         ),
                       ],

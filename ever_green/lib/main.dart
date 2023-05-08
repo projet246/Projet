@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +25,8 @@ import 'quiz/NiveauxQuiz.dart';
 import 'quiz/managementQuiz.dart';
 import 'sort_game/Levels/levels_managment.dart';
 import 'conseils/conseils.dart';
-import 'quiz/quizmultiples.dart';
+import 'histoires/storydesign.dart';
+import 'histoires/levelsStory.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -56,6 +56,7 @@ void main() async {
   bool decoyMethod(bool te) {
     return false;
   }
+
   await getProgress();
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
@@ -71,19 +72,20 @@ void main() async {
             OpenLevels: 1,
             href: '/',
           ),
-      '/LeaderBoard' : (context) => const LeaderBoard(),
+      '/LeaderBoard': (context) => const LeaderBoard(),
       '/LoginPage': (context) => const LoginPage(),
       '/ProfilePage': (context) => const ProfilePage(),
       '/RegisterPage': (context) => const RegisterPage(),
       '/VerifyUserEmail': (context) => const VerifyUserEmail(),
-      '/OfflineProfilesSelection': (context) => const OfflineProfilesSelection(),
+      '/OfflineProfilesSelection': (context) =>
+          const OfflineProfilesSelection(),
       '/Nquiz': (context) => N,
       '/Puzzles': (context) => PuzzleLevels(
-        nbrNiveax: 5,
-        openLevels: 1,
-        levelMangement: PuzzleManagement(),
-        href: '/',
-      ),
+            nbrNiveax: 5,
+            openLevels: 1,
+            levelMangement: PuzzleManagement(),
+            href: '/',
+          ),
       '/ChildSelector': (context) => const AnonChildSelector(),
       '/TrophiesPage': (context) => const TrophiesPage(),
       '/PuzzleLevel': (context) => PuzzleLevel(
@@ -96,8 +98,7 @@ void main() async {
             imageName: 'assets/images/puzzle_level1.jpg',
           ),
       '/conseils': (context) => Conseils(),
+      '/levelsStory': (context) => levelsStory(nbrKeys: 1,),
     },
   ));
 }
-
-

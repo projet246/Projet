@@ -85,24 +85,23 @@ class _mainMenuState extends State<mainMenu> {
                       children: const [
                         cardBg(
                           title: 'GAMES',
-                          coleur1: Color.fromARGB(255, 79, 195, 7),
-                          coleur2: Color.fromARGB(255, 102, 235, 0),
+                          coleur1: Color.fromARGB(255, 76, 218, 254),
+                          coleur2: Color.fromARGB(255, 76, 218, 254),
+                          couleur3: Color.fromARGB(255, 133, 216, 229),
                           href: '/games',
                           Photo: "trash.png",
-                          hei: 150.00,
-                          wid: 200.0,
                         ),
                         SizedBox(
                           width: 40,
                         ),
                         cardBg(
                           title: 'Livre',
-                          coleur1: Color.fromARGB(255, 79, 195, 7),
-                          coleur2: Color.fromARGB(255, 102, 235, 0),
+                          coleur1: Color.fromARGB(255, 76, 218, 254),
+                          coleur2: Color.fromARGB(255, 76, 218, 254),
+                          couleur3: Color.fromARGB(255, 133, 216, 229),
+
                           href: '/conseils',
                           Photo: "trash2.png",
-                          hei: 170.00,
-                          wid: 200.0,
                         ),
                         SizedBox(
                           width: 40,
@@ -110,12 +109,11 @@ class _mainMenuState extends State<mainMenu> {
 
                         cardBg(
                           title: 'HISTOIRES',
-                          coleur1: Color.fromARGB(255, 79, 195, 7),
-                          coleur2: Color.fromARGB(255, 102, 235, 0),
-                          href: '/',
-                          Photo: "trush3.png",
-                          hei: 150.00,
-                          wid: 200.0,
+                          coleur1: Color.fromARGB(255, 76, 218, 254),
+                          coleur2: Color.fromARGB(255, 76, 218, 254),
+                          couleur3: Color.fromARGB(255, 133, 216, 229),
+                          href: '/levelsStory',
+                          Photo: "trash3.png",
                         ),
                       ],
                     ),
