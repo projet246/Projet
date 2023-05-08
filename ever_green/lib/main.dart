@@ -1,6 +1,6 @@
 
 
-import 'package:timezone/data/latest.dart' as tz;
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +34,7 @@ import 'conseils/conseils.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  tz.initializeTimeZones();
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
