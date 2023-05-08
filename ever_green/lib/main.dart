@@ -98,7 +98,7 @@ void main() async {
             imageName: 'assets/images/puzzle_level1.jpg',
           ),
       '/conseils': (context) => Conseils(),
-      '/levelsStory': (context) => levelsStory(nbrKeys: 1,),
+      '/levelsStory': (context) => levelsStory(nbrKeys: 2,),
     },
   ));
 }
