@@ -5,7 +5,7 @@ import 'package:sorttrash/player_box.dart';
 import '../../BackEnd/DataBaseService/local_data_base_service.dart';
 import 'Objects.dart';
 import 'TrashCans.dart';
-
+int puzzleNumber = 1;
 class PuzzleManagement{
   DataBaseService dataBaseService = currentProfileIndex == 1? offlineProgress : onlineProgress;
   late PuzzleLevel level1 = PuzzleLevel(

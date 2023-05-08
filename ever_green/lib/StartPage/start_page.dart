@@ -76,7 +76,7 @@ class _StartPageState extends State<StartPage> {
                       height: 90,
                       child: Stack(
                         children: [
-                          const AnonButton(href: '/ChildSelector',color: Color.fromRGBO(255, 210, 23, 5),),
+                           const AnonButton(text: 'Play' ,href: '/ChildSelector',color: Color.fromRGBO(255, 210, 23, 5),),
                           Positioned(
                             left: 100,
                             bottom: 20,

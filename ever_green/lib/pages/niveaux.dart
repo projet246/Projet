@@ -50,19 +50,19 @@ class _NiveauxState extends State<Niveaux> {
               //les bouttons au-dessus
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
+                const Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
                     height: 60.0,
                     width: 60.0,
-                    child: const Center(
-                      child: RoundButton(href: '/games', myIcon: Icons.arrow_back , couleur: Color.fromRGBO(255, 210, 23, 5),),
+                    child: Center(
+                      child: RoundButton(href: '/games', myIcon: Icons.arrow_back , couleur: Color.fromRGBO(255, 210, 23, 5), shadowColor:  Color.fromRGBO(255, 210, 23, 5) ,),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5.0, 15.0, 0.0),
-                  child: Container(
+                  child: SizedBox(
                     //pour creer un alignement des elements
                     height: 60.0,
                     width: 120.0,
@@ -72,11 +72,12 @@ class _NiveauxState extends State<Niveaux> {
                         children: [
                           const RoundButton(
                               href: '/',
-                              myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
+                              myIcon: Icons.home , couleur: Color.fromRGBO(255, 210, 23, 5), shadowColor: Color.fromRGBO(255, 210, 23, 5) ,), //le premier button
                           RoundButton(
                             href: widget.href,
                             myIcon: Icons.settings,
-                            couleur: Color.fromRGBO(255, 210, 23, 5),
+                            couleur: const Color.fromRGBO(255, 210, 23, 5),
+                            shadowColor: const Color.fromRGBO(255, 210, 23, 5),
                           ), //le deuxieme button
                         ]),
                   ),

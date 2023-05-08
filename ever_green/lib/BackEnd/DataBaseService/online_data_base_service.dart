@@ -11,7 +11,7 @@ class OnlineDataBaseService extends DataBaseService {
     _uid = uid;
   }
   @override
-  addElementProgress(String childName, int childAge) {
+  addElementProgress(String childName, int childAge, String profileImage) {
     if (!(childName == '' || childAge >= 100 || childAge <= 3)) {
       int index = 0;
       if (onlineParentBox.isEmpty) {
@@ -29,7 +29,7 @@ class OnlineDataBaseService extends DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}','assets/profiles/0.svg'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}',profileImage,DateTime.now()));
         setParentChildren(returnPlayers());
         onlineParentBox.put(_uid, returnParent());
       } else {
@@ -47,7 +47,7 @@ class OnlineDataBaseService extends DataBaseService {
             DateTime.now(),
             index,
             childName,
-            '$childName-${const Uuid().v4().toString().substring(0, 8)}', 'assets/profiles/0.svg'));
+            '$childName-${const Uuid().v4().toString().substring(0, 8)}', profileImage,DateTime.now()));
         setParentChildren(returnPlayers());
         onlineParentBox.put(_uid, returnParent());
       }
@@ -125,7 +125,7 @@ class OnlineDataBaseService extends DataBaseService {
             parent.children[cpt].lastTimeToJoin,
             i + cpt,
             parent.children[cpt].childsName,
-            parent.children[cpt].childGlobalUID, parent.children[cpt].avatarProfileName));
+            parent.children[cpt].childGlobalUID, parent.children[cpt].avatarProfileName, parent.children[cpt].lastChallengeDate));
         cpt++;
         incrementChildrenCount();
       }

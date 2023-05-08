@@ -10,7 +10,6 @@ part 'player.g.dart';
 class PlayerProgress {
   @HiveField(0)
   late int score;
-
   @HiveField(1)
   late int childID;
   @HiveField(2)
@@ -23,9 +22,10 @@ class PlayerProgress {
   late String? childGlobalUID;
   @HiveField(6)
   late String? avatarProfileName;
+  @HiveField(7)
+  late DateTime? lastChallengeDate;
   PlayerProgress(this.score, this.gamesData, this.lastTimeToJoin, this.childID,
-      this.childsName, this.childGlobalUID, this.avatarProfileName);
-
+      this.childsName, this.childGlobalUID, this.avatarProfileName, this.lastChallengeDate);
   factory PlayerProgress.fromJson(Map<String, dynamic> json) {
     List<dynamic> gamesDataJson = json['gamesData'];
     List<LevelsCompleted> gamesData = gamesDataJson.map((gameJson) => LevelsCompleted.fromJson(gameJson)).toList();
@@ -36,7 +36,8 @@ class PlayerProgress {
       json['childID'] as int,
       json['childsName'] as String?,
       json['childGlobalUID'] as String?,
-      json['avatarProfileName'] as String?
+      json['avatarProfileName'] as String?,
+      DateTime.parse(json['lastChallengeDate'] as String),
     );
   }
   Map<String, dynamic> toJson() {
@@ -47,7 +48,8 @@ class PlayerProgress {
       'lastTimeToJoin': lastTimeToJoin.toIso8601String(),
       'childsName': childsName,
       'childGlobalUID': childGlobalUID,
-      'avatarProfileName' : avatarProfileName
+      'avatarProfileName' : avatarProfileName,
+      'lastChallengeDate' : lastChallengeDate?.toIso8601String()
     };
   }
 }

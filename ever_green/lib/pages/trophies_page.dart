@@ -169,7 +169,7 @@ class _TrophiesPage extends State<TrophiesPage> {
                             left: 560,
                             top: 5,
                             child: RoundButton(
-                              myIcon: Icons.exit_to_app, href: '/games' , couleur: Color.fromRGBO(255, 210, 23, 5),))
+                              myIcon: Icons.exit_to_app, href: '/games' , couleur: Color.fromRGBO(255, 210, 23, 5), shadowColor: Colors.transparent,))
                       ],
                     ),
                   ],

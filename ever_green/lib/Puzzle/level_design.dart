@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sorttrash/Puzzle/Models/puzzle_management.dart';
 import 'package:sorttrash/Puzzle/main_puzzle.dart';
 import 'package:sorttrash/button.dart';
 
@@ -30,6 +31,9 @@ class _PuzzleLevelDesign extends State<PuzzleLevelDesign> {
         InkWell(
           onTap: () {
             if (!widget.href.returnIsLocked()) {
+              setState(() {
+                puzzleNumber = widget.index + 1;
+              });
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => widget.href),

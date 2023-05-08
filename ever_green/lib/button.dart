@@ -4,8 +4,9 @@ class RoundButton extends StatefulWidget {
   final String? href; //pour indiquer le chemin à prendre en cliquant sur l'icon
   final IconData myIcon;
   final Color couleur;
+  final Color shadowColor;
   const RoundButton(
-      {super.key, required this.href, required this.myIcon, required this.couleur});
+      {super.key, required this.href, required this.myIcon, required this.couleur, required this.shadowColor});
 
   @override
   State<RoundButton> createState() => _RoundButtonState();
@@ -16,6 +17,7 @@ class _RoundButtonState extends State<RoundButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
+        print(MediaQuery.of(context).size);
         await Navigator.popAndPushNamed(context, '${widget.href}')
             ;
       },
@@ -25,7 +27,7 @@ class _RoundButtonState extends State<RoundButton> {
         decoration: BoxDecoration(
           boxShadow:  [
             BoxShadow(
-              color: widget.couleur,
+              color: widget.shadowColor,
               spreadRadius: 0,
               blurRadius: 0,
               offset: const Offset(0, 4.2), // changes position of shadow
@@ -96,7 +98,7 @@ class RectangleButton extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 0.0),
                 child: Text(
-                  "${text}",
+                  "$text",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 13.0,

@@ -63,12 +63,15 @@ class _GamesMenuState extends State<GamesMenu> {
                                 const RoundButton(
                                     href: '/',
                                     myIcon: Icons.home,
-                                    couleur: Color.fromRGBO(255, 210, 23, 5),), //le premier button
+                                    couleur: Color.fromRGBO(255, 210, 23, 5),
+                                    shadowColor:  Color.fromRGBO(255, 210, 23, 5),
+                          ), //le premier button
                                 const RoundButton(
                                     href: '/TrophiesPage',
                                     myIcon: Icons
                                         .woo_commerce,
                                         couleur: Color.fromRGBO(255, 210, 23, 5),
+                                        shadowColor:  Color.fromRGBO(255, 210, 23, 5) ,
                                         ), //le deuxieme button
                                 isSignedIn ?
                                 RoundButtonSettingsWhileLogged(

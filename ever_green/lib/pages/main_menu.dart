@@ -53,7 +53,7 @@ class _mainMenuState extends State<mainMenu> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 15.0),
-                        child: Container(
+                        child: SizedBox(
                           //pour creer un alignement des elements
                           height: 60.0,
                           width: 120.0,
@@ -65,6 +65,7 @@ class _mainMenuState extends State<mainMenu> {
                                     href: '/StartPage',
                                     myIcon: Icons.home,
                                     couleur: Color.fromRGBO(255, 210, 23, 5),
+                                  shadowColor: Color.fromRGBO(255, 210, 23, 5),
                                     ), //le premier
                                 // button
                                 isSignedIn ?
@@ -112,7 +113,7 @@ class _mainMenuState extends State<mainMenu> {
                           title: 'HISTOIRES',
                           coleur1: Color.fromARGB(255, 79, 195, 7),
                           coleur2: Color.fromARGB(255, 102, 235, 0),
-                          href: '/',
+                          href: '/ChallengesScreen',
                           Photo: "trush3.png",
                           hei: 150.00,
                           wid: 200.0,

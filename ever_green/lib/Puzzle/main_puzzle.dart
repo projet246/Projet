@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sorttrash/Puzzle/Models/Objects.dart';
 import 'package:sorttrash/Puzzle/Models/TrashCans.dart';
+import 'package:sorttrash/Puzzle/Models/puzzle_management.dart';
 import 'package:sorttrash/button.dart';
 
 import '../BackEnd/PlayerProgress/player.dart';
@@ -145,11 +146,13 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                       href: '/',
                       myIcon: Icons.place_rounded,
                       couleur: Color.fromRGBO(255, 210, 23, 5),
+                      shadowColor: Color.fromRGBO(255, 210, 23, 5),
                     ),
                     const RoundButton(
                       href: '/Puzzles',
                       myIcon: Icons.settings,
                       couleur: Color.fromRGBO(255, 210, 23, 5),
+                      shadowColor:  Color.fromRGBO(255, 210, 23, 5),
                     ),
                     SizedBox(
                       width: 0.013888 * screenWidth,
@@ -247,13 +250,15 @@ class _PuzzleLevelState extends State<PuzzleLevel> {
                   widget._copyOfarrayOfPuzzlePieces.toList();
               widget.setIsFinished(true);
               widget._changeBooleanStatus(false);
+              playerProgress.score += 100;
               setState(() {
-                playerProgress.score = 100;
-                String newLevelsCompleted = playerProgress
-                    .gamesData[0].levelsCompleted
-                    .replaceFirst('0', '1');
-                playerProgress.gamesData[0].levelsCompleted =
-                    newLevelsCompleted;
+                if ( puzzleNumber < playerProgress.gamesData[0].levelsCompleted.length) {
+                  List<String> characters = playerProgress.gamesData[0]
+                      .levelsCompleted.split('');
+                  characters[puzzleNumber] = '1';
+                  playerProgress.gamesData[0].levelsCompleted =
+                      characters.join('');
+                }
               });
               try {
                 if (currentProfileIndex == 1) {
